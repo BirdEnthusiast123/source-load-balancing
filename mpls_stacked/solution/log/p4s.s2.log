@@ -1,0 +1,832 @@
+Warning: you requested the nanomsg event logger, but bmv2 was compiled without -DBMELOG, and the event logger cannot be activated
+Calling target program-options parser
+[17:45:00.340] [bmv2] [D] [thread 160537] Set default default entry for table 'MyIngress.ipv4_lpm': MyIngress.drop - 
+[17:45:00.407] [bmv2] [D] [thread 160537] Set default default entry for table 'MyIngress.FEC_tbl': NoAction - 
+[17:45:00.407] [bmv2] [D] [thread 160537] Set default default entry for table 'tbl_stacked227': stacked227 - 
+[17:45:00.407] [bmv2] [D] [thread 160537] Set default default entry for table 'MyIngress.mpls_tbl': NoAction - 
+Adding interface s2-eth1 as port 1
+[17:45:00.419] [bmv2] [D] [thread 160537] Adding interface s2-eth1 as port 1
+Adding interface s2-eth2 as port 2
+[17:45:00.439] [bmv2] [D] [thread 160537] Adding interface s2-eth2 as port 2
+[17:45:00.474] [bmv2] [I] [thread 160537] Starting Thrift server on port 9091
+[17:45:00.474] [bmv2] [I] [thread 160537] Thrift server was started
+[17:45:00.476] [bmv2] [D] [thread 160544] [0.0] [cxt 0] Processing packet received on port 1
+[17:45:00.476] [bmv2] [D] [thread 160544] [0.0] [cxt 0] Parser 'parser': start
+[17:45:00.476] [bmv2] [D] [thread 160544] [0.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.476] [bmv2] [D] [thread 160544] [0.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.476] [bmv2] [D] [thread 160544] [0.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.476] [bmv2] [T] [thread 160544] [0.0] [cxt 0] Bytes parsed: 14
+[17:45:00.476] [bmv2] [D] [thread 160544] [0.0] [cxt 0] Parser 'parser': end
+[17:45:00.476] [bmv2] [D] [thread 160544] [0.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.476] [bmv2] [T] [thread 160544] [0.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.476] [bmv2] [T] [thread 160544] [0.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.476] [bmv2] [D] [thread 160544] [0.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.476] [bmv2] [D] [thread 160544] [0.0] [cxt 0] Egress port is 0
+[17:45:00.476] [bmv2] [D] [thread 160544] [1.0] [cxt 0] Processing packet received on port 1
+[17:45:00.476] [bmv2] [D] [thread 160544] [1.0] [cxt 0] Parser 'parser': start
+[17:45:00.476] [bmv2] [D] [thread 160544] [1.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.476] [bmv2] [D] [thread 160544] [1.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.476] [bmv2] [D] [thread 160544] [1.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.476] [bmv2] [T] [thread 160544] [1.0] [cxt 0] Bytes parsed: 14
+[17:45:00.476] [bmv2] [D] [thread 160544] [1.0] [cxt 0] Parser 'parser': end
+[17:45:00.476] [bmv2] [D] [thread 160544] [1.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.476] [bmv2] [T] [thread 160544] [1.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.476] [bmv2] [T] [thread 160544] [1.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.476] [bmv2] [D] [thread 160544] [1.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.476] [bmv2] [D] [thread 160544] [1.0] [cxt 0] Egress port is 0
+[17:45:00.476] [bmv2] [D] [thread 160545] [0.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.476] [bmv2] [D] [thread 160545] [0.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.476] [bmv2] [D] [thread 160545] [0.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.476] [bmv2] [T] [thread 160545] [0.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.476] [bmv2] [D] [thread 160545] [0.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.476] [bmv2] [D] [thread 160545] [0.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.476] [bmv2] [D] [thread 160545] [1.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.476] [bmv2] [D] [thread 160545] [1.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.476] [bmv2] [D] [thread 160545] [1.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.476] [bmv2] [T] [thread 160545] [1.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.476] [bmv2] [D] [thread 160545] [1.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.476] [bmv2] [D] [thread 160545] [1.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.476] [bmv2] [D] [thread 160549] [0.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:00.476] [bmv2] [D] [thread 160549] [1.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[17:45:00.496] [bmv2] [D] [thread 160544] [2.0] [cxt 0] Processing packet received on port 2
+[17:45:00.496] [bmv2] [D] [thread 160544] [2.0] [cxt 0] Parser 'parser': start
+[17:45:00.496] [bmv2] [D] [thread 160544] [2.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.496] [bmv2] [D] [thread 160544] [2.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.496] [bmv2] [D] [thread 160544] [2.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.496] [bmv2] [T] [thread 160544] [2.0] [cxt 0] Bytes parsed: 14
+[17:45:00.496] [bmv2] [D] [thread 160544] [2.0] [cxt 0] Parser 'parser': end
+[17:45:00.496] [bmv2] [D] [thread 160544] [2.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.496] [bmv2] [T] [thread 160544] [2.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.496] [bmv2] [T] [thread 160544] [2.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.496] [bmv2] [D] [thread 160544] [2.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.496] [bmv2] [D] [thread 160544] [2.0] [cxt 0] Egress port is 0
+[17:45:00.496] [bmv2] [D] [thread 160544] [3.0] [cxt 0] Processing packet received on port 2
+[17:45:00.496] [bmv2] [D] [thread 160544] [3.0] [cxt 0] Parser 'parser': start
+[17:45:00.496] [bmv2] [D] [thread 160544] [3.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.496] [bmv2] [D] [thread 160544] [3.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.496] [bmv2] [D] [thread 160544] [3.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.496] [bmv2] [T] [thread 160544] [3.0] [cxt 0] Bytes parsed: 14
+[17:45:00.496] [bmv2] [D] [thread 160544] [3.0] [cxt 0] Parser 'parser': end
+[17:45:00.496] [bmv2] [D] [thread 160544] [3.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.496] [bmv2] [T] [thread 160544] [3.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.496] [bmv2] [T] [thread 160544] [3.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.496] [bmv2] [D] [thread 160544] [3.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.496] [bmv2] [D] [thread 160544] [3.0] [cxt 0] Egress port is 0
+[17:45:00.496] [bmv2] [D] [thread 160545] [2.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.496] [bmv2] [D] [thread 160545] [2.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.496] [bmv2] [D] [thread 160545] [2.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.496] [bmv2] [T] [thread 160545] [2.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.496] [bmv2] [D] [thread 160545] [2.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.496] [bmv2] [D] [thread 160545] [2.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.496] [bmv2] [D] [thread 160545] [3.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.496] [bmv2] [D] [thread 160545] [3.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.496] [bmv2] [D] [thread 160545] [3.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.496] [bmv2] [T] [thread 160545] [3.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.496] [bmv2] [D] [thread 160545] [3.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.496] [bmv2] [D] [thread 160545] [3.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.496] [bmv2] [D] [thread 160549] [2.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[17:45:00.496] [bmv2] [D] [thread 160549] [3.0] [cxt 0] Transmitting packet of size 70 out of port 0
+[17:45:00.506] [bmv2] [D] [thread 160544] [4.0] [cxt 0] Processing packet received on port 2
+[17:45:00.506] [bmv2] [D] [thread 160544] [4.0] [cxt 0] Parser 'parser': start
+[17:45:00.506] [bmv2] [D] [thread 160544] [4.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.506] [bmv2] [D] [thread 160544] [4.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.506] [bmv2] [D] [thread 160544] [4.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.506] [bmv2] [T] [thread 160544] [4.0] [cxt 0] Bytes parsed: 14
+[17:45:00.506] [bmv2] [D] [thread 160544] [4.0] [cxt 0] Parser 'parser': end
+[17:45:00.506] [bmv2] [D] [thread 160544] [4.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.506] [bmv2] [T] [thread 160544] [4.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.506] [bmv2] [T] [thread 160544] [4.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.506] [bmv2] [D] [thread 160544] [4.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.506] [bmv2] [D] [thread 160544] [4.0] [cxt 0] Egress port is 0
+[17:45:00.506] [bmv2] [D] [thread 160545] [4.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.506] [bmv2] [D] [thread 160545] [4.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.506] [bmv2] [D] [thread 160545] [4.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.506] [bmv2] [T] [thread 160545] [4.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.506] [bmv2] [D] [thread 160545] [4.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.506] [bmv2] [D] [thread 160545] [4.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.506] [bmv2] [D] [thread 160549] [4.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[17:45:00.538] [bmv2] [D] [thread 160544] [5.0] [cxt 0] Processing packet received on port 1
+[17:45:00.538] [bmv2] [D] [thread 160544] [5.0] [cxt 0] Parser 'parser': start
+[17:45:00.538] [bmv2] [D] [thread 160544] [5.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.538] [bmv2] [D] [thread 160544] [5.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.538] [bmv2] [D] [thread 160544] [5.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.538] [bmv2] [T] [thread 160544] [5.0] [cxt 0] Bytes parsed: 14
+[17:45:00.538] [bmv2] [D] [thread 160544] [5.0] [cxt 0] Parser 'parser': end
+[17:45:00.538] [bmv2] [D] [thread 160544] [5.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.538] [bmv2] [T] [thread 160544] [5.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.539] [bmv2] [T] [thread 160544] [5.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.539] [bmv2] [D] [thread 160544] [5.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.539] [bmv2] [D] [thread 160544] [5.0] [cxt 0] Egress port is 0
+[17:45:00.539] [bmv2] [D] [thread 160545] [5.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.539] [bmv2] [D] [thread 160545] [5.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.539] [bmv2] [D] [thread 160545] [5.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.539] [bmv2] [T] [thread 160545] [5.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.539] [bmv2] [D] [thread 160545] [5.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.539] [bmv2] [D] [thread 160545] [5.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.539] [bmv2] [D] [thread 160549] [5.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:00.589] [bmv2] [D] [thread 160544] [6.0] [cxt 0] Processing packet received on port 2
+[17:45:00.589] [bmv2] [D] [thread 160544] [6.0] [cxt 0] Parser 'parser': start
+[17:45:00.589] [bmv2] [D] [thread 160544] [6.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.589] [bmv2] [D] [thread 160544] [6.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.589] [bmv2] [D] [thread 160544] [6.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.589] [bmv2] [T] [thread 160544] [6.0] [cxt 0] Bytes parsed: 14
+[17:45:00.589] [bmv2] [D] [thread 160544] [6.0] [cxt 0] Parser 'parser': end
+[17:45:00.589] [bmv2] [D] [thread 160544] [6.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.589] [bmv2] [T] [thread 160544] [6.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.589] [bmv2] [T] [thread 160544] [6.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.589] [bmv2] [D] [thread 160544] [6.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.589] [bmv2] [D] [thread 160544] [6.0] [cxt 0] Egress port is 0
+[17:45:00.589] [bmv2] [D] [thread 160545] [6.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.589] [bmv2] [D] [thread 160545] [6.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.589] [bmv2] [D] [thread 160545] [6.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.589] [bmv2] [T] [thread 160545] [6.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.589] [bmv2] [D] [thread 160545] [6.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.589] [bmv2] [D] [thread 160545] [6.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.589] [bmv2] [D] [thread 160549] [6.0] [cxt 0] Transmitting packet of size 110 out of port 0
+[17:45:00.599] [bmv2] [D] [thread 160544] [7.0] [cxt 0] Processing packet received on port 2
+[17:45:00.599] [bmv2] [D] [thread 160544] [7.0] [cxt 0] Parser 'parser': start
+[17:45:00.599] [bmv2] [D] [thread 160544] [7.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.599] [bmv2] [D] [thread 160544] [7.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.599] [bmv2] [D] [thread 160544] [7.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.599] [bmv2] [T] [thread 160544] [7.0] [cxt 0] Bytes parsed: 14
+[17:45:00.599] [bmv2] [D] [thread 160544] [7.0] [cxt 0] Parser 'parser': end
+[17:45:00.599] [bmv2] [D] [thread 160544] [7.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.599] [bmv2] [T] [thread 160544] [7.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.599] [bmv2] [T] [thread 160544] [7.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.599] [bmv2] [D] [thread 160544] [7.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.599] [bmv2] [D] [thread 160544] [7.0] [cxt 0] Egress port is 0
+[17:45:00.599] [bmv2] [D] [thread 160545] [7.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.599] [bmv2] [D] [thread 160545] [7.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.599] [bmv2] [D] [thread 160545] [7.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.599] [bmv2] [T] [thread 160545] [7.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.599] [bmv2] [D] [thread 160545] [7.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.599] [bmv2] [D] [thread 160545] [7.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.599] [bmv2] [D] [thread 160549] [7.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:00.651] [bmv2] [D] [thread 160544] [8.0] [cxt 0] Processing packet received on port 1
+[17:45:00.651] [bmv2] [D] [thread 160544] [8.0] [cxt 0] Parser 'parser': start
+[17:45:00.651] [bmv2] [D] [thread 160544] [8.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.651] [bmv2] [D] [thread 160544] [8.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.651] [bmv2] [D] [thread 160544] [8.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.651] [bmv2] [T] [thread 160544] [8.0] [cxt 0] Bytes parsed: 14
+[17:45:00.651] [bmv2] [D] [thread 160544] [8.0] [cxt 0] Parser 'parser': end
+[17:45:00.651] [bmv2] [D] [thread 160544] [8.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.651] [bmv2] [T] [thread 160544] [8.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.651] [bmv2] [T] [thread 160544] [8.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.651] [bmv2] [D] [thread 160544] [8.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.651] [bmv2] [D] [thread 160544] [8.0] [cxt 0] Egress port is 0
+[17:45:00.651] [bmv2] [D] [thread 160545] [8.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.651] [bmv2] [D] [thread 160545] [8.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.651] [bmv2] [D] [thread 160545] [8.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.651] [bmv2] [T] [thread 160545] [8.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.651] [bmv2] [D] [thread 160545] [8.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.651] [bmv2] [D] [thread 160545] [8.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.651] [bmv2] [D] [thread 160549] [8.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:00.659] [bmv2] [D] [thread 160544] [9.0] [cxt 0] Processing packet received on port 1
+[17:45:00.659] [bmv2] [D] [thread 160544] [9.0] [cxt 0] Parser 'parser': start
+[17:45:00.659] [bmv2] [D] [thread 160544] [9.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.659] [bmv2] [D] [thread 160544] [9.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.659] [bmv2] [D] [thread 160544] [9.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.659] [bmv2] [T] [thread 160544] [9.0] [cxt 0] Bytes parsed: 14
+[17:45:00.659] [bmv2] [D] [thread 160544] [9.0] [cxt 0] Parser 'parser': end
+[17:45:00.659] [bmv2] [D] [thread 160544] [9.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.659] [bmv2] [T] [thread 160544] [9.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.659] [bmv2] [T] [thread 160544] [9.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.659] [bmv2] [D] [thread 160544] [9.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.659] [bmv2] [D] [thread 160544] [9.0] [cxt 0] Egress port is 0
+[17:45:00.659] [bmv2] [D] [thread 160545] [9.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.659] [bmv2] [D] [thread 160545] [9.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.659] [bmv2] [D] [thread 160545] [9.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.659] [bmv2] [T] [thread 160545] [9.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.659] [bmv2] [D] [thread 160545] [9.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.659] [bmv2] [D] [thread 160545] [9.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.659] [bmv2] [D] [thread 160549] [9.0] [cxt 0] Transmitting packet of size 205 out of port 0
+[17:45:00.722] [bmv2] [D] [thread 160544] [10.0] [cxt 0] Processing packet received on port 2
+[17:45:00.722] [bmv2] [D] [thread 160544] [10.0] [cxt 0] Parser 'parser': start
+[17:45:00.722] [bmv2] [D] [thread 160544] [10.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.722] [bmv2] [D] [thread 160544] [10.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.722] [bmv2] [D] [thread 160544] [10.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.722] [bmv2] [T] [thread 160544] [10.0] [cxt 0] Bytes parsed: 14
+[17:45:00.722] [bmv2] [D] [thread 160544] [10.0] [cxt 0] Parser 'parser': end
+[17:45:00.722] [bmv2] [D] [thread 160544] [10.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.722] [bmv2] [T] [thread 160544] [10.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.722] [bmv2] [T] [thread 160544] [10.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.722] [bmv2] [D] [thread 160544] [10.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.722] [bmv2] [D] [thread 160544] [10.0] [cxt 0] Egress port is 0
+[17:45:00.722] [bmv2] [D] [thread 160545] [10.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.722] [bmv2] [D] [thread 160545] [10.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.722] [bmv2] [D] [thread 160545] [10.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.722] [bmv2] [T] [thread 160545] [10.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.722] [bmv2] [D] [thread 160545] [10.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.722] [bmv2] [D] [thread 160545] [10.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.722] [bmv2] [D] [thread 160549] [10.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:00.782] [bmv2] [D] [thread 160544] [11.0] [cxt 0] Processing packet received on port 1
+[17:45:00.782] [bmv2] [D] [thread 160544] [11.0] [cxt 0] Parser 'parser': start
+[17:45:00.782] [bmv2] [D] [thread 160544] [11.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.782] [bmv2] [D] [thread 160544] [11.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.782] [bmv2] [D] [thread 160544] [11.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.782] [bmv2] [T] [thread 160544] [11.0] [cxt 0] Bytes parsed: 14
+[17:45:00.782] [bmv2] [D] [thread 160544] [11.0] [cxt 0] Parser 'parser': end
+[17:45:00.782] [bmv2] [D] [thread 160544] [11.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.782] [bmv2] [T] [thread 160544] [11.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.782] [bmv2] [T] [thread 160544] [11.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.782] [bmv2] [D] [thread 160544] [11.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.782] [bmv2] [D] [thread 160544] [11.0] [cxt 0] Egress port is 0
+[17:45:00.782] [bmv2] [D] [thread 160544] [12.0] [cxt 0] Processing packet received on port 2
+[17:45:00.782] [bmv2] [D] [thread 160544] [12.0] [cxt 0] Parser 'parser': start
+[17:45:00.782] [bmv2] [D] [thread 160544] [12.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.782] [bmv2] [D] [thread 160544] [12.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.782] [bmv2] [D] [thread 160544] [12.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.782] [bmv2] [T] [thread 160544] [12.0] [cxt 0] Bytes parsed: 14
+[17:45:00.782] [bmv2] [D] [thread 160544] [12.0] [cxt 0] Parser 'parser': end
+[17:45:00.782] [bmv2] [D] [thread 160544] [12.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.782] [bmv2] [T] [thread 160544] [12.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.782] [bmv2] [T] [thread 160544] [12.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.782] [bmv2] [D] [thread 160544] [12.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.782] [bmv2] [D] [thread 160544] [12.0] [cxt 0] Egress port is 0
+[17:45:00.782] [bmv2] [D] [thread 160544] [13.0] [cxt 0] Processing packet received on port 2
+[17:45:00.782] [bmv2] [D] [thread 160544] [13.0] [cxt 0] Parser 'parser': start
+[17:45:00.782] [bmv2] [D] [thread 160544] [13.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.782] [bmv2] [D] [thread 160544] [13.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.782] [bmv2] [D] [thread 160544] [13.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.782] [bmv2] [T] [thread 160544] [13.0] [cxt 0] Bytes parsed: 14
+[17:45:00.782] [bmv2] [D] [thread 160544] [13.0] [cxt 0] Parser 'parser': end
+[17:45:00.782] [bmv2] [D] [thread 160544] [13.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.782] [bmv2] [T] [thread 160544] [13.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.782] [bmv2] [T] [thread 160544] [13.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.782] [bmv2] [D] [thread 160544] [13.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.782] [bmv2] [D] [thread 160544] [13.0] [cxt 0] Egress port is 0
+[17:45:00.782] [bmv2] [D] [thread 160545] [11.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.782] [bmv2] [D] [thread 160545] [11.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.782] [bmv2] [D] [thread 160545] [11.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.782] [bmv2] [T] [thread 160545] [11.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.782] [bmv2] [D] [thread 160545] [11.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.782] [bmv2] [D] [thread 160545] [11.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.782] [bmv2] [D] [thread 160545] [12.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.782] [bmv2] [D] [thread 160545] [12.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.782] [bmv2] [D] [thread 160545] [12.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.782] [bmv2] [T] [thread 160545] [12.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.783] [bmv2] [D] [thread 160545] [12.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.783] [bmv2] [D] [thread 160545] [12.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.783] [bmv2] [D] [thread 160545] [13.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.783] [bmv2] [D] [thread 160545] [13.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.783] [bmv2] [D] [thread 160545] [13.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.783] [bmv2] [T] [thread 160545] [13.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.783] [bmv2] [D] [thread 160545] [13.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.783] [bmv2] [D] [thread 160545] [13.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.783] [bmv2] [D] [thread 160549] [11.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:00.783] [bmv2] [D] [thread 160549] [12.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[17:45:00.783] [bmv2] [D] [thread 160549] [13.0] [cxt 0] Transmitting packet of size 70 out of port 0
+[17:45:00.798] [bmv2] [D] [thread 160544] [14.0] [cxt 0] Processing packet received on port 2
+[17:45:00.798] [bmv2] [D] [thread 160544] [14.0] [cxt 0] Parser 'parser': start
+[17:45:00.798] [bmv2] [D] [thread 160544] [14.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.798] [bmv2] [D] [thread 160544] [14.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.798] [bmv2] [D] [thread 160544] [14.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.798] [bmv2] [T] [thread 160544] [14.0] [cxt 0] Bytes parsed: 14
+[17:45:00.798] [bmv2] [D] [thread 160544] [14.0] [cxt 0] Parser 'parser': end
+[17:45:00.798] [bmv2] [D] [thread 160544] [14.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.798] [bmv2] [T] [thread 160544] [14.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.798] [bmv2] [T] [thread 160544] [14.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.798] [bmv2] [D] [thread 160544] [14.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.798] [bmv2] [D] [thread 160544] [14.0] [cxt 0] Egress port is 0
+[17:45:00.798] [bmv2] [D] [thread 160545] [14.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.798] [bmv2] [D] [thread 160545] [14.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.798] [bmv2] [D] [thread 160545] [14.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.798] [bmv2] [T] [thread 160545] [14.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.798] [bmv2] [D] [thread 160545] [14.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.798] [bmv2] [D] [thread 160545] [14.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.798] [bmv2] [D] [thread 160549] [14.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[17:45:00.810] [bmv2] [D] [thread 160544] [15.0] [cxt 0] Processing packet received on port 1
+[17:45:00.810] [bmv2] [D] [thread 160544] [15.0] [cxt 0] Parser 'parser': start
+[17:45:00.810] [bmv2] [D] [thread 160544] [15.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.810] [bmv2] [D] [thread 160544] [15.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.810] [bmv2] [D] [thread 160544] [15.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.810] [bmv2] [T] [thread 160544] [15.0] [cxt 0] Bytes parsed: 14
+[17:45:00.810] [bmv2] [D] [thread 160544] [15.0] [cxt 0] Parser 'parser': end
+[17:45:00.810] [bmv2] [D] [thread 160544] [15.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.810] [bmv2] [T] [thread 160544] [15.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.811] [bmv2] [T] [thread 160544] [15.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.811] [bmv2] [D] [thread 160544] [15.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.811] [bmv2] [D] [thread 160544] [15.0] [cxt 0] Egress port is 0
+[17:45:00.811] [bmv2] [D] [thread 160545] [15.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.811] [bmv2] [D] [thread 160545] [15.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.811] [bmv2] [D] [thread 160545] [15.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.811] [bmv2] [T] [thread 160545] [15.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.811] [bmv2] [D] [thread 160545] [15.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.811] [bmv2] [D] [thread 160545] [15.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.811] [bmv2] [D] [thread 160549] [15.0] [cxt 0] Transmitting packet of size 110 out of port 0
+[17:45:00.888] [bmv2] [D] [thread 160544] [16.0] [cxt 0] Processing packet received on port 2
+[17:45:00.888] [bmv2] [D] [thread 160544] [16.0] [cxt 0] Parser 'parser': start
+[17:45:00.888] [bmv2] [D] [thread 160544] [16.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.888] [bmv2] [D] [thread 160544] [16.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.888] [bmv2] [D] [thread 160544] [16.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.888] [bmv2] [T] [thread 160544] [16.0] [cxt 0] Bytes parsed: 14
+[17:45:00.888] [bmv2] [D] [thread 160544] [16.0] [cxt 0] Parser 'parser': end
+[17:45:00.888] [bmv2] [D] [thread 160544] [16.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.888] [bmv2] [T] [thread 160544] [16.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.888] [bmv2] [T] [thread 160544] [16.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.888] [bmv2] [D] [thread 160544] [16.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.888] [bmv2] [D] [thread 160544] [16.0] [cxt 0] Egress port is 0
+[17:45:00.888] [bmv2] [D] [thread 160545] [16.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.888] [bmv2] [D] [thread 160545] [16.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.888] [bmv2] [D] [thread 160545] [16.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.888] [bmv2] [T] [thread 160545] [16.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.888] [bmv2] [D] [thread 160545] [16.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.888] [bmv2] [D] [thread 160545] [16.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.888] [bmv2] [D] [thread 160549] [16.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:00.905] [bmv2] [D] [thread 160544] [17.0] [cxt 0] Processing packet received on port 1
+[17:45:00.905] [bmv2] [D] [thread 160544] [17.0] [cxt 0] Parser 'parser': start
+[17:45:00.905] [bmv2] [D] [thread 160544] [17.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.905] [bmv2] [D] [thread 160544] [17.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.905] [bmv2] [D] [thread 160544] [17.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.905] [bmv2] [T] [thread 160544] [17.0] [cxt 0] Bytes parsed: 14
+[17:45:00.905] [bmv2] [D] [thread 160544] [17.0] [cxt 0] Parser 'parser': end
+[17:45:00.905] [bmv2] [D] [thread 160544] [17.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.905] [bmv2] [T] [thread 160544] [17.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.905] [bmv2] [T] [thread 160544] [17.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.905] [bmv2] [D] [thread 160544] [17.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.905] [bmv2] [D] [thread 160544] [17.0] [cxt 0] Egress port is 0
+[17:45:00.905] [bmv2] [D] [thread 160545] [17.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.905] [bmv2] [D] [thread 160545] [17.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.905] [bmv2] [D] [thread 160545] [17.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.905] [bmv2] [T] [thread 160545] [17.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.905] [bmv2] [D] [thread 160545] [17.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.905] [bmv2] [D] [thread 160545] [17.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.905] [bmv2] [D] [thread 160549] [17.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:00.950] [bmv2] [D] [thread 160544] [18.0] [cxt 0] Processing packet received on port 2
+[17:45:00.950] [bmv2] [D] [thread 160544] [18.0] [cxt 0] Parser 'parser': start
+[17:45:00.950] [bmv2] [D] [thread 160544] [18.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.950] [bmv2] [D] [thread 160544] [18.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.950] [bmv2] [D] [thread 160544] [18.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.950] [bmv2] [T] [thread 160544] [18.0] [cxt 0] Bytes parsed: 14
+[17:45:00.950] [bmv2] [D] [thread 160544] [18.0] [cxt 0] Parser 'parser': end
+[17:45:00.950] [bmv2] [D] [thread 160544] [18.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.950] [bmv2] [T] [thread 160544] [18.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.950] [bmv2] [T] [thread 160544] [18.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.950] [bmv2] [D] [thread 160544] [18.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.950] [bmv2] [D] [thread 160544] [18.0] [cxt 0] Egress port is 0
+[17:45:00.950] [bmv2] [D] [thread 160545] [18.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.950] [bmv2] [D] [thread 160545] [18.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.950] [bmv2] [D] [thread 160545] [18.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.950] [bmv2] [T] [thread 160545] [18.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.950] [bmv2] [D] [thread 160545] [18.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.950] [bmv2] [D] [thread 160545] [18.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.950] [bmv2] [D] [thread 160549] [18.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[17:45:00.973] [bmv2] [D] [thread 160544] [19.0] [cxt 0] Processing packet received on port 2
+[17:45:00.974] [bmv2] [D] [thread 160544] [19.0] [cxt 0] Parser 'parser': start
+[17:45:00.974] [bmv2] [D] [thread 160544] [19.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:00.974] [bmv2] [D] [thread 160544] [19.0] [cxt 0] Extracting header 'ethernet'
+[17:45:00.974] [bmv2] [D] [thread 160544] [19.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:00.974] [bmv2] [T] [thread 160544] [19.0] [cxt 0] Bytes parsed: 14
+[17:45:00.974] [bmv2] [D] [thread 160544] [19.0] [cxt 0] Parser 'parser': end
+[17:45:00.974] [bmv2] [D] [thread 160544] [19.0] [cxt 0] Pipeline 'ingress': start
+[17:45:00.974] [bmv2] [T] [thread 160544] [19.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:00.974] [bmv2] [T] [thread 160544] [19.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:00.974] [bmv2] [D] [thread 160544] [19.0] [cxt 0] Pipeline 'ingress': end
+[17:45:00.974] [bmv2] [D] [thread 160544] [19.0] [cxt 0] Egress port is 0
+[17:45:00.974] [bmv2] [D] [thread 160545] [19.0] [cxt 0] Pipeline 'egress': start
+[17:45:00.974] [bmv2] [D] [thread 160545] [19.0] [cxt 0] Pipeline 'egress': end
+[17:45:00.974] [bmv2] [D] [thread 160545] [19.0] [cxt 0] Deparser 'deparser': start
+[17:45:00.974] [bmv2] [T] [thread 160545] [19.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:00.974] [bmv2] [D] [thread 160545] [19.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:00.974] [bmv2] [D] [thread 160545] [19.0] [cxt 0] Deparser 'deparser': end
+[17:45:00.974] [bmv2] [D] [thread 160549] [19.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:01.010] [bmv2] [D] [thread 160544] [20.0] [cxt 0] Processing packet received on port 2
+[17:45:01.010] [bmv2] [D] [thread 160544] [20.0] [cxt 0] Parser 'parser': start
+[17:45:01.010] [bmv2] [D] [thread 160544] [20.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.010] [bmv2] [D] [thread 160544] [20.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.011] [bmv2] [D] [thread 160544] [20.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.011] [bmv2] [T] [thread 160544] [20.0] [cxt 0] Bytes parsed: 14
+[17:45:01.011] [bmv2] [D] [thread 160544] [20.0] [cxt 0] Parser 'parser': end
+[17:45:01.011] [bmv2] [D] [thread 160544] [20.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.011] [bmv2] [T] [thread 160544] [20.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.011] [bmv2] [T] [thread 160544] [20.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.011] [bmv2] [D] [thread 160544] [20.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.011] [bmv2] [D] [thread 160544] [20.0] [cxt 0] Egress port is 0
+[17:45:01.011] [bmv2] [D] [thread 160545] [20.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.011] [bmv2] [D] [thread 160545] [20.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.011] [bmv2] [D] [thread 160545] [20.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.011] [bmv2] [T] [thread 160545] [20.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.011] [bmv2] [D] [thread 160545] [20.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.011] [bmv2] [D] [thread 160545] [20.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.011] [bmv2] [D] [thread 160549] [20.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:01.154] [bmv2] [D] [thread 160544] [21.0] [cxt 0] Processing packet received on port 1
+[17:45:01.154] [bmv2] [D] [thread 160544] [21.0] [cxt 0] Parser 'parser': start
+[17:45:01.154] [bmv2] [D] [thread 160544] [21.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.154] [bmv2] [D] [thread 160544] [21.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.154] [bmv2] [D] [thread 160544] [21.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.154] [bmv2] [T] [thread 160544] [21.0] [cxt 0] Bytes parsed: 14
+[17:45:01.154] [bmv2] [D] [thread 160544] [21.0] [cxt 0] Parser 'parser': end
+[17:45:01.154] [bmv2] [D] [thread 160544] [21.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.154] [bmv2] [T] [thread 160544] [21.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.154] [bmv2] [T] [thread 160544] [21.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.154] [bmv2] [D] [thread 160544] [21.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.154] [bmv2] [D] [thread 160544] [21.0] [cxt 0] Egress port is 0
+[17:45:01.154] [bmv2] [D] [thread 160545] [21.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.154] [bmv2] [D] [thread 160545] [21.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.154] [bmv2] [D] [thread 160545] [21.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.154] [bmv2] [T] [thread 160545] [21.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.154] [bmv2] [D] [thread 160545] [21.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.154] [bmv2] [D] [thread 160545] [21.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.154] [bmv2] [D] [thread 160549] [21.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:01.223] [bmv2] [D] [thread 160544] [22.0] [cxt 0] Processing packet received on port 2
+[17:45:01.223] [bmv2] [D] [thread 160544] [22.0] [cxt 0] Parser 'parser': start
+[17:45:01.223] [bmv2] [D] [thread 160544] [22.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.223] [bmv2] [D] [thread 160544] [22.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.223] [bmv2] [D] [thread 160544] [22.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.223] [bmv2] [T] [thread 160544] [22.0] [cxt 0] Bytes parsed: 14
+[17:45:01.223] [bmv2] [D] [thread 160544] [22.0] [cxt 0] Parser 'parser': end
+[17:45:01.223] [bmv2] [D] [thread 160544] [22.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.223] [bmv2] [T] [thread 160544] [22.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.223] [bmv2] [T] [thread 160544] [22.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.223] [bmv2] [D] [thread 160544] [22.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.223] [bmv2] [D] [thread 160544] [22.0] [cxt 0] Egress port is 0
+[17:45:01.223] [bmv2] [D] [thread 160545] [22.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.223] [bmv2] [D] [thread 160545] [22.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.223] [bmv2] [D] [thread 160545] [22.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.223] [bmv2] [T] [thread 160545] [22.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.223] [bmv2] [D] [thread 160545] [22.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.223] [bmv2] [D] [thread 160545] [22.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.223] [bmv2] [D] [thread 160549] [22.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:01.258] [bmv2] [D] [thread 160544] [23.0] [cxt 0] Processing packet received on port 2
+[17:45:01.258] [bmv2] [D] [thread 160544] [23.0] [cxt 0] Parser 'parser': start
+[17:45:01.258] [bmv2] [D] [thread 160544] [23.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.258] [bmv2] [D] [thread 160544] [23.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.258] [bmv2] [D] [thread 160544] [23.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.258] [bmv2] [T] [thread 160544] [23.0] [cxt 0] Bytes parsed: 14
+[17:45:01.258] [bmv2] [D] [thread 160544] [23.0] [cxt 0] Parser 'parser': end
+[17:45:01.258] [bmv2] [D] [thread 160544] [23.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.258] [bmv2] [T] [thread 160544] [23.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.258] [bmv2] [T] [thread 160544] [23.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.258] [bmv2] [D] [thread 160544] [23.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.258] [bmv2] [D] [thread 160544] [23.0] [cxt 0] Egress port is 0
+[17:45:01.258] [bmv2] [D] [thread 160545] [23.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.258] [bmv2] [D] [thread 160545] [23.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.258] [bmv2] [D] [thread 160545] [23.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.258] [bmv2] [T] [thread 160545] [23.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.258] [bmv2] [D] [thread 160545] [23.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.258] [bmv2] [D] [thread 160545] [23.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.258] [bmv2] [D] [thread 160549] [23.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[17:45:01.263] [bmv2] [D] [thread 160544] [24.0] [cxt 0] Processing packet received on port 2
+[17:45:01.263] [bmv2] [D] [thread 160544] [24.0] [cxt 0] Parser 'parser': start
+[17:45:01.263] [bmv2] [D] [thread 160544] [24.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.263] [bmv2] [D] [thread 160544] [24.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.263] [bmv2] [D] [thread 160544] [24.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.263] [bmv2] [T] [thread 160544] [24.0] [cxt 0] Bytes parsed: 14
+[17:45:01.263] [bmv2] [D] [thread 160544] [24.0] [cxt 0] Parser 'parser': end
+[17:45:01.263] [bmv2] [D] [thread 160544] [24.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.263] [bmv2] [T] [thread 160544] [24.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.263] [bmv2] [T] [thread 160544] [24.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.263] [bmv2] [D] [thread 160544] [24.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.263] [bmv2] [D] [thread 160544] [24.0] [cxt 0] Egress port is 0
+[17:45:01.263] [bmv2] [D] [thread 160545] [24.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.263] [bmv2] [D] [thread 160545] [24.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.263] [bmv2] [D] [thread 160545] [24.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.263] [bmv2] [T] [thread 160545] [24.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.263] [bmv2] [D] [thread 160545] [24.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.263] [bmv2] [D] [thread 160545] [24.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.263] [bmv2] [D] [thread 160549] [24.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:01.354] [bmv2] [D] [thread 160544] [25.0] [cxt 0] Processing packet received on port 1
+[17:45:01.354] [bmv2] [D] [thread 160544] [25.0] [cxt 0] Parser 'parser': start
+[17:45:01.354] [bmv2] [D] [thread 160544] [25.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.354] [bmv2] [D] [thread 160544] [25.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.354] [bmv2] [D] [thread 160544] [25.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.354] [bmv2] [T] [thread 160544] [25.0] [cxt 0] Bytes parsed: 14
+[17:45:01.354] [bmv2] [D] [thread 160544] [25.0] [cxt 0] Parser 'parser': end
+[17:45:01.354] [bmv2] [D] [thread 160544] [25.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.354] [bmv2] [T] [thread 160544] [25.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.354] [bmv2] [T] [thread 160544] [25.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.354] [bmv2] [D] [thread 160544] [25.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.354] [bmv2] [D] [thread 160544] [25.0] [cxt 0] Egress port is 0
+[17:45:01.354] [bmv2] [D] [thread 160545] [25.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.354] [bmv2] [D] [thread 160545] [25.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.354] [bmv2] [D] [thread 160545] [25.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.354] [bmv2] [T] [thread 160545] [25.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.354] [bmv2] [D] [thread 160545] [25.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.354] [bmv2] [D] [thread 160545] [25.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.354] [bmv2] [D] [thread 160549] [25.0] [cxt 0] Transmitting packet of size 205 out of port 0
+[17:45:01.387] [bmv2] [D] [thread 160544] [26.0] [cxt 0] Processing packet received on port 2
+[17:45:01.387] [bmv2] [D] [thread 160544] [26.0] [cxt 0] Parser 'parser': start
+[17:45:01.387] [bmv2] [D] [thread 160544] [26.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.387] [bmv2] [D] [thread 160544] [26.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.387] [bmv2] [D] [thread 160544] [26.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.387] [bmv2] [T] [thread 160544] [26.0] [cxt 0] Bytes parsed: 14
+[17:45:01.387] [bmv2] [D] [thread 160544] [26.0] [cxt 0] Parser 'parser': end
+[17:45:01.387] [bmv2] [D] [thread 160544] [26.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.387] [bmv2] [T] [thread 160544] [26.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.387] [bmv2] [T] [thread 160544] [26.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.387] [bmv2] [D] [thread 160544] [26.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.387] [bmv2] [D] [thread 160544] [26.0] [cxt 0] Egress port is 0
+[17:45:01.387] [bmv2] [D] [thread 160545] [26.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.387] [bmv2] [D] [thread 160545] [26.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.387] [bmv2] [D] [thread 160545] [26.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.387] [bmv2] [T] [thread 160545] [26.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.387] [bmv2] [D] [thread 160545] [26.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.387] [bmv2] [D] [thread 160545] [26.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.387] [bmv2] [D] [thread 160549] [26.0] [cxt 0] Transmitting packet of size 110 out of port 0
+[17:45:01.423] [bmv2] [D] [thread 160544] [27.0] [cxt 0] Processing packet received on port 2
+[17:45:01.423] [bmv2] [D] [thread 160544] [27.0] [cxt 0] Parser 'parser': start
+[17:45:01.423] [bmv2] [D] [thread 160544] [27.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.423] [bmv2] [D] [thread 160544] [27.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.423] [bmv2] [D] [thread 160544] [27.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.423] [bmv2] [T] [thread 160544] [27.0] [cxt 0] Bytes parsed: 14
+[17:45:01.423] [bmv2] [D] [thread 160544] [27.0] [cxt 0] Parser 'parser': end
+[17:45:01.423] [bmv2] [D] [thread 160544] [27.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.423] [bmv2] [T] [thread 160544] [27.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.423] [bmv2] [T] [thread 160544] [27.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.423] [bmv2] [D] [thread 160544] [27.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.423] [bmv2] [D] [thread 160544] [27.0] [cxt 0] Egress port is 0
+[17:45:01.423] [bmv2] [D] [thread 160545] [27.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.423] [bmv2] [D] [thread 160545] [27.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.423] [bmv2] [D] [thread 160545] [27.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.423] [bmv2] [T] [thread 160545] [27.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.423] [bmv2] [D] [thread 160545] [27.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.423] [bmv2] [D] [thread 160545] [27.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.424] [bmv2] [D] [thread 160549] [27.0] [cxt 0] Transmitting packet of size 205 out of port 0
+[17:45:01.512] [bmv2] [D] [thread 160544] [28.0] [cxt 0] Processing packet received on port 2
+[17:45:01.512] [bmv2] [D] [thread 160544] [28.0] [cxt 0] Parser 'parser': start
+[17:45:01.512] [bmv2] [D] [thread 160544] [28.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.512] [bmv2] [D] [thread 160544] [28.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.512] [bmv2] [D] [thread 160544] [28.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.512] [bmv2] [T] [thread 160544] [28.0] [cxt 0] Bytes parsed: 14
+[17:45:01.512] [bmv2] [D] [thread 160544] [28.0] [cxt 0] Parser 'parser': end
+[17:45:01.512] [bmv2] [D] [thread 160544] [28.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.512] [bmv2] [T] [thread 160544] [28.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.512] [bmv2] [T] [thread 160544] [28.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.512] [bmv2] [D] [thread 160544] [28.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.512] [bmv2] [D] [thread 160544] [28.0] [cxt 0] Egress port is 0
+[17:45:01.512] [bmv2] [D] [thread 160545] [28.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.512] [bmv2] [D] [thread 160545] [28.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.512] [bmv2] [D] [thread 160545] [28.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.512] [bmv2] [T] [thread 160545] [28.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.512] [bmv2] [D] [thread 160545] [28.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.513] [bmv2] [D] [thread 160545] [28.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.513] [bmv2] [D] [thread 160549] [28.0] [cxt 0] Transmitting packet of size 217 out of port 0
+[17:45:01.531] [bmv2] [D] [thread 160544] [29.0] [cxt 0] Processing packet received on port 1
+[17:45:01.531] [bmv2] [D] [thread 160544] [29.0] [cxt 0] Parser 'parser': start
+[17:45:01.531] [bmv2] [D] [thread 160544] [29.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.531] [bmv2] [D] [thread 160544] [29.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.531] [bmv2] [D] [thread 160544] [29.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.531] [bmv2] [T] [thread 160544] [29.0] [cxt 0] Bytes parsed: 14
+[17:45:01.531] [bmv2] [D] [thread 160544] [29.0] [cxt 0] Parser 'parser': end
+[17:45:01.531] [bmv2] [D] [thread 160544] [29.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.531] [bmv2] [T] [thread 160544] [29.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.531] [bmv2] [T] [thread 160544] [29.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.531] [bmv2] [D] [thread 160544] [29.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.531] [bmv2] [D] [thread 160544] [29.0] [cxt 0] Egress port is 0
+[17:45:01.532] [bmv2] [D] [thread 160545] [29.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.532] [bmv2] [D] [thread 160545] [29.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.532] [bmv2] [D] [thread 160545] [29.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.532] [bmv2] [T] [thread 160545] [29.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.532] [bmv2] [D] [thread 160545] [29.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.532] [bmv2] [D] [thread 160545] [29.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.532] [bmv2] [D] [thread 160549] [29.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:01.601] [bmv2] [D] [thread 160544] [30.0] [cxt 0] Processing packet received on port 2
+[17:45:01.601] [bmv2] [D] [thread 160544] [30.0] [cxt 0] Parser 'parser': start
+[17:45:01.601] [bmv2] [D] [thread 160544] [30.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.601] [bmv2] [D] [thread 160544] [30.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.601] [bmv2] [D] [thread 160544] [30.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.601] [bmv2] [T] [thread 160544] [30.0] [cxt 0] Bytes parsed: 14
+[17:45:01.601] [bmv2] [D] [thread 160544] [30.0] [cxt 0] Parser 'parser': end
+[17:45:01.601] [bmv2] [D] [thread 160544] [30.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.601] [bmv2] [T] [thread 160544] [30.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.601] [bmv2] [T] [thread 160544] [30.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.601] [bmv2] [D] [thread 160544] [30.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.601] [bmv2] [D] [thread 160544] [30.0] [cxt 0] Egress port is 0
+[17:45:01.601] [bmv2] [D] [thread 160545] [30.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.601] [bmv2] [D] [thread 160545] [30.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.601] [bmv2] [D] [thread 160545] [30.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.601] [bmv2] [T] [thread 160545] [30.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.601] [bmv2] [D] [thread 160545] [30.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.601] [bmv2] [D] [thread 160545] [30.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.602] [bmv2] [D] [thread 160549] [30.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:01.712] [bmv2] [D] [thread 160544] [31.0] [cxt 0] Processing packet received on port 2
+[17:45:01.712] [bmv2] [D] [thread 160544] [31.0] [cxt 0] Parser 'parser': start
+[17:45:01.712] [bmv2] [D] [thread 160544] [31.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.712] [bmv2] [D] [thread 160544] [31.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.712] [bmv2] [D] [thread 160544] [31.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.712] [bmv2] [T] [thread 160544] [31.0] [cxt 0] Bytes parsed: 14
+[17:45:01.712] [bmv2] [D] [thread 160544] [31.0] [cxt 0] Parser 'parser': end
+[17:45:01.712] [bmv2] [D] [thread 160544] [31.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.712] [bmv2] [T] [thread 160544] [31.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.712] [bmv2] [T] [thread 160544] [31.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.712] [bmv2] [D] [thread 160544] [31.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.712] [bmv2] [D] [thread 160544] [31.0] [cxt 0] Egress port is 0
+[17:45:01.712] [bmv2] [D] [thread 160545] [31.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.712] [bmv2] [D] [thread 160545] [31.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.713] [bmv2] [D] [thread 160545] [31.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.713] [bmv2] [T] [thread 160545] [31.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.713] [bmv2] [D] [thread 160545] [31.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.713] [bmv2] [D] [thread 160545] [31.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.713] [bmv2] [D] [thread 160549] [31.0] [cxt 0] Transmitting packet of size 205 out of port 0
+[17:45:01.830] [bmv2] [D] [thread 160544] [32.0] [cxt 0] Processing packet received on port 1
+[17:45:01.830] [bmv2] [D] [thread 160544] [32.0] [cxt 0] Parser 'parser': start
+[17:45:01.830] [bmv2] [D] [thread 160544] [32.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.830] [bmv2] [D] [thread 160544] [32.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.830] [bmv2] [D] [thread 160544] [32.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.831] [bmv2] [T] [thread 160544] [32.0] [cxt 0] Bytes parsed: 14
+[17:45:01.831] [bmv2] [D] [thread 160544] [32.0] [cxt 0] Parser 'parser': end
+[17:45:01.831] [bmv2] [D] [thread 160544] [32.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.831] [bmv2] [T] [thread 160544] [32.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.831] [bmv2] [T] [thread 160544] [32.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.831] [bmv2] [D] [thread 160544] [32.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.831] [bmv2] [D] [thread 160544] [32.0] [cxt 0] Egress port is 0
+[17:45:01.831] [bmv2] [D] [thread 160545] [32.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.831] [bmv2] [D] [thread 160545] [32.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.831] [bmv2] [D] [thread 160545] [32.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.831] [bmv2] [T] [thread 160545] [32.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.831] [bmv2] [D] [thread 160545] [32.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.831] [bmv2] [D] [thread 160545] [32.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.831] [bmv2] [D] [thread 160549] [32.0] [cxt 0] Transmitting packet of size 205 out of port 0
+[17:45:01.891] [bmv2] [D] [thread 160544] [33.0] [cxt 0] Processing packet received on port 2
+[17:45:01.891] [bmv2] [D] [thread 160544] [33.0] [cxt 0] Parser 'parser': start
+[17:45:01.891] [bmv2] [D] [thread 160544] [33.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:01.891] [bmv2] [D] [thread 160544] [33.0] [cxt 0] Extracting header 'ethernet'
+[17:45:01.891] [bmv2] [D] [thread 160544] [33.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:01.891] [bmv2] [T] [thread 160544] [33.0] [cxt 0] Bytes parsed: 14
+[17:45:01.891] [bmv2] [D] [thread 160544] [33.0] [cxt 0] Parser 'parser': end
+[17:45:01.892] [bmv2] [D] [thread 160544] [33.0] [cxt 0] Pipeline 'ingress': start
+[17:45:01.892] [bmv2] [T] [thread 160544] [33.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:01.892] [bmv2] [T] [thread 160544] [33.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:01.892] [bmv2] [D] [thread 160544] [33.0] [cxt 0] Pipeline 'ingress': end
+[17:45:01.892] [bmv2] [D] [thread 160544] [33.0] [cxt 0] Egress port is 0
+[17:45:01.892] [bmv2] [D] [thread 160545] [33.0] [cxt 0] Pipeline 'egress': start
+[17:45:01.892] [bmv2] [D] [thread 160545] [33.0] [cxt 0] Pipeline 'egress': end
+[17:45:01.892] [bmv2] [D] [thread 160545] [33.0] [cxt 0] Deparser 'deparser': start
+[17:45:01.892] [bmv2] [T] [thread 160545] [33.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:01.892] [bmv2] [D] [thread 160545] [33.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:01.892] [bmv2] [D] [thread 160545] [33.0] [cxt 0] Deparser 'deparser': end
+[17:45:01.892] [bmv2] [D] [thread 160549] [33.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:02.528] [bmv2] [D] [thread 160544] [34.0] [cxt 0] Processing packet received on port 1
+[17:45:02.528] [bmv2] [D] [thread 160544] [34.0] [cxt 0] Parser 'parser': start
+[17:45:02.528] [bmv2] [D] [thread 160544] [34.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:02.528] [bmv2] [D] [thread 160544] [34.0] [cxt 0] Extracting header 'ethernet'
+[17:45:02.528] [bmv2] [D] [thread 160544] [34.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:02.528] [bmv2] [T] [thread 160544] [34.0] [cxt 0] Bytes parsed: 14
+[17:45:02.528] [bmv2] [D] [thread 160544] [34.0] [cxt 0] Parser 'parser': end
+[17:45:02.528] [bmv2] [D] [thread 160544] [34.0] [cxt 0] Pipeline 'ingress': start
+[17:45:02.528] [bmv2] [T] [thread 160544] [34.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:02.528] [bmv2] [T] [thread 160544] [34.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:02.528] [bmv2] [D] [thread 160544] [34.0] [cxt 0] Pipeline 'ingress': end
+[17:45:02.528] [bmv2] [D] [thread 160544] [34.0] [cxt 0] Egress port is 0
+[17:45:02.528] [bmv2] [D] [thread 160545] [34.0] [cxt 0] Pipeline 'egress': start
+[17:45:02.528] [bmv2] [D] [thread 160545] [34.0] [cxt 0] Pipeline 'egress': end
+[17:45:02.528] [bmv2] [D] [thread 160545] [34.0] [cxt 0] Deparser 'deparser': start
+[17:45:02.528] [bmv2] [T] [thread 160545] [34.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:02.528] [bmv2] [D] [thread 160545] [34.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:02.528] [bmv2] [D] [thread 160545] [34.0] [cxt 0] Deparser 'deparser': end
+[17:45:02.528] [bmv2] [D] [thread 160549] [34.0] [cxt 0] Transmitting packet of size 205 out of port 0
+[17:45:02.595] [bmv2] [D] [thread 160544] [35.0] [cxt 0] Processing packet received on port 2
+[17:45:02.595] [bmv2] [D] [thread 160544] [35.0] [cxt 0] Parser 'parser': start
+[17:45:02.595] [bmv2] [D] [thread 160544] [35.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:02.595] [bmv2] [D] [thread 160544] [35.0] [cxt 0] Extracting header 'ethernet'
+[17:45:02.595] [bmv2] [D] [thread 160544] [35.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:02.595] [bmv2] [T] [thread 160544] [35.0] [cxt 0] Bytes parsed: 14
+[17:45:02.595] [bmv2] [D] [thread 160544] [35.0] [cxt 0] Parser 'parser': end
+[17:45:02.595] [bmv2] [D] [thread 160544] [35.0] [cxt 0] Pipeline 'ingress': start
+[17:45:02.595] [bmv2] [T] [thread 160544] [35.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:02.595] [bmv2] [T] [thread 160544] [35.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:02.595] [bmv2] [D] [thread 160544] [35.0] [cxt 0] Pipeline 'ingress': end
+[17:45:02.595] [bmv2] [D] [thread 160544] [35.0] [cxt 0] Egress port is 0
+[17:45:02.595] [bmv2] [D] [thread 160545] [35.0] [cxt 0] Pipeline 'egress': start
+[17:45:02.595] [bmv2] [D] [thread 160545] [35.0] [cxt 0] Pipeline 'egress': end
+[17:45:02.595] [bmv2] [D] [thread 160545] [35.0] [cxt 0] Deparser 'deparser': start
+[17:45:02.595] [bmv2] [T] [thread 160545] [35.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:02.595] [bmv2] [D] [thread 160545] [35.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:02.595] [bmv2] [D] [thread 160545] [35.0] [cxt 0] Deparser 'deparser': end
+[17:45:02.595] [bmv2] [D] [thread 160549] [35.0] [cxt 0] Transmitting packet of size 205 out of port 0
+[17:45:02.779] [bmv2] [D] [thread 160544] [36.0] [cxt 0] Processing packet received on port 1
+[17:45:02.779] [bmv2] [D] [thread 160544] [36.0] [cxt 0] Parser 'parser': start
+[17:45:02.779] [bmv2] [D] [thread 160544] [36.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:02.779] [bmv2] [D] [thread 160544] [36.0] [cxt 0] Extracting header 'ethernet'
+[17:45:02.780] [bmv2] [D] [thread 160544] [36.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:02.780] [bmv2] [T] [thread 160544] [36.0] [cxt 0] Bytes parsed: 14
+[17:45:02.780] [bmv2] [D] [thread 160544] [36.0] [cxt 0] Parser 'parser': end
+[17:45:02.780] [bmv2] [D] [thread 160544] [36.0] [cxt 0] Pipeline 'ingress': start
+[17:45:02.780] [bmv2] [T] [thread 160544] [36.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:02.780] [bmv2] [T] [thread 160544] [36.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:02.780] [bmv2] [D] [thread 160544] [36.0] [cxt 0] Pipeline 'ingress': end
+[17:45:02.780] [bmv2] [D] [thread 160544] [36.0] [cxt 0] Egress port is 0
+[17:45:02.780] [bmv2] [D] [thread 160545] [36.0] [cxt 0] Pipeline 'egress': start
+[17:45:02.780] [bmv2] [D] [thread 160545] [36.0] [cxt 0] Pipeline 'egress': end
+[17:45:02.780] [bmv2] [D] [thread 160545] [36.0] [cxt 0] Deparser 'deparser': start
+[17:45:02.780] [bmv2] [T] [thread 160545] [36.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:02.780] [bmv2] [D] [thread 160545] [36.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:02.780] [bmv2] [D] [thread 160545] [36.0] [cxt 0] Deparser 'deparser': end
+[17:45:02.780] [bmv2] [D] [thread 160549] [36.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:02.884] [bmv2] [D] [thread 160544] [37.0] [cxt 0] Processing packet received on port 2
+[17:45:02.884] [bmv2] [D] [thread 160544] [37.0] [cxt 0] Parser 'parser': start
+[17:45:02.884] [bmv2] [D] [thread 160544] [37.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:02.884] [bmv2] [D] [thread 160544] [37.0] [cxt 0] Extracting header 'ethernet'
+[17:45:02.884] [bmv2] [D] [thread 160544] [37.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:02.884] [bmv2] [T] [thread 160544] [37.0] [cxt 0] Bytes parsed: 14
+[17:45:02.884] [bmv2] [D] [thread 160544] [37.0] [cxt 0] Parser 'parser': end
+[17:45:02.884] [bmv2] [D] [thread 160544] [37.0] [cxt 0] Pipeline 'ingress': start
+[17:45:02.884] [bmv2] [T] [thread 160544] [37.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:02.884] [bmv2] [T] [thread 160544] [37.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:02.884] [bmv2] [D] [thread 160544] [37.0] [cxt 0] Pipeline 'ingress': end
+[17:45:02.884] [bmv2] [D] [thread 160544] [37.0] [cxt 0] Egress port is 0
+[17:45:02.884] [bmv2] [D] [thread 160545] [37.0] [cxt 0] Pipeline 'egress': start
+[17:45:02.884] [bmv2] [D] [thread 160545] [37.0] [cxt 0] Pipeline 'egress': end
+[17:45:02.884] [bmv2] [D] [thread 160545] [37.0] [cxt 0] Deparser 'deparser': start
+[17:45:02.884] [bmv2] [T] [thread 160545] [37.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:02.884] [bmv2] [D] [thread 160545] [37.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:02.884] [bmv2] [D] [thread 160545] [37.0] [cxt 0] Deparser 'deparser': end
+[17:45:02.884] [bmv2] [D] [thread 160549] [37.0] [cxt 0] Transmitting packet of size 205 out of port 0
+[17:45:03.374] [bmv2] [D] [thread 160544] [38.0] [cxt 0] Processing packet received on port 1
+[17:45:03.374] [bmv2] [D] [thread 160544] [38.0] [cxt 0] Parser 'parser': start
+[17:45:03.374] [bmv2] [D] [thread 160544] [38.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:03.374] [bmv2] [D] [thread 160544] [38.0] [cxt 0] Extracting header 'ethernet'
+[17:45:03.375] [bmv2] [D] [thread 160544] [38.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:03.375] [bmv2] [T] [thread 160544] [38.0] [cxt 0] Bytes parsed: 14
+[17:45:03.375] [bmv2] [D] [thread 160544] [38.0] [cxt 0] Parser 'parser': end
+[17:45:03.375] [bmv2] [D] [thread 160544] [38.0] [cxt 0] Pipeline 'ingress': start
+[17:45:03.375] [bmv2] [T] [thread 160544] [38.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:03.375] [bmv2] [T] [thread 160544] [38.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:03.375] [bmv2] [D] [thread 160544] [38.0] [cxt 0] Pipeline 'ingress': end
+[17:45:03.375] [bmv2] [D] [thread 160544] [38.0] [cxt 0] Egress port is 0
+[17:45:03.375] [bmv2] [D] [thread 160545] [38.0] [cxt 0] Pipeline 'egress': start
+[17:45:03.375] [bmv2] [D] [thread 160545] [38.0] [cxt 0] Pipeline 'egress': end
+[17:45:03.375] [bmv2] [D] [thread 160545] [38.0] [cxt 0] Deparser 'deparser': start
+[17:45:03.375] [bmv2] [T] [thread 160545] [38.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:03.375] [bmv2] [D] [thread 160545] [38.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:03.375] [bmv2] [D] [thread 160545] [38.0] [cxt 0] Deparser 'deparser': end
+[17:45:03.376] [bmv2] [D] [thread 160549] [38.0] [cxt 0] Transmitting packet of size 70 out of port 0
+[17:45:03.535] [bmv2] [D] [thread 160544] [39.0] [cxt 0] Processing packet received on port 1
+[17:45:03.535] [bmv2] [D] [thread 160544] [39.0] [cxt 0] Parser 'parser': start
+[17:45:03.535] [bmv2] [D] [thread 160544] [39.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:03.535] [bmv2] [D] [thread 160544] [39.0] [cxt 0] Extracting header 'ethernet'
+[17:45:03.535] [bmv2] [D] [thread 160544] [39.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:03.535] [bmv2] [T] [thread 160544] [39.0] [cxt 0] Bytes parsed: 14
+[17:45:03.535] [bmv2] [D] [thread 160544] [39.0] [cxt 0] Parser 'parser': end
+[17:45:03.535] [bmv2] [D] [thread 160544] [39.0] [cxt 0] Pipeline 'ingress': start
+[17:45:03.535] [bmv2] [T] [thread 160544] [39.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:03.535] [bmv2] [T] [thread 160544] [39.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:03.535] [bmv2] [D] [thread 160544] [39.0] [cxt 0] Pipeline 'ingress': end
+[17:45:03.535] [bmv2] [D] [thread 160544] [39.0] [cxt 0] Egress port is 0
+[17:45:03.536] [bmv2] [D] [thread 160545] [39.0] [cxt 0] Pipeline 'egress': start
+[17:45:03.536] [bmv2] [D] [thread 160545] [39.0] [cxt 0] Pipeline 'egress': end
+[17:45:03.540] [bmv2] [D] [thread 160545] [39.0] [cxt 0] Deparser 'deparser': start
+[17:45:03.540] [bmv2] [T] [thread 160545] [39.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:03.540] [bmv2] [D] [thread 160545] [39.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:03.540] [bmv2] [D] [thread 160545] [39.0] [cxt 0] Deparser 'deparser': end
+[17:45:03.540] [bmv2] [D] [thread 160549] [39.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:03.601] [bmv2] [D] [thread 160544] [40.0] [cxt 0] Processing packet received on port 2
+[17:45:03.601] [bmv2] [D] [thread 160544] [40.0] [cxt 0] Parser 'parser': start
+[17:45:03.601] [bmv2] [D] [thread 160544] [40.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:03.601] [bmv2] [D] [thread 160544] [40.0] [cxt 0] Extracting header 'ethernet'
+[17:45:03.601] [bmv2] [D] [thread 160544] [40.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:03.601] [bmv2] [T] [thread 160544] [40.0] [cxt 0] Bytes parsed: 14
+[17:45:03.601] [bmv2] [D] [thread 160544] [40.0] [cxt 0] Parser 'parser': end
+[17:45:03.602] [bmv2] [D] [thread 160544] [40.0] [cxt 0] Pipeline 'ingress': start
+[17:45:03.602] [bmv2] [T] [thread 160544] [40.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:03.602] [bmv2] [T] [thread 160544] [40.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:03.602] [bmv2] [D] [thread 160544] [40.0] [cxt 0] Pipeline 'ingress': end
+[17:45:03.602] [bmv2] [D] [thread 160544] [40.0] [cxt 0] Egress port is 0
+[17:45:03.602] [bmv2] [D] [thread 160545] [40.0] [cxt 0] Pipeline 'egress': start
+[17:45:03.602] [bmv2] [D] [thread 160545] [40.0] [cxt 0] Pipeline 'egress': end
+[17:45:03.602] [bmv2] [D] [thread 160545] [40.0] [cxt 0] Deparser 'deparser': start
+[17:45:03.602] [bmv2] [T] [thread 160545] [40.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:03.602] [bmv2] [D] [thread 160545] [40.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:03.602] [bmv2] [D] [thread 160545] [40.0] [cxt 0] Deparser 'deparser': end
+[17:45:03.602] [bmv2] [D] [thread 160549] [40.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:03.915] [bmv2] [D] [thread 160544] [41.0] [cxt 0] Processing packet received on port 2
+[17:45:03.915] [bmv2] [D] [thread 160544] [41.0] [cxt 0] Parser 'parser': start
+[17:45:03.915] [bmv2] [D] [thread 160544] [41.0] [cxt 0] Parser 'parser' entering state 'start'
+[17:45:03.915] [bmv2] [D] [thread 160544] [41.0] [cxt 0] Extracting header 'ethernet'
+[17:45:03.915] [bmv2] [D] [thread 160544] [41.0] [cxt 0] Parser state 'start': key is 86dd
+[17:45:03.915] [bmv2] [T] [thread 160544] [41.0] [cxt 0] Bytes parsed: 14
+[17:45:03.915] [bmv2] [D] [thread 160544] [41.0] [cxt 0] Parser 'parser': end
+[17:45:03.915] [bmv2] [D] [thread 160544] [41.0] [cxt 0] Pipeline 'ingress': start
+[17:45:03.915] [bmv2] [T] [thread 160544] [41.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(245) Condition "hdr.ipv4.isValid()" (node_2) is false
+[17:45:03.915] [bmv2] [T] [thread 160544] [41.0] [cxt 0] /home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4(253) Condition "hdr.mpls[0].isValid()" (node_5) is false
+[17:45:03.915] [bmv2] [D] [thread 160544] [41.0] [cxt 0] Pipeline 'ingress': end
+[17:45:03.915] [bmv2] [D] [thread 160544] [41.0] [cxt 0] Egress port is 0
+[17:45:03.915] [bmv2] [D] [thread 160545] [41.0] [cxt 0] Pipeline 'egress': start
+[17:45:03.915] [bmv2] [D] [thread 160545] [41.0] [cxt 0] Pipeline 'egress': end
+[17:45:03.915] [bmv2] [D] [thread 160545] [41.0] [cxt 0] Deparser 'deparser': start
+[17:45:03.916] [bmv2] [T] [thread 160545] [41.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[17:45:03.916] [bmv2] [D] [thread 160545] [41.0] [cxt 0] Deparsing header 'ethernet'
+[17:45:03.916] [bmv2] [D] [thread 160545] [41.0] [cxt 0] Deparser 'deparser': end
+[17:45:03.916] [bmv2] [D] [thread 160549] [41.0] [cxt 0] Transmitting packet of size 221 out of port 0
+[17:45:06.789] [bmv2] [T] [thread 160755] bm_get_config
+[17:45:06.793] [bmv2] [T] [thread 160755] bm_table_add_entry
+[17:45:06.793] [bmv2] [D] [thread 160755] Entry 0 added to table 'MyIngress.mpls_tbl'
+[17:45:06.793] [bmv2] [D] [thread 160755] Dumping entry 0
+Match key:
+* hdr.mpls[0].label   : EXACT     000002
+* hdr.mpls[0].s       : EXACT     00
+Action entry: MyIngress.mpls_forward - 40100,2,
+
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory

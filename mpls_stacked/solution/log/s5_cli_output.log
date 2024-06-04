@@ -1,0 +1,9 @@
+Obtaining JSON from switch...
+Done
+Control utility for runtime P4 table manipulation
+RuntimeCmd: Adding entry to exact match table mpls_tbl
+match key:           EXACT-00:00:02	EXACT-01
+action:              penultimate
+runtime data:        00:00:00:07:01:00	00:02
+Entry has been added with handle 0
+RuntimeCmd: 
