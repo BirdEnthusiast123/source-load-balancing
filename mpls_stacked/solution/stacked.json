@@ -371,7 +371,7 @@
         "column" : 8,
         "source_fragment" : "MyDeparser"
       },
-      "order" : ["ethernet", "ipv4", "mpls[0]", "mpls[1]", "mpls[2]", "mpls[3]", "mpls[4]", "mpls[5]", "mpls[6]", "mpls[7]", "tcp"],
+      "order" : ["ethernet", "mpls[0]", "mpls[1]", "mpls[2]", "mpls[3]", "mpls[4]", "mpls[5]", "mpls[6]", "mpls[7]", "ipv4", "tcp"],
       "primitives" : []
     }
   ],
@@ -411,7 +411,7 @@
       "id" : 1,
       "source_info" : {
         "filename" : "/home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4",
-        "line" : 280,
+        "line" : 276,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
@@ -479,26 +479,10 @@
       "primitives" : []
     },
     {
-      "name" : "MyIngress.drop",
+      "name" : "NoAction",
       "id" : 2,
       "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "mark_to_drop",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "standard_metadata"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4",
-            "line" : 28,
-            "column" : 8,
-            "source_fragment" : "mark_to_drop(standard_metadata)"
-          }
-        }
-      ]
+      "primitives" : []
     },
     {
       "name" : "MyIngress.ipv4_forward",
@@ -3160,16 +3144,16 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [3, 5, 2],
-          "actions" : ["MyIngress.ipv4_forward", "MyIngress.ecmp_group", "MyIngress.drop"],
+          "action_ids" : [3, 5, 0],
+          "actions" : ["MyIngress.ipv4_forward", "MyIngress.ecmp_group", "NoAction"],
           "base_default_next" : "node_5",
           "next_tables" : {
             "MyIngress.ecmp_group" : "MyIngress.FEC_tbl",
             "MyIngress.ipv4_forward" : "node_5",
-            "MyIngress.drop" : "node_5"
+            "NoAction" : "node_5"
           },
           "default_entry" : {
-            "action_id" : 2,
+            "action_id" : 0,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
@@ -3204,7 +3188,7 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [4, 6, 7, 8, 9, 10, 0],
+          "action_ids" : [4, 6, 7, 8, 9, 10, 1],
           "actions" : ["MyIngress.ipv4_forward", "MyIngress.mpls_ingress_1_hop", "MyIngress.mpls_ingress_2_hop", "MyIngress.mpls_ingress_3_hop", "MyIngress.mpls_ingress_4_hop", "MyIngress.mpls_ingress_5_hop", "NoAction"],
           "base_default_next" : "node_5",
           "next_tables" : {
@@ -3217,7 +3201,7 @@
             "NoAction" : "node_5"
           },
           "default_entry" : {
-            "action_id" : 0,
+            "action_id" : 1,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
@@ -3281,7 +3265,7 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [11, 12, 1],
+          "action_ids" : [11, 12, 2],
           "actions" : ["MyIngress.mpls_forward", "MyIngress.penultimate", "NoAction"],
           "base_default_next" : null,
           "next_tables" : {
@@ -3290,7 +3274,7 @@
             "NoAction" : null
           },
           "default_entry" : {
-            "action_id" : 1,
+            "action_id" : 2,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
@@ -3304,7 +3288,7 @@
           "id" : 0,
           "source_info" : {
             "filename" : "/home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4",
-            "line" : 245,
+            "line" : 241,
             "column" : 12,
             "source_fragment" : "hdr.ipv4.isValid()"
           },
@@ -3327,7 +3311,7 @@
           "id" : 1,
           "source_info" : {
             "filename" : "/home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4",
-            "line" : 253,
+            "line" : 249,
             "column" : 11,
             "source_fragment" : "hdr.mpls[0].isValid()"
           },
@@ -3352,7 +3336,7 @@
       "id" : 1,
       "source_info" : {
         "filename" : "/home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4",
-        "line" : 263,
+        "line" : 259,
         "column" : 8,
         "source_fragment" : "MyEgress"
       },
@@ -3368,7 +3352,7 @@
       "id" : 0,
       "source_info" : {
         "filename" : "/home/vboxuser/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/solution/stacked.p4",
-        "line" : 280,
+        "line" : 276,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },

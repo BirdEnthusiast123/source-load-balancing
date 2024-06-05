@@ -173,10 +173,10 @@ control MyIngress(inout headers hdr,
         actions = {
             ipv4_forward;
             ecmp_group;
-            drop;
+            NoAction;
         }
         size = 1024;
-        default_action = drop;
+        default_action = NoAction();
     }
 
     table FEC_tbl {
@@ -237,10 +237,6 @@ control MyIngress(inout headers hdr,
     }
 
     apply {
-        /* Ingress Pipeline Control Logic */
-        // if(hdr.ipv4.isValid()){
-        //     FEC_tbl.apply();
-        // }
 
         if (hdr.ipv4.isValid()){
             switch (ipv4_lpm.apply().action_run){

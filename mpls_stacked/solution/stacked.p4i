@@ -1021,10 +1021,10 @@ control MyDeparser(packet_out packet, in headers hdr) {
 
         //parsed headers have to be added again into the packet.
         packet.emit(hdr.ethernet);
+        packet.emit(hdr.mpls);
         packet.emit(hdr.ipv4);
 
         //Only emited if valid
-        packet.emit(hdr.mpls);
         packet.emit(hdr.tcp);
     }
 }
@@ -1196,10 +1196,10 @@ control MyIngress(inout headers hdr,
         actions = {
             ipv4_forward;
             ecmp_group;
-            drop;
+            NoAction;
         }
         size = 1024;
-        default_action = drop;
+        default_action = NoAction();
     }
 
     table FEC_tbl {
@@ -1260,10 +1260,6 @@ control MyIngress(inout headers hdr,
     }
 
     apply {
-        /* Ingress Pipeline Control Logic */
-        // if(hdr.ipv4.isValid()){
-        //     FEC_tbl.apply();
-        // }
 
         if (hdr.ipv4.isValid()){
             switch (ipv4_lpm.apply().action_run){

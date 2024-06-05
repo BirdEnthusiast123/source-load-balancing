@@ -1,12 +1,49 @@
 Obtaining JSON from switch...
 Done
 Control utility for runtime P4 table manipulation
-RuntimeCmd: Error: Table FEC_tbl needs 2 key fields
+RuntimeCmd: Adding entry to lpm match table ipv4_lpm
+match key:           LPM-0a:01:01:00/24
+action:              ipv4_forward
+runtime data:        00:00:0a:01:01:02	00:01
+Entry has been added with handle 0
+RuntimeCmd: Adding entry to lpm match table ipv4_lpm
+match key:           LPM-0a:07:02:00/24
+action:              ecmp_group
+runtime data:        00:01	00:02
+Entry has been added with handle 1
+RuntimeCmd: Adding entry to lpm match table ipv4_lpm
+match key:           LPM-0a:07:03:00/24
+action:              ecmp_group
+runtime data:        00:02	00:02
+Entry has been added with handle 2
+RuntimeCmd: Adding entry to exact match table FEC_tbl
+match key:           EXACT-00:01	EXACT-00:00
+action:              mpls_ingress_4_hop
+runtime data:        00:00:02	00:00:03	00:00:02	00:00:02
+Entry has been added with handle 0
+RuntimeCmd: Adding entry to exact match table FEC_tbl
+match key:           EXACT-00:01	EXACT-00:01
+action:              mpls_ingress_4_hop
+runtime data:        00:00:02	00:00:03	00:00:02	00:00:03
+Entry has been added with handle 1
+RuntimeCmd: Adding entry to exact match table FEC_tbl
+match key:           EXACT-00:02	EXACT-00:00
+action:              mpls_ingress_4_hop
+runtime data:        00:00:02	00:00:03	00:00:02	00:00:02
+Entry has been added with handle 2
+RuntimeCmd: Adding entry to exact match table FEC_tbl
+match key:           EXACT-00:02	EXACT-00:01
+action:              mpls_ingress_4_hop
+runtime data:        00:00:02	00:00:03	00:00:02	00:00:03
+Entry has been added with handle 3
 RuntimeCmd: Adding entry to exact match table mpls_tbl
 match key:           EXACT-00:00:02	EXACT-00
 action:              mpls_forward
 runtime data:        00:00:00:02:01:00	00:02
 Entry has been added with handle 0
-RuntimeCmd: Error: Table FEC_tbl needs 2 key fields
-RuntimeCmd: Error: Table FEC_tbl needs 2 key fields
+RuntimeCmd: Adding entry to exact match table mpls_tbl
+match key:           EXACT-00:00:03	EXACT-00
+action:              mpls_forward
+runtime data:        00:00:00:03:01:00	00:03
+Entry has been added with handle 1
 RuntimeCmd: 
