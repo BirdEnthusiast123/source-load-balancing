@@ -1,16 +1,16 @@
 // basic forwarding ///////////ip dest @   => MAC address       port //////////////
 table_add ipv4_lpm ipv4_forward 10.1.1.0/24 => 00:00:0a:01:01:02 1
 
-// ip_dest -> ecmp_group /////ip dest @   => ecmp_group nb_of_possible_next_hops //
-table_add ipv4_lpm ecmp_group 10.7.2.0/24 => 1 2
-table_add ipv4_lpm ecmp_group 10.7.3.0/24 => 2 2
+// ip_dest -> sr_group /////ip dest @   => sr_group nb_of_possible_next_hops //
+table_add ipv4_lpm sr_group 10.7.2.0/24 => 1 2
+table_add ipv4_lpm sr_group 10.7.3.0/24 => 2 2
 
-// ecmp_group (todo add dest) -> label list ///ecmp_group ecmp_hash => list of labels ///////
-table_add FEC_tbl mpls_ingress_4_hop 1 0 => 2 3 2 2
-table_add FEC_tbl mpls_ingress_4_hop 1 1 => 2 3 2 3
-table_add FEC_tbl mpls_ingress_4_hop 2 0 => 2 3 2 2
-table_add FEC_tbl mpls_ingress_4_hop 2 1 => 2 3 2 3
+// sr_group (todo add dest) -> label list ///sr_group ecmp_hash => list of labels ///////
+table_add FEC_tbl sr_ingress_4_hop 1 0 => 2 3 2 2
+table_add FEC_tbl sr_ingress_4_hop 1 1 => 2 3 2 3
+table_add FEC_tbl sr_ingress_4_hop 2 0 => 2 3 2 2
+table_add FEC_tbl sr_ingress_4_hop 2 1 => 2 3 2 3
 
-// mpls forwarding /////////////label is_bottom => MAC @ port /////////////////////
-table_add mpls_tbl mpls_forward 2 0 => 00:00:00:02:01:00 2
-table_add mpls_tbl mpls_forward 3 0 => 00:00:00:03:01:00 3
+// sr forwarding /////////////label is_bottom => MAC @ port /////////////////////
+table_add sr_tbl sr_forward 2 0 => 00:00:00:02:01:00 2
+table_add sr_tbl sr_forward 3 0 => 00:00:00:03:01:00 3

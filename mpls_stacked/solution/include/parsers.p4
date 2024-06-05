@@ -17,17 +17,17 @@ parser MyParser(packet_in packet,
 
         packet.extract(hdr.ethernet);
         transition select(hdr.ethernet.etherType){
-            TYPE_MPLS: parse_mpls;
+            TYPE_SR: parse_sr;
             TYPE_IPV4: parse_ipv4;
             default: accept;
         }
     }
 
-    state parse_mpls {
-        packet.extract(hdr.mpls.next);
-        transition select(hdr.mpls.last.s) {
+    state parse_sr {
+        packet.extract(hdr.sr.next);
+        transition select(hdr.sr.last.s) {
             1: parse_ipv4;
-            default: parse_mpls;
+            default: parse_sr;
         }
     }
 
@@ -55,7 +55,7 @@ control MyDeparser(packet_out packet, in headers hdr) {
 
         //parsed headers have to be added again into the packet.
         packet.emit(hdr.ethernet);
-        packet.emit(hdr.mpls);
+        packet.emit(hdr.sr);
         packet.emit(hdr.ipv4);
 
         //Only emited if valid

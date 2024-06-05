@@ -28,6 +28,8 @@ control MyIngress(inout headers hdr,
         mark_to_drop(standard_metadata);
     }
 
+
+    // DST @ -> CLASSIFICATION OF FLOWS //////////////////////////////////
     action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {
 
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
@@ -37,8 +39,8 @@ control MyIngress(inout headers hdr,
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
 
-    action ecmp_group(bit<14> ecmp_group_id, bit<16> num_nhops){
-        hash(meta.ecmp_hash,
+    action sr_group(bit<14> sr_group_id, bit<16> num_nhops){
+        hash(meta.packet_hash,
 	    HashAlgorithm.crc16,
 	    (bit<1>)0,
 	    { hdr.ipv4.srcAddr,
@@ -48,122 +50,7 @@ control MyIngress(inout headers hdr,
           hdr.ipv4.protocol},
 	    num_nhops);
 
-	    meta.ecmp_group_id = ecmp_group_id;
-    }
-
-    action mpls_ingress_1_hop(label_t label_1) {
-
-        hdr.ethernet.etherType = TYPE_MPLS;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_1;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 1;
-    }
-
-    action mpls_ingress_2_hop(label_t label_1, label_t label_2) {
-
-        hdr.ethernet.etherType = TYPE_MPLS;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_1;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 1;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_2;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
-    }
-
-    action mpls_ingress_3_hop(label_t label_1, label_t label_2, label_t label_3) {
-
-        hdr.ethernet.etherType = TYPE_MPLS;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_1;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 1;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_2;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_3;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
-    }
-
-    action mpls_ingress_4_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4) {
-
-        hdr.ethernet.etherType = TYPE_MPLS;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_1;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 1;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_2;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_3;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_4;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
-    }
-
-    action mpls_ingress_5_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4, label_t label_5) {
-
-        hdr.ethernet.etherType = TYPE_MPLS;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_1;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 1;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_2;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_3;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_4;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
-
-        hdr.mpls.push_front(1);
-        hdr.mpls[0].setValid();
-        hdr.mpls[0].label = label_5;
-        hdr.mpls[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.mpls[0].s = 0;
+	    meta.sr_group_id = sr_group_id;
     }
 
     table ipv4_lpm {
@@ -172,41 +59,162 @@ control MyIngress(inout headers hdr,
         }
         actions = {
             ipv4_forward;
-            ecmp_group;
+            sr_group;
             NoAction;
         }
         size = 1024;
         default_action = NoAction();
     }
 
+
+    // GROUPS OF FLOWS -> LISTS OF SEGMENTS //////////////////////////////
+    action sr_ingress_1_hop(label_t label_1) {
+
+        hdr.ethernet.etherType = TYPE_SR;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_1;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 1;
+    }
+
+    action sr_ingress_2_hop(label_t label_1, label_t label_2) {
+
+        hdr.ethernet.etherType = TYPE_SR;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_1;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 1;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_2;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+    }
+
+    action sr_ingress_3_hop(label_t label_1, label_t label_2, label_t label_3) {
+
+        hdr.ethernet.etherType = TYPE_SR;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_1;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 1;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_2;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_3;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+    }
+
+    action sr_ingress_4_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4) {
+
+        hdr.ethernet.etherType = TYPE_SR;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_1;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 1;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_2;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_3;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_4;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+    }
+
+    action sr_ingress_5_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4, label_t label_5) {
+
+        hdr.ethernet.etherType = TYPE_SR;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_1;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 1;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_2;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_3;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_4;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label_5;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+    }
+
     table FEC_tbl {
         key = {
-            meta.ecmp_group_id:    exact;
-            meta.ecmp_hash: exact;
+            meta.sr_group_id: exact;
+            meta.packet_hash: exact;
         }
         actions = {
-            ipv4_forward;
-            mpls_ingress_1_hop;
-            mpls_ingress_2_hop;
-            mpls_ingress_3_hop;
-            mpls_ingress_4_hop;
-            mpls_ingress_5_hop;
+            sr_ingress_1_hop;
+            sr_ingress_2_hop;
+            sr_ingress_3_hop;
+            sr_ingress_4_hop;
+            sr_ingress_5_hop;
             NoAction;
         }
         default_action = NoAction();
         size = 256;
     }
 
-    action mpls_forward(macAddr_t dstAddr, egressSpec_t port) {
+
+    // LIST OF SEGMENTS -> FORWARDING //////////////////////////////
+    action sr_forward(macAddr_t dstAddr, egressSpec_t port) {
 
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
         hdr.ethernet.dstAddr = dstAddr;
 
         standard_metadata.egress_spec = port;
 
-        hdr.mpls[1].ttl = hdr.mpls[0].ttl - 1;
+        hdr.sr[1].ttl = hdr.sr[0].ttl - 1;
 
-        hdr.mpls.pop_front(1);
+        if(1 == 1)
+        {
+            hdr.sr.pop_front(1);
+        }
     }
 
     action penultimate(macAddr_t dstAddr, egressSpec_t port) {
@@ -216,19 +224,19 @@ control MyIngress(inout headers hdr,
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
         hdr.ethernet.dstAddr = dstAddr;
 
-        hdr.ipv4.ttl = hdr.mpls[0].ttl - 1;
+        hdr.ipv4.ttl = hdr.sr[0].ttl - 1;
 
         standard_metadata.egress_spec = port;
-        hdr.mpls.pop_front(1);
+        hdr.sr.pop_front(1);
     }
 
-    table mpls_tbl {
+    table sr_tbl {
         key = {
-            hdr.mpls[0].label: exact;
-            hdr.mpls[0].s: exact;
+            hdr.sr[0].label: exact;
+            hdr.sr[0].s: exact;
         }
         actions = {
-            mpls_forward;
+            sr_forward;
             penultimate;
             NoAction;
         }
@@ -237,17 +245,18 @@ control MyIngress(inout headers hdr,
     }
 
     apply {
-
+        // Ingress router
         if (hdr.ipv4.isValid()){
             switch (ipv4_lpm.apply().action_run){
-                ecmp_group: {
+                sr_group: {
                     FEC_tbl.apply();
                 }
             }
         }
 
-        if(hdr.mpls[0].isValid()){
-            mpls_tbl.apply();
+        // SR-Forwarding
+        if(hdr.sr[0].isValid()){
+            sr_tbl.apply();
         }
     }
 }

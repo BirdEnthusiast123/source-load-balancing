@@ -3,10 +3,10 @@
 *************************************************************************/
 
 #define CONST_MAX_LABELS 	128
-#define CONST_MAX_MPLS_HOPS 8
+#define CONST_MAX_SR_HOPS 8
 
 const bit<16> TYPE_IPV4 = 0x800;
-const bit<16> TYPE_MPLS = 0x8847;
+const bit<16> TYPE_SR   = 0x8847;
 
 typedef bit<9>  egressSpec_t;
 typedef bit<48> macAddr_t;
@@ -19,7 +19,7 @@ header ethernet_t {
     bit<16>   etherType;
 }
 
-header mpls_t {
+header sr_t {
     bit<20>   label;
     bit<3>    exp;
     bit<1>    s;
@@ -62,13 +62,13 @@ header tcp_t{
 }
 
 struct metadata {
-    bit<14> ecmp_hash;
-    bit<14> ecmp_group_id;
+    bit<14> packet_hash;
+    bit<14> sr_group_id;
 }
 
 struct headers {
     ethernet_t                      ethernet;
-    mpls_t[CONST_MAX_MPLS_HOPS]     mpls;
+    sr_t[CONST_MAX_SR_HOPS]         sr;
     ipv4_t                          ipv4;
     tcp_t                           tcp;
 }
