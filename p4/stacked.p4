@@ -41,7 +41,7 @@ control MyIngress(inout headers hdr,
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
 
-    action sr_group(bit<14> sr_group_id, bit<16> num_nhops){
+    action set_sr_group(bit<14> sr_group_id, bit<16> num_shops){
         hash(meta.packet_hash,
 	    HashAlgorithm.crc16,
 	    (bit<1>)0,
@@ -50,7 +50,7 @@ control MyIngress(inout headers hdr,
           hdr.tcp.srcPort,
           hdr.tcp.dstPort,
           hdr.ipv4.protocol},
-	    num_nhops);
+	    num_shops);
 
 	    meta.sr_group_id = sr_group_id;
     }
@@ -61,7 +61,7 @@ control MyIngress(inout headers hdr,
         }
         actions = {
             ipv4_forward;
-            sr_group;
+            set_sr_group;
             NoAction;
         }
         size = 1024;
@@ -210,8 +210,21 @@ control MyIngress(inout headers hdr,
         hdr.ethernet.dstAddr = dstAddr;
 
         standard_metadata.egress_spec = port;
-
         hdr.sr[1].ttl = hdr.sr[0].ttl - 1;
+    }
+
+    action set_ecmp_group(bit<14> ecmp_group_id, bit<16> num_nhops){
+        hash(meta.packet_hash,
+	    HashAlgorithm.crc16,
+	    (bit<1>)0,
+	    { hdr.ipv4.srcAddr,
+	      hdr.ipv4.dstAddr,
+          hdr.tcp.srcPort,
+          hdr.tcp.dstPort,
+          hdr.ipv4.protocol},
+	    num_nhops);
+
+	    meta.ecmp_group_id = ecmp_group_id;
     }
 
     table sr_tbl {
@@ -220,17 +233,30 @@ control MyIngress(inout headers hdr,
         }
         actions = {
             sr_forward;
+            set_ecmp_group;
             NoAction;
         }
         default_action = NoAction();
         size = CONST_MAX_LABELS;
     }
 
+    table ecmp_group_to_nhop {
+        key = {
+            meta.ecmp_group_id:    exact;
+            meta.packet_hash: exact;
+        }
+        actions = {
+            drop;
+            sr_forward;
+        }
+        size = 1024;
+    }
+
     apply {
         // Ingress router
         if (hdr.ipv4.isValid()){
             switch (ipv4_lpm.apply().action_run){
-                sr_group: {
+                set_sr_group: {
                     FEC_tbl.apply();
                 }
             }
@@ -248,7 +274,12 @@ control MyIngress(inout headers hdr,
                 hdr.sr.pop_front(1);
             }
 
-            sr_tbl.apply();
+            
+            switch (sr_tbl.apply().action_run){
+                set_ecmp_group: {
+                    ecmp_group_to_nhop.apply();
+                }
+            }
         }
     }
 }

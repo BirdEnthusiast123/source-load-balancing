@@ -9,11 +9,17 @@
         ["tmp_1", 16, false],
         ["tmp_2", 16, false],
         ["tmp_3", 8, false],
+        ["tmp_4", 32, false],
+        ["tmp_5", 32, false],
+        ["tmp_6", 16, false],
+        ["tmp_7", 16, false],
+        ["tmp_8", 8, false],
         ["key_0", 20, false],
+        ["metadata.sr_id", 20, false],
         ["metadata.packet_hash", 14, false],
         ["metadata.sr_group_id", 14, false],
-        ["metadata.sr_id", 20, false],
-        ["_padding_0", 4, false]
+        ["metadata.ecmp_group_id", 14, false],
+        ["_padding_0", 6, false]
       ]
     },
     {
@@ -366,7 +372,7 @@
       "name" : "deparser",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/include/parsers.p4",
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/include/parsers.p4",
         "line" : 53,
         "column" : 8,
         "source_fragment" : "MyDeparser"
@@ -382,7 +388,7 @@
       "name" : "MyIngress.sr_id_register",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
         "line" : 31,
         "column" : 25,
         "source_fragment" : "sr_id_register"
@@ -422,9 +428,36 @@
     {
       "name" : "calc_0",
       "id" : 1,
+      "algo" : "crc16",
+      "input" : [
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_4"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_5"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_6"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_7"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_8"]
+        }
+      ]
+    },
+    {
+      "name" : "calc_1",
+      "id" : 2,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-        "line" : 277,
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+        "line" : 308,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
@@ -498,8 +531,36 @@
       "primitives" : []
     },
     {
-      "name" : "MyIngress.ipv4_forward",
+      "name" : "NoAction",
       "id" : 3,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "MyIngress.drop",
+      "id" : 4,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "mark_to_drop",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "standard_metadata"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 28,
+            "column" : 8,
+            "source_fragment" : "mark_to_drop(standard_metadata)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.ipv4_forward",
+      "id" : 5,
       "runtime_data" : [
         {
           "name" : "dstAddr",
@@ -524,7 +585,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 37,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
@@ -543,7 +604,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 38,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
@@ -562,7 +623,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 40,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
@@ -604,7 +665,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 41,
             "column" : 8,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
@@ -613,15 +674,15 @@
       ]
     },
     {
-      "name" : "MyIngress.sr_group",
-      "id" : 4,
+      "name" : "MyIngress.set_sr_group",
+      "id" : 6,
       "runtime_data" : [
         {
           "name" : "sr_group_id",
           "bitwidth" : 14
         },
         {
-          "name" : "num_nhops",
+          "name" : "num_shops",
           "bitwidth" : 16
         }
       ],
@@ -639,7 +700,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 48,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.srcAddr"
@@ -658,7 +719,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 49,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.dstAddr"
@@ -677,7 +738,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 50,
             "column" : 10,
             "source_fragment" : "hdr.tcp.srcPort"
@@ -696,7 +757,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 51,
             "column" : 10,
             "source_fragment" : "hdr.tcp.dstPort"
@@ -715,7 +776,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 52,
             "column" : 10,
             "source_fragment" : "hdr.ipv4.protocol"
@@ -742,7 +803,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 45,
             "column" : 8,
             "source_fragment" : "hash(meta.packet_hash, ..."
@@ -761,7 +822,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 55,
             "column" : 5,
             "source_fragment" : "meta.sr_group_id = sr_group_id"
@@ -771,7 +832,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_1_hop",
-      "id" : 5,
+      "id" : 7,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -792,7 +853,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/include/headers.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
             "line" : 9,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
@@ -811,7 +872,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 77,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -826,7 +887,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 78,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -845,7 +906,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 79,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
@@ -887,7 +948,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 80,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -906,7 +967,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 81,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
@@ -916,7 +977,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_2_hop",
-      "id" : 6,
+      "id" : 8,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -941,7 +1002,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/include/headers.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
             "line" : 9,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
@@ -960,7 +1021,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 88,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -975,7 +1036,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 89,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -994,7 +1055,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 90,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
@@ -1036,7 +1097,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 91,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -1055,7 +1116,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 92,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
@@ -1074,7 +1135,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 94,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -1089,7 +1150,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 95,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -1108,7 +1169,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 96,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_2"
@@ -1150,7 +1211,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 97,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -1169,7 +1230,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 98,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -1179,7 +1240,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_3_hop",
-      "id" : 7,
+      "id" : 9,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -1208,7 +1269,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/include/headers.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
             "line" : 9,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
@@ -1227,7 +1288,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 105,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -1242,7 +1303,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 106,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -1261,7 +1322,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 107,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
@@ -1303,7 +1364,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 108,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -1322,7 +1383,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 109,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
@@ -1341,7 +1402,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 111,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -1356,7 +1417,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 112,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -1375,7 +1436,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 113,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_2"
@@ -1417,7 +1478,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 114,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -1436,7 +1497,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 115,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -1455,7 +1516,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 117,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -1470,7 +1531,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 118,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -1489,7 +1550,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 119,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_3"
@@ -1531,7 +1592,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 120,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -1550,7 +1611,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 121,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -1560,7 +1621,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_4_hop",
-      "id" : 8,
+      "id" : 10,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -1593,7 +1654,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/include/headers.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
             "line" : 9,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
@@ -1612,7 +1673,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 128,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -1627,7 +1688,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 129,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -1646,7 +1707,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 130,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
@@ -1688,7 +1749,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 131,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -1707,7 +1768,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 132,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
@@ -1726,7 +1787,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 134,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -1741,7 +1802,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 135,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -1760,7 +1821,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 136,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_2"
@@ -1802,7 +1863,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 137,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -1821,7 +1882,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 138,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -1840,7 +1901,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 140,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -1855,7 +1916,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 141,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -1874,7 +1935,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 142,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_3"
@@ -1916,7 +1977,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 143,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -1935,7 +1996,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 144,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -1954,7 +2015,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 146,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -1969,7 +2030,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 147,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -1988,7 +2049,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 148,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_4"
@@ -2030,7 +2091,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 149,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -2049,7 +2110,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 150,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -2059,7 +2120,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_5_hop",
-      "id" : 9,
+      "id" : 11,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -2096,7 +2157,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/include/headers.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
             "line" : 9,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
@@ -2115,7 +2176,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 157,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -2130,7 +2191,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 158,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -2149,7 +2210,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 159,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
@@ -2191,7 +2252,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 160,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -2210,7 +2271,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 161,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
@@ -2229,7 +2290,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 163,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -2244,7 +2305,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 164,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -2263,7 +2324,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 165,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_2"
@@ -2305,7 +2366,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 166,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -2324,7 +2385,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 167,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -2343,7 +2404,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 169,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -2358,7 +2419,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 170,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -2377,7 +2438,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 171,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_3"
@@ -2419,7 +2480,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 172,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -2438,7 +2499,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 173,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -2457,7 +2518,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 175,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -2472,7 +2533,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 176,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -2491,7 +2552,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 177,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_4"
@@ -2533,7 +2594,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 178,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -2552,7 +2613,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 179,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -2571,7 +2632,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 181,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
@@ -2586,7 +2647,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 182,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
@@ -2605,7 +2666,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 183,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_5"
@@ -2647,7 +2708,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 184,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
@@ -2666,7 +2727,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 185,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
@@ -2676,7 +2737,7 @@
     },
     {
       "name" : "MyIngress.sr_forward",
-      "id" : 10,
+      "id" : 12,
       "runtime_data" : [
         {
           "name" : "dstAddr",
@@ -2701,7 +2762,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 209,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
@@ -2720,7 +2781,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 210,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
@@ -2739,7 +2800,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 212,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
@@ -2781,8 +2842,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 214,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 213,
             "column" : 8,
             "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
           }
@@ -2790,8 +2851,280 @@
       ]
     },
     {
-      "name" : "stacked246",
-      "id" : 11,
+      "name" : "MyIngress.sr_forward",
+      "id" : 13,
+      "runtime_data" : [
+        {
+          "name" : "dstAddr",
+          "bitwidth" : 48
+        },
+        {
+          "name" : "port",
+          "bitwidth" : 9
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ethernet", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 209,
+            "column" : 8,
+            "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 210,
+            "column" : 8,
+            "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 212,
+            "column" : 8,
+            "source_fragment" : "standard_metadata.egress_spec = port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[1]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["sr[0]", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 213,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.set_ecmp_group",
+      "id" : 14,
+      "runtime_data" : [
+        {
+          "name" : "ecmp_group_id",
+          "bitwidth" : 14
+        },
+        {
+          "name" : "num_nhops",
+          "bitwidth" : 16
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_4"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 220,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_5"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 221,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_6"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 222,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.srcPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_7"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 223,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.dstPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_8"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "protocol"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 224,
+            "column" : 10,
+            "source_fragment" : "hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "modify_field_with_hash_based_offset",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.packet_hash"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            },
+            {
+              "type" : "calculation",
+              "value" : "calc_0"
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 217,
+            "column" : 8,
+            "source_fragment" : "hash(meta.packet_hash, ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.ecmp_group_id"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 227,
+            "column" : 5,
+            "source_fragment" : "meta.ecmp_group_id = ecmp_group_id"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "stacked272",
+      "id" : 15,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -2807,7 +3140,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/include/headers.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
             "line" : 8,
             "column" : 26,
             "source_fragment" : "0x800; ..."
@@ -2816,8 +3149,8 @@
       ]
     },
     {
-      "name" : "stacked248",
-      "id" : 12,
+      "name" : "stacked274",
+      "id" : 16,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -2833,8 +3166,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 248,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 274,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           }
@@ -2842,8 +3175,8 @@
       ]
     },
     {
-      "name" : "stacked241",
-      "id" : 13,
+      "name" : "stacked267",
+      "id" : 17,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -2863,8 +3196,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 241,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 267,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           }
@@ -2872,8 +3205,8 @@
       ]
     },
     {
-      "name" : "stacked219",
-      "id" : 14,
+      "name" : "stacked232",
+      "id" : 18,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -2889,8 +3222,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 219,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 232,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           }
@@ -2903,7 +3236,7 @@
       "name" : "ingress",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
         "line" : 23,
         "column" : 8,
         "source_fragment" : "MyIngress"
@@ -2914,7 +3247,7 @@
           "name" : "MyIngress.ipv4_lpm",
           "id" : 0,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 58,
             "column" : 10,
             "source_fragment" : "ipv4_lpm"
@@ -2933,11 +3266,11 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [3, 4, 0],
-          "actions" : ["MyIngress.ipv4_forward", "MyIngress.sr_group", "NoAction"],
+          "action_ids" : [5, 6, 0],
+          "actions" : ["MyIngress.ipv4_forward", "MyIngress.set_sr_group", "NoAction"],
           "base_default_next" : "node_5",
           "next_tables" : {
-            "MyIngress.sr_group" : "MyIngress.FEC_tbl",
+            "MyIngress.set_sr_group" : "MyIngress.FEC_tbl",
             "MyIngress.ipv4_forward" : "node_5",
             "NoAction" : "node_5"
           },
@@ -2952,7 +3285,7 @@
           "name" : "MyIngress.FEC_tbl",
           "id" : 1,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
             "line" : 188,
             "column" : 10,
             "source_fragment" : "FEC_tbl"
@@ -2977,7 +3310,7 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [5, 6, 7, 8, 9, 1],
+          "action_ids" : [7, 8, 9, 10, 11, 1],
           "actions" : ["MyIngress.sr_ingress_1_hop", "MyIngress.sr_ingress_2_hop", "MyIngress.sr_ingress_3_hop", "MyIngress.sr_ingress_4_hop", "MyIngress.sr_ingress_5_hop", "NoAction"],
           "base_default_next" : "node_5",
           "next_tables" : {
@@ -2996,11 +3329,11 @@
           }
         },
         {
-          "name" : "tbl_stacked241",
+          "name" : "tbl_stacked267",
           "id" : 2,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 241,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 267,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           },
@@ -3011,25 +3344,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [13],
-          "actions" : ["stacked241"],
+          "action_ids" : [17],
+          "actions" : ["stacked267"],
           "base_default_next" : "node_7",
           "next_tables" : {
-            "stacked241" : "node_7"
+            "stacked267" : "node_7"
           },
           "default_entry" : {
-            "action_id" : 13,
+            "action_id" : 17,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_stacked246",
+          "name" : "tbl_stacked272",
           "id" : 3,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 246,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 272,
             "column" : 43,
             "source_fragment" : "="
           },
@@ -3040,25 +3373,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [11],
-          "actions" : ["stacked246"],
-          "base_default_next" : "tbl_stacked248",
+          "action_ids" : [15],
+          "actions" : ["stacked272"],
+          "base_default_next" : "tbl_stacked274",
           "next_tables" : {
-            "stacked246" : "tbl_stacked248"
+            "stacked272" : "tbl_stacked274"
           },
           "default_entry" : {
-            "action_id" : 11,
+            "action_id" : 15,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_stacked248",
+          "name" : "tbl_stacked274",
           "id" : 4,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 248,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 274,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           },
@@ -3069,25 +3402,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [12],
-          "actions" : ["stacked248"],
-          "base_default_next" : "tbl_stacked219",
+          "action_ids" : [16],
+          "actions" : ["stacked274"],
+          "base_default_next" : "tbl_stacked232",
           "next_tables" : {
-            "stacked248" : "tbl_stacked219"
+            "stacked274" : "tbl_stacked232"
           },
           "default_entry" : {
-            "action_id" : 12,
+            "action_id" : 16,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_stacked219",
+          "name" : "tbl_stacked232",
           "id" : 5,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 219,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 232,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           },
@@ -3098,14 +3431,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [14],
-          "actions" : ["stacked219"],
+          "action_ids" : [18],
+          "actions" : ["stacked232"],
           "base_default_next" : "MyIngress.sr_tbl",
           "next_tables" : {
-            "stacked219" : "MyIngress.sr_tbl"
+            "stacked232" : "MyIngress.sr_tbl"
           },
           "default_entry" : {
-            "action_id" : 14,
+            "action_id" : 18,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -3115,8 +3448,8 @@
           "name" : "MyIngress.sr_tbl",
           "id" : 6,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 217,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 230,
             "column" : 10,
             "source_fragment" : "sr_tbl"
           },
@@ -3134,15 +3467,60 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [10, 2],
-          "actions" : ["MyIngress.sr_forward", "NoAction"],
+          "action_ids" : [12, 14, 2],
+          "actions" : ["MyIngress.sr_forward", "MyIngress.set_ecmp_group", "NoAction"],
           "base_default_next" : null,
           "next_tables" : {
+            "MyIngress.set_ecmp_group" : "MyIngress.ecmp_group_to_nhop",
             "MyIngress.sr_forward" : null,
             "NoAction" : null
           },
           "default_entry" : {
             "action_id" : 2,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "MyIngress.ecmp_group_to_nhop",
+          "id" : 7,
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 243,
+            "column" : 10,
+            "source_fragment" : "ecmp_group_to_nhop"
+          },
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "meta.ecmp_group_id",
+              "target" : ["scalars", "metadata.ecmp_group_id"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.packet_hash",
+              "target" : ["scalars", "metadata.packet_hash"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [4, 13, 3],
+          "actions" : ["MyIngress.drop", "MyIngress.sr_forward", "NoAction"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "MyIngress.drop" : null,
+            "MyIngress.sr_forward" : null,
+            "NoAction" : null
+          },
+          "default_entry" : {
+            "action_id" : 3,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
@@ -3155,8 +3533,8 @@
           "name" : "node_2",
           "id" : 0,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 231,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 257,
             "column" : 12,
             "source_fragment" : "hdr.ipv4.isValid()"
           },
@@ -3178,8 +3556,8 @@
           "name" : "node_5",
           "id" : 1,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 240,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 266,
             "column" : 11,
             "source_fragment" : "hdr.sr[0].isValid()"
           },
@@ -3195,14 +3573,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_stacked241"
+          "true_next" : "tbl_stacked267"
         },
         {
           "name" : "node_7",
           "id" : 2,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 242,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 268,
             "column" : 15,
             "source_fragment" : "hdr.sr[0].label == meta.sr_id"
           },
@@ -3221,14 +3599,14 @@
             }
           },
           "true_next" : "node_8",
-          "false_next" : "tbl_stacked219"
+          "false_next" : "tbl_stacked232"
         },
         {
           "name" : "node_8",
           "id" : 3,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-            "line" : 244,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 270,
             "column" : 19,
             "source_fragment" : "hdr.sr[0].s == 1"
           },
@@ -3246,8 +3624,8 @@
               }
             }
           },
-          "true_next" : "tbl_stacked246",
-          "false_next" : "tbl_stacked248"
+          "true_next" : "tbl_stacked272",
+          "false_next" : "tbl_stacked274"
         }
       ]
     },
@@ -3255,8 +3633,8 @@
       "name" : "egress",
       "id" : 1,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-        "line" : 260,
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+        "line" : 291,
         "column" : 8,
         "source_fragment" : "MyEgress"
       },
@@ -3271,14 +3649,14 @@
       "name" : "cksum",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4",
-        "line" : 277,
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+        "line" : 308,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
       "target" : ["ipv4", "hdrChecksum"],
       "type" : "generic",
-      "calculation" : "calc_0",
+      "calculation" : "calc_1",
       "verify" : false,
       "update" : true,
       "if_cond" : {
@@ -3334,7 +3712,7 @@
       ["standard_metadata", "priority"]
     ]
   ],
-  "program" : "/home/p4/p4-utils/p4-learning/exercises/04-MPLS/thrift/mpls_stacked/p4/stacked.p4i",
+  "program" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4i",
   "__meta__" : {
     "version" : [2, 23],
     "compiler" : "https://github.com/p4lang/p4c"
