@@ -64,6 +64,8 @@ header tcp_t{
 struct metadata {
     bit<14> packet_hash;
     bit<14> sr_group_id;
+    bit<20> sr_id;
+
 }
 
 struct headers {

@@ -1,7 +1,7 @@
 /* -*- P4_16 -*- */
 
 #include <core.p4>
-#include <v1model.p4>
+#include <v1model.p4> 
 
 //My includes
 #include "include/headers.p4"
@@ -28,8 +28,10 @@ control MyIngress(inout headers hdr,
         mark_to_drop(standard_metadata);
     }
 
+    register<bit<20>>(1) sr_id_register;
 
-    // DST @ -> CLASSIFICATION OF FLOWS //////////////////////////////////
+
+    // DST @ -> CLASSIFICATION OF FLOWS//////////////////////////////////
     action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {
 
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
@@ -210,34 +212,14 @@ control MyIngress(inout headers hdr,
         standard_metadata.egress_spec = port;
 
         hdr.sr[1].ttl = hdr.sr[0].ttl - 1;
-
-        if(1 == 1)
-        {
-            hdr.sr.pop_front(1);
-        }
-    }
-
-    action penultimate(macAddr_t dstAddr, egressSpec_t port) {
-
-        hdr.ethernet.etherType = TYPE_IPV4;
-
-        hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
-        hdr.ethernet.dstAddr = dstAddr;
-
-        hdr.ipv4.ttl = hdr.sr[0].ttl - 1;
-
-        standard_metadata.egress_spec = port;
-        hdr.sr.pop_front(1);
     }
 
     table sr_tbl {
         key = {
             hdr.sr[0].label: exact;
-            hdr.sr[0].s: exact;
         }
         actions = {
             sr_forward;
-            penultimate;
             NoAction;
         }
         default_action = NoAction();
@@ -256,6 +238,16 @@ control MyIngress(inout headers hdr,
 
         // SR-Forwarding
         if(hdr.sr[0].isValid()){
+            sr_id_register.read(meta.sr_id, 0);
+            if(hdr.sr[0].label == meta.sr_id)
+            {
+                if(hdr.sr[0].s == 1)
+                {
+                    hdr.ethernet.etherType = TYPE_IPV4;
+                }
+                hdr.sr.pop_front(1);
+            }
+
             sr_tbl.apply();
         }
     }

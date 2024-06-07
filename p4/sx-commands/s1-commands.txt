@@ -1,16 +1,23 @@
+// Give the router an ID //////////////////////////////////////////////////////////
+register_write sr_id_register 0 1
+
 // basic forwarding ///////////ip dest @   => MAC address       port //////////////
 table_add ipv4_lpm ipv4_forward 10.1.1.0/24 => 00:00:0a:01:01:02 1
 
-// ip_dest -> sr_group /////ip dest @   => sr_group nb_of_possible_next_hops //
+// ip_dest -> sr_group /////ip dest @   => sr_group nb_of_possible_next_hops //////
 table_add ipv4_lpm sr_group 10.7.2.0/24 => 1 2
 table_add ipv4_lpm sr_group 10.7.3.0/24 => 2 2
 
-// sr_group (todo add dest) -> label list ///sr_group ecmp_hash => list of labels ///////
+// sr_group (todo add dest) -> label list ///sr_group ecmp_hash => list of labels /
 table_add FEC_tbl sr_ingress_4_hop 1 0 => 7 5 4 3
 table_add FEC_tbl sr_ingress_4_hop 1 1 => 7 6 4 3
 table_add FEC_tbl sr_ingress_4_hop 2 0 => 7 5 4 2
 table_add FEC_tbl sr_ingress_4_hop 2 1 => 7 6 4 2
 
-// sr forwarding /////////////label is_bottom => MAC @ port /////////////////////
-table_add sr_tbl sr_forward 2 0 => 00:00:00:02:01:00 2
-table_add sr_tbl sr_forward 3 0 => 00:00:00:03:01:00 3
+// sr forwarding ////////// label is_bottom => MAC @ port /////////////////////////
+table_add sr_tbl sr_forward 2 => 00:00:00:02:01:00 2
+table_add sr_tbl sr_forward 3 => 00:00:00:03:01:00 3
+table_add sr_tbl sr_forward 4 => 00:00:00:02:01:00 2
+table_add sr_tbl sr_forward 5 => 00:00:00:02:01:00 2
+table_add sr_tbl sr_forward 6 => 00:00:00:02:01:00 2
+table_add sr_tbl sr_forward 7 => 00:00:00:02:01:00 2

@@ -1,5 +1,10 @@
-table_add sr_tbl sr_forward 2 0 => 00:00:00:02:02:00 1
-table_add sr_tbl sr_forward 3 0 => 00:00:00:03:02:00 2
-table_add sr_tbl sr_forward 5 0 => 00:00:00:05:01:00 3
-table_add sr_tbl sr_forward 6 0 => 00:00:00:06:01:00 4
+// Give the router an ID //////////////////////////////////////////////////////////
+register_write sr_id_register 0 4
+
+table_add sr_tbl sr_forward 2 => 00:00:00:02:02:00 1
+table_add sr_tbl sr_forward 3 => 00:00:00:03:02:00 2
+table_add sr_tbl sr_forward 5 => 00:00:00:05:01:00 3
+table_add sr_tbl sr_forward 6 => 00:00:00:06:01:00 4
+table_add sr_tbl sr_forward 1 => 00:00:00:02:02:00 2
+table_add sr_tbl sr_forward 7 => 00:00:00:05:01:00 3
 
