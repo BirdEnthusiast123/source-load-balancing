@@ -33,7 +33,6 @@ control MyIngress(inout headers hdr,
 
     // DST @ -> CLASSIFICATION OF FLOWS//////////////////////////////////
     action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {
-
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
         hdr.ethernet.dstAddr = dstAddr;
 
@@ -205,7 +204,6 @@ control MyIngress(inout headers hdr,
 
     // LIST OF SEGMENTS -> FORWARDING //////////////////////////////
     action sr_forward(macAddr_t dstAddr, egressSpec_t port) {
-
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
         hdr.ethernet.dstAddr = dstAddr;
 
@@ -279,6 +277,15 @@ control MyIngress(inout headers hdr,
                 set_ecmp_group: {
                     ecmp_group_to_nhop.apply();
                 }
+            }
+
+            if((hdr.ethernet.etherType == TYPE_SR) && (hdr.sr[0].label & SR_ADJ_SEGMENT_MASK) != 0)
+            {
+                if(hdr.sr[0].s == 1)
+                {
+                    hdr.ethernet.etherType = TYPE_IPV4;
+                }
+                hdr.sr.pop_front(1);
             }
         }
     }

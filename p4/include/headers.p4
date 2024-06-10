@@ -4,6 +4,7 @@
 
 #define CONST_MAX_LABELS 	128
 #define CONST_MAX_SR_HOPS 8
+#define SR_ADJ_SEGMENT_MASK 1<<18
 
 const bit<16> TYPE_IPV4 = 0x800;
 const bit<16> TYPE_SR   = 0x8847;

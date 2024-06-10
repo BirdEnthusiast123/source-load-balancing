@@ -5,12 +5,12 @@ register_write sr_id_register 0 1
 table_add ipv4_lpm ipv4_forward 10.1.1.0/24 => 00:00:0a:01:01:02 1
 
 // ip_dest -> sr_group /////ip dest @   => sr_group nb_of_possible_next_hops //////
-// table_add ipv4_lpm set_sr_group 10.7.2.0/24 => 1 1
+// table_add ipv4_lpm set_sr_group 10.7.2.0/24 => 1 2
 table_add ipv4_lpm set_sr_group 10.7.2.0/24 => 1 1
 table_add ipv4_lpm set_sr_group 10.7.3.0/24 => 2 2
 
 // sr_group (todo add dest) -> label list ///sr_group ecmp_hash => list of labels /
-table_add FEC_tbl sr_ingress_1_hop 1 0 => 7
+table_add FEC_tbl sr_ingress_3_hop 1 0 => 7 524289 4
 //table_add FEC_tbl sr_ingress_4_hop 1 1 => 7 4
 table_add FEC_tbl sr_ingress_4_hop 2 0 => 7 5 4 2
 table_add FEC_tbl sr_ingress_4_hop 2 1 => 7 6 4 2
