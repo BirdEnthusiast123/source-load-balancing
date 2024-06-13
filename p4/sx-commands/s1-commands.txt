@@ -1,7 +1,7 @@
 // Give the router an ID //////////////////////////////////////////////////////////
 register_write sr_id_register 0 1
 
-// basic forwarding ///////////ip dest @   => MAC address       port //////////////
+// Basic forwarding ///////////ip dest @   => MAC address       port //////////////
 table_add ipv4_lpm ipv4_forward 10.1.1.0/24 => 00:00:0a:01:01:02 1
 
 // ip_dest -> sr_group /////ip dest @   => sr_group nb_of_possible_next_hops //////

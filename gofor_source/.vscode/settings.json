@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "segmentllset.h": "c",
+        "utils.h": "c"
+    }
+}
