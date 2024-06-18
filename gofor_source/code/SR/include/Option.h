@@ -30,7 +30,7 @@ struct Options {
     Mode_t mode;
     char *printSolution;
     char* saveSrGraphBin; 
-    char* printSegList;
+    char* printDAG;
 };
 
 

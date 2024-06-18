@@ -27,7 +27,7 @@ int Option_command_parser(int argc, char **argv, struct Options *opt)
         {"retrieve", required_argument, NULL, 'R'},
         {"print-solution", required_argument, NULL, 'P'},
         {"save-sr-bin", required_argument, NULL, 'B'},
-        {"print-segment-list", required_argument, NULL, 'L'},
+        {"print-dag", required_argument, NULL, 'L'},
         {0, 0, 0, 0}};
 
     opt->output = NULL;
@@ -45,7 +45,7 @@ int Option_command_parser(int argc, char **argv, struct Options *opt)
     opt->encoding = LOOSE_ENCODING;
     opt->retrieve = SC_RETRIEVE_ONE_BEST;
     opt->printSolution = NULL;
-    opt->printSegList = NULL;
+    opt->printDAG = NULL;
     opt->saveSrGraphBin = NULL;
     opt->mode = PARETO;
 
@@ -79,7 +79,7 @@ int Option_command_parser(int argc, char **argv, struct Options *opt)
             break;
 
         case 'L':
-            opt->printSegList = optarg;
+            opt->printDAG = optarg;
             break;
 
         case 'r':

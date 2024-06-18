@@ -1,0 +1,3 @@
+src dst node/adj delay
+2 1 Adj 7
+3 2 Node 6

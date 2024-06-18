@@ -19,7 +19,7 @@ void write_results(FILE *output, Dict_t *dist, int nbNodes, int src);
 
 void print_solution(SamcraContext_t *ctx, int dest, my_m1 cstr1);
 
-void print_segment_list(SamcraContext_t *ctx, int dest, my_m1 cstr1, int src);
+void print_solution_dag(SamcraContext_t *ctx, int dest, my_m1 cstr1, int src);
 
 int main(int argc, char **argv)
 {   
@@ -244,17 +244,17 @@ int main(int argc, char **argv)
             }
         }
 
-        if (opt.printSegList)
+        if (opt.printDAG)
         {
             int dest;
             my_m1 m1;
-            if (sscanf(opt.printSegList, "dest=%d,m1=%d", &dest, &m1) != 2)
+            if (sscanf(opt.printDAG, "dest=%d,m1=%d", &dest, &m1) != 2)
             {
                 printf("Wrong format for print-segment-list option. Should be dest=ID,m1=VALUE\n");
             }
             else
             {
-                print_segment_list(&ctx, dest, m1, opt.src);
+                print_solution_dag(&ctx, dest, m1, opt.src);
             }
         }
 
@@ -341,6 +341,7 @@ DistVector_t find_src_dist(SamcraContext_t *ctx, int dst, DistVector_t dstDist, 
     exit(1);
 }
 
+
 void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t dstDist, int level, DistVector_t *ignoredPred)
 {
     // ignored if already computed
@@ -376,8 +377,12 @@ void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t 
     while (lastSegs)
     {
         int src = lastSegs->seg.src;
+        // printf("%d, %d\t", ignoredPred[src].m1, ignoredPred[src].m1);
         if (lastSegs->seg.type == NODE_SEGMENT)
+        {
             newIgnoredPred[src] = find_src_dist(ctx, dst, dstDist, lastSegs->seg);
+            // printf("%d : %d, %d\t", src, newIgnoredPred[src].m1, newIgnoredPred[src].m1);
+        }
         lastSegs = lastSegs->next;
     }
 
@@ -388,6 +393,7 @@ void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t 
         DistVector_t srcDist = find_src_dist(ctx, dst, dstDist, lastSegs->seg);
 
         (void) ignoredPred;
+        // printf("%d %d, %d %d\n", ignoredPred[src].m1, ignoredPred[src].m2, srcDist.m1, srcDist.m2);
         if (lastSegs->seg.type == NODE_SEGMENT && Distance_eq(ignoredPred[src], srcDist))
         {
             // ignore this path because the predecessor has already been
@@ -403,6 +409,9 @@ void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t 
             fprintDistVector(stdout, srcDist);
             printf(") IGNORED TRIANGLE\n");
 
+            // printf("%d : %d, %d\t", src, newIgnoredPred[src].m1, newIgnoredPred[src].m1);
+
+
             lastSegs = lastSegs->next;
             continue;
         }
@@ -417,6 +426,7 @@ void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t 
         fprintDistVector(stdout, srcDist);
         printf(")\n");
 
+        // printf("%d : %d, %d\t", src, newIgnoredPred[src].m1, newIgnoredPred[src].m1);
         recursive_solution(ctx, dag, src, srcDist, level + 1, newIgnoredPred);
 
         if (ctx->retrieveOption == SC_RETRIEVE_ONE_BEST)
@@ -426,7 +436,9 @@ void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t 
         }
         lastSegs = lastSegs->next;
     }
+
     free(newIgnoredPred);
+    return;
 }
 
 void print_solution(SamcraContext_t *ctx, int dst, my_m1 cstr1)
@@ -461,9 +473,9 @@ void print_solution(SamcraContext_t *ctx, int dst, my_m1 cstr1)
     }
     else
     {
-        // printf("== found solution == -> %d with distance ", dst);
-        // fprintDistVector(stdout, finalDist);
-        // printf("\n");
+        printf("== found solution == -> %d with distance ", dst);
+        fprintDistVector(stdout, finalDist);
+        printf("\n");
 
         DistVector_t *ignoredPred = calloc(ctx->topo->nbNode, sizeof(*ignoredPred));
         for (int i = 0; i < ctx->topo->nbNode; i++)
@@ -475,7 +487,7 @@ void print_solution(SamcraContext_t *ctx, int dst, my_m1 cstr1)
     }
 }
 
-void recursive_seg_list(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t dstDist, int level, DistVector_t *ignoredPred, char *str_seg_lst, int *str_seg_lst_len, int actual_src)
+void recursive_dag(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t dstDist, int level, DistVector_t *ignoredPred, int actual_src)
 {
     // ignored if already computed
     if (Dag_get(dag, dst, dstDist) != NULL)
@@ -526,32 +538,12 @@ void recursive_seg_list(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t 
             // ignore this path because the predecessor has already been
             // handled by our parent
 
-            strcat(str_seg_lst, lastSegs->seg.type == NODE_SEGMENT ? "N" : "A");
-            (*str_seg_lst_len)++;
-            sprintf(str_seg_lst + (*str_seg_lst_len), "%d ", dst);
-            (*str_seg_lst_len) += 2;
-            if (src == actual_src)
-            {
-                printf("%s\n", str_seg_lst);
-            }
-
             lastSegs = lastSegs->next;
             continue;
         }
 
         // printf("%s%d", lastSegs->seg.type == NODE_SEGMENT ? "N" : "A", dst);
-        strcat(str_seg_lst, lastSegs->seg.type == NODE_SEGMENT ? "N" : "A");
-        (*str_seg_lst_len)++;
-        sprintf(str_seg_lst + (*str_seg_lst_len), "%d ", dst);
-        (*str_seg_lst_len) += 2;
-        if (src == actual_src)
-        {
-            printf("%s\n", str_seg_lst);
-        }
-        recursive_seg_list(ctx, dag, src, srcDist, level + 1, newIgnoredPred, str_seg_lst, str_seg_lst_len, actual_src);
-
-        *str_seg_lst_len = *str_seg_lst_len - 3;
-        str_seg_lst[*str_seg_lst_len] = '\0';
+        recursive_dag(ctx, dag, src, srcDist, level + 1, newIgnoredPred, actual_src);
 
         if (ctx->retrieveOption == SC_RETRIEVE_ONE_BEST)
         {
@@ -563,15 +555,8 @@ void recursive_seg_list(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t 
     free(newIgnoredPred);
 }
 
-void print_segment_list(SamcraContext_t *ctx, int dst, my_m1 cstr1, int src)
+void print_solution_dag(SamcraContext_t *ctx, int dst, my_m1 cstr1, int src)
 {
-    char *str_seg_lst = calloc(100, sizeof(char));
-    sprintf(str_seg_lst, "%d ", dst);
-    int str_len = 0;
-    while(str_seg_lst[str_len] != '\0' && str_len < 100){
-        str_len++;
-    }
-
     Dag_t *dag = Dag_new(ctx->topo->nbNode, ctx->cstr);
 
     bool found = false;
@@ -599,8 +584,11 @@ void print_segment_list(SamcraContext_t *ctx, int dst, my_m1 cstr1, int src)
         for (int i = 0; i < ctx->topo->nbNode; i++)
             ignoredPred[i] = Distance_maxValue();
 
-        recursive_seg_list(ctx, dag, dst, finalDist, 0, ignoredPred, str_seg_lst, &str_len, src);
+        recursive_dag(ctx, dag, dst, finalDist, 0, ignoredPred, src);
+        Dag_to_dot_like(dag);
         free(ignoredPred);
     }
-    free(str_seg_lst);
 }
+
+
+

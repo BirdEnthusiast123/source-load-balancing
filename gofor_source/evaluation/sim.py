@@ -515,7 +515,6 @@ def runOnFile(file, use_cases, force, draw, resfile):
 
 
 def runOnFileCmd(file, use_cases="LeastDelaySR-pareto-loose", force=False, draw=False, resFile=None):
-    print("test")
     topoName = file.split("/")[-1]
     resultPath = os.path.join(config['Paths']["data"], "model-real", topoName)
     topoFile = os.path.join(resultPath, "topo.txt")
