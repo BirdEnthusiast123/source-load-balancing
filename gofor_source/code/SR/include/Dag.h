@@ -85,6 +85,7 @@ void Dag_print(Dag_t *dag)
 
 void Dag_to_dot_like(Dag_t *dag)
 {
+    fprintf(stdout, "src dst node/adj delay\n");
     for (int i = 0; i < dag->nbNode; i++)
     {
         if (dag->lastSegs[i] != NULL)
@@ -94,14 +95,16 @@ void Dag_to_dot_like(Dag_t *dag)
                 if (dag->lastSegs[i][j] != NULL)
                 {
                     SegmentLLSet_t *lastSegs = dag->lastSegs[i][j];
+                    int k = 0;
                     while (lastSegs)
                     {
                         fprintf(stdout, "%d %d %s %d\n", 
-                                lastSegs->seg.src, 
-                                i, 
+                                lastSegs->seg.src,
+                                i,
                                 lastSegs->seg.type == NODE_SEGMENT ? "Node" : "Adj", 
                                 j);
                         lastSegs = lastSegs->next;
+                        k++;
                     }
                 }
             }

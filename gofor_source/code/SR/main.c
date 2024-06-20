@@ -21,8 +21,10 @@ void print_solution(SamcraContext_t *ctx, int dest, my_m1 cstr1);
 
 void print_solution_dag(SamcraContext_t *ctx, int dest, my_m1 cstr1, int src);
 
+void print_solution_dag_weights(SamcraContext_t *ctx, int dest, my_m1 cstr1, int src);
+
 int main(int argc, char **argv)
-{   
+{
     struct Options opt;
     if (Option_command_parser(argc, argv, &opt) == -1)
     {
@@ -250,11 +252,25 @@ int main(int argc, char **argv)
             my_m1 m1;
             if (sscanf(opt.printDAG, "dest=%d,m1=%d", &dest, &m1) != 2)
             {
-                printf("Wrong format for print-segment-list option. Should be dest=ID,m1=VALUE\n");
+                printf("Wrong format for print-dag option. Should be dest=ID,m1=VALUE\n");
             }
             else
             {
                 print_solution_dag(&ctx, dest, m1, opt.src);
+            }
+        }
+
+        if (opt.printDAGWeights)
+        {
+            int dest;
+            my_m1 m1;
+            if (sscanf(opt.printDAGWeights, "dest=%d,m1=%d", &dest, &m1) != 2)
+            {
+                printf("Wrong format for print-dag-weights option. Should be dest=ID,m1=VALUE\n");
+            }
+            else
+            {
+                print_solution_dag_weights(&ctx, dest, m1, opt.src);
             }
         }
 
@@ -341,7 +357,6 @@ DistVector_t find_src_dist(SamcraContext_t *ctx, int dst, DistVector_t dstDist, 
     exit(1);
 }
 
-
 void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t dstDist, int level, DistVector_t *ignoredPred)
 {
     // ignored if already computed
@@ -392,7 +407,7 @@ void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t 
         int src = lastSegs->seg.src;
         DistVector_t srcDist = find_src_dist(ctx, dst, dstDist, lastSegs->seg);
 
-        (void) ignoredPred;
+        (void)ignoredPred;
         // printf("%d %d, %d %d\n", ignoredPred[src].m1, ignoredPred[src].m2, srcDist.m1, srcDist.m2);
         if (lastSegs->seg.type == NODE_SEGMENT && Distance_eq(ignoredPred[src], srcDist))
         {
@@ -410,7 +425,6 @@ void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t 
             printf(") IGNORED TRIANGLE\n");
 
             // printf("%d : %d, %d\t", src, newIgnoredPred[src].m1, newIgnoredPred[src].m1);
-
 
             lastSegs = lastSegs->next;
             continue;
@@ -532,7 +546,7 @@ void recursive_dag(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t dstDi
     {
         int src = lastSegs->seg.src;
         DistVector_t srcDist = find_src_dist(ctx, dst, dstDist, lastSegs->seg);
-        (void) ignoredPred;
+        (void)ignoredPred;
         if (lastSegs->seg.type == NODE_SEGMENT && Distance_eq(ignoredPred[src], srcDist))
         {
             // ignore this path because the predecessor has already been
@@ -590,5 +604,110 @@ void print_solution_dag(SamcraContext_t *ctx, int dst, my_m1 cstr1, int src)
     }
 }
 
+void recursive_dag_weights(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t dstDist, int level, DistVector_t *ignoredPred, int actual_src)
+{
+    // ignored if already computed
+    if (Dag_get(dag, dst, dstDist) != NULL)
+    {
+        return;
+    }
 
+    // find the index of the path that leads to the current path
+    for (int j = 0; j < ctx->dist[dst].actSize; j++)
+    {
+        DistVector_t jDist = ctx->dist[dst].paths[j].distSr.dist;
+        if (ctx->dist[dst].paths[j].color == RETRIEVABLE && Distance_eq(jDist, dstDist))
+        {
+            Dag_addEdges(dag, dst, ctx->dist[dst].paths[j].distSr.lastSegs, dstDist);
+        }
+    }
 
+    SegmentLLSet_t *lastSegs = Dag_get(dag, dst, dstDist);
+    if (lastSegs == NULL)
+    {
+        // this is the source of the DAG
+        return;
+    }
+
+    // create new ignoredPred array
+    DistVector_t *newIgnoredPred = malloc(ctx->topo->nbNode * sizeof(*newIgnoredPred));
+    for (int i = 0; i < ctx->topo->nbNode; i++)
+    {
+        newIgnoredPred[i] = Distance_maxValue();
+    }
+
+    while (lastSegs)
+    {
+        int src = lastSegs->seg.src;
+        if (lastSegs->seg.type == NODE_SEGMENT)
+            newIgnoredPred[src] = find_src_dist(ctx, dst, dstDist, lastSegs->seg);
+        lastSegs = lastSegs->next;
+    }
+
+    lastSegs = Dag_get(dag, dst, dstDist);
+    while (lastSegs)
+    {
+        int src = lastSegs->seg.src;
+        DistVector_t srcDist = find_src_dist(ctx, dst, dstDist, lastSegs->seg);
+        (void)ignoredPred;
+        if (lastSegs->seg.type == NODE_SEGMENT && Distance_eq(ignoredPred[src], srcDist))
+        {
+            // ignore this path because the predecessor has already been
+            // handled by our parent
+
+            DistVector_t diff = Distance_sub(dstDist, srcDist);
+            fprintf(stdout, "%d %d %d %s\n", src, dst, diff.m1, lastSegs->seg.type == NODE_SEGMENT ? "Node" : "Adj");
+
+            lastSegs = lastSegs->next;
+            continue;
+        }
+
+        DistVector_t diff = Distance_sub(dstDist, srcDist);
+        fprintf(stdout, "%d %d %d %s\n", src, dst, diff.m1, lastSegs->seg.type == NODE_SEGMENT ? "Node" : "Adj");
+
+        // printf("%s%d", lastSegs->seg.type == NODE_SEGMENT ? "N" : "A", dst);
+        recursive_dag_weights(ctx, dag, src, srcDist, level + 1, newIgnoredPred, actual_src);
+
+        if (ctx->retrieveOption == SC_RETRIEVE_ONE_BEST)
+        {
+            // only one is enough
+            break;
+        }
+        lastSegs = lastSegs->next;
+    }
+    free(newIgnoredPred);
+}
+
+void print_solution_dag_weights(SamcraContext_t *ctx, int dst, my_m1 cstr1, int src)
+{
+    Dag_t *dag = Dag_new(ctx->topo->nbNode, ctx->cstr);
+
+    bool found = false;
+    DistVector_t finalDist;
+    for (int j = 0; j < ctx->dist[dst].actSize; j++)
+    {
+        // if (dist[dst].paths[j].color == NON_DOMINATED)
+        {
+            if (ctx->dist[dst].paths[j].distSr.dist.m1 == cstr1)
+            {
+                // Dag_addEdges(dag, dst, ctx->dist[dst].paths[j].distSr.lastSegs, ctx->dist[dst].paths[j].distSr.dist);
+                finalDist = ctx->dist[dst].paths[j].distSr.dist;
+                found = true;
+            }
+        }
+    }
+
+    if (!found)
+    {
+        printf("\n");
+    }
+    else
+    {
+        DistVector_t *ignoredPred = calloc(ctx->topo->nbNode, sizeof(*ignoredPred));
+        for (int i = 0; i < ctx->topo->nbNode; i++)
+            ignoredPred[i] = Distance_maxValue();
+        fprintf(stdout, "src dst delay node/adj\n");
+        recursive_dag_weights(ctx, dag, dst, finalDist, 0, ignoredPred, src);
+        free(ignoredPred);
+    }
+}

@@ -28,6 +28,7 @@ int Option_command_parser(int argc, char **argv, struct Options *opt)
         {"print-solution", required_argument, NULL, 'P'},
         {"save-sr-bin", required_argument, NULL, 'B'},
         {"print-dag", required_argument, NULL, 'L'},
+        {"print-weights-dag", required_argument, NULL, 'W'},
         {0, 0, 0, 0}};
 
     opt->output = NULL;
@@ -46,6 +47,7 @@ int Option_command_parser(int argc, char **argv, struct Options *opt)
     opt->retrieve = SC_RETRIEVE_ONE_BEST;
     opt->printSolution = NULL;
     opt->printDAG = NULL;
+    opt->printDAGWeights = NULL;
     opt->saveSrGraphBin = NULL;
     opt->mode = PARETO;
 
@@ -80,6 +82,10 @@ int Option_command_parser(int argc, char **argv, struct Options *opt)
 
         case 'L':
             opt->printDAG = optarg;
+            break;
+
+        case 'W':
+            opt->printDAGWeights = optarg;
             break;
 
         case 'r':

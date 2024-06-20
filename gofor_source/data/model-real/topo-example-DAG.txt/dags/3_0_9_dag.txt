@@ -1,2 +1,0 @@
-src dst node/adj delay
-3 0 Node 9

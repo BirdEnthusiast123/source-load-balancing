@@ -31,6 +31,7 @@ struct Options {
     char *printSolution;
     char* saveSrGraphBin; 
     char* printDAG;
+    char* printDAGWeights;
 };
 
 
