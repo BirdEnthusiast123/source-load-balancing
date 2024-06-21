@@ -3,34 +3,44 @@
   "cli": true,
   "pcap_dump": true,
   "enable_log": true,
+  "exec_scripts": [
+    {
+      "cmd": "sudo python controller.py",
+      "reboot_run": true
+    }
+  ],
   "topology": {
     "assignment_strategy": "l3",
-    "links": [["h1", "s1"],
-              ["s1", "s2"],
-              ["s1", "s3"],
-              ["s2", "s4"],
-              ["s3", "s4"],
-              ["s4", "s5"],
-              ["s4", "s6"],
-              ["s5", "s7"],
-              ["s6", "s7"],
-              ["s7", "h2"],
-              ["s7", "h3"],
-              ["s1", "s8"],
-              ["s1", "s10"],
-              ["s8", "s9"],
-              ["s10", "s11"],
-              ["s9", "s7"],
-              ["s11", "s7"]],
+    "links": [["h1", "s1", {"igp_cost": 1, "delay": 0.1}],
+              ["s0", "s3", {"igp_cost": 2, "delay": 0.1}],
+              ["s3", "s1", {"igp_cost": 4, "delay": 0.1}],
+              ["s3", "s6", {"igp_cost": 1, "delay": 0.1}],
+              ["s3", "s7", {"igp_cost": 4, "delay": 0.2}],
+              ["s1", "s2", {"igp_cost": 4, "delay": 0.2}],
+              ["s1", "s4", {"igp_cost": 2, "delay": 0.1}],
+              ["s1", "s5", {"igp_cost": 1, "delay": 0.5}],
+              ["s1", "s6", {"igp_cost": 2, "delay": 0.1}],
+              ["s2", "s4", {"igp_cost": 2, "delay": 0.1}],
+              ["s2", "s5", {"igp_cost": 1, "delay": 0.1}],
+              ["s2", "s8", {"igp_cost": 3, "delay": 0.1}],
+              ["s4", "s5_1", {"igp_cost": 2, "delay": 0.2}],
+              ["s4", "s5_2", {"igp_cost": 3, "delay": 0.1}],
+              ["s5_1", "s5", {"igp_cost": 0, "delay": 0}],
+              ["s5_2", "s5", {"igp_cost": 0, "delay": 0}],
+              ["s4", "s7", {"igp_cost": 1, "delay": 0.1}],
+              ["s5", "s8", {"igp_cost": 2, "delay": 0.1}],
+              ["s6", "s7", {"igp_cost": 3, "delay": 0.1}],
+              ["s8", "h2", {"igp_cost": 1, "delay": 0.1}]],
     "hosts": {
       "h1": {
       },
       "h2": {
-      },
-      "h3": {
       }
     },
     "switches": {
+      "s0": {
+        "cli_input": "sx-commands/s0-commands.txt"
+      },
       "s1": {
         "cli_input": "sx-commands/s1-commands.txt"
       },
@@ -54,15 +64,6 @@
       },
       "s8": {
         "cli_input": "sx-commands/s8-commands.txt"
-      },
-      "s9": {
-        "cli_input": "sx-commands/s9-commands.txt"
-      },
-      "s10": {
-        "cli_input": "sx-commands/s10-commands.txt"
-      },
-      "s11": {
-        "cli_input": "sx-commands/s11-commands.txt"
       }
     }
   }
