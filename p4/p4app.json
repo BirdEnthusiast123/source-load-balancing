@@ -11,7 +11,7 @@
   ],
   "topology": {
     "assignment_strategy": "l3",
-    "links": [["h1", "s1", {"igp_cost": 1, "delay": 0.1}],
+    "links": [["h11", "s0"],
               ["s0", "s3", {"igp_cost": 2, "delay": 0.1}],
               ["s3", "s1", {"igp_cost": 4, "delay": 0.1}],
               ["s3", "s6", {"igp_cost": 1, "delay": 0.1}],
@@ -23,47 +23,42 @@
               ["s2", "s4", {"igp_cost": 2, "delay": 0.1}],
               ["s2", "s5", {"igp_cost": 1, "delay": 0.1}],
               ["s2", "s8", {"igp_cost": 3, "delay": 0.1}],
-              ["s4", "s5_1", {"igp_cost": 2, "delay": 0.2}],
-              ["s4", "s5_2", {"igp_cost": 3, "delay": 0.1}],
-              ["s5_1", "s5", {"igp_cost": 0, "delay": 0}],
-              ["s5_2", "s5", {"igp_cost": 0, "delay": 0}],
+              ["s4", "s21", {"igp_cost": 2, "delay": 0.2}],
+              ["s4", "s22", {"igp_cost": 3, "delay": 0.1}],
+              ["s21", "s5", {"igp_cost": 0, "delay": 0}],
+              ["s22", "s5", {"igp_cost": 0, "delay": 0}],
               ["s4", "s7", {"igp_cost": 1, "delay": 0.1}],
               ["s5", "s8", {"igp_cost": 2, "delay": 0.1}],
               ["s6", "s7", {"igp_cost": 3, "delay": 0.1}],
-              ["s8", "h2", {"igp_cost": 1, "delay": 0.1}]],
+              ["s8", "h12"]],
     "hosts": {
-      "h1": {
+      "h11": {
       },
-      "h2": {
+      "h12": {
       }
     },
     "switches": {
-      "s0": {
-        "cli_input": "sx-commands/s0-commands.txt"
+      "s0": {"host_prefix": "10.1.0.0/8"
       },
       "s1": {
-        "cli_input": "sx-commands/s1-commands.txt"
       },
       "s2": {
-        "cli_input": "sx-commands/s2-commands.txt"
       },
       "s3": {
-        "cli_input": "sx-commands/s3-commands.txt"
       },
       "s4": {
-        "cli_input": "sx-commands/s4-commands.txt"
       },
       "s5": {
-        "cli_input": "sx-commands/s5-commands.txt"
       },
       "s6": {
-        "cli_input": "sx-commands/s6-commands.txt"
       },
       "s7": {
-        "cli_input": "sx-commands/s7-commands.txt"
       },
-      "s8": {
-        "cli_input": "sx-commands/s8-commands.txt"
+      "s8": {"host_prefix": "10.9.0.0/8"
+      },
+      "s21": {
+      },
+      "s22": {
       }
     }
   }

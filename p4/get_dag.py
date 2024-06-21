@@ -34,11 +34,11 @@ def parametrize_get_dag_weights_call(cmd, src, dest, dist, output_folder):
     cmd += ["--print-weights-dag", "dest={},m1={}".format(dest, dist)]
     output_file_with_source = f"{src}_{dest}_{dist}_{base_output_filename_weights}"
     output_path = "/".join([output_folder, output_file_with_source])
-    return (cmd, output_path) 
+    return (cmd, output_path)
 
-def init_paths(topology):
-    distances_file = "/".join(["../data/model-real",topology.split('/')[-1], base_use_case + "-DIST"])
-    output_folder = "/".join(["../data/model-real", topology.split('/')[-1], base_output_folder])
+def init_paths(topology_path):
+    distances_file = "/".join([sim.DataPath, "model-real", topology_path.split('/')[-1], base_use_case + "-DIST"])
+    output_folder = "/".join([sim.DataPath, "model-real", topology_path.split('/')[-1], base_output_folder])
     return (distances_file, output_folder)
 
 def init_files(distances_df, output_folder):
@@ -77,8 +77,7 @@ def write_dags(distances_df, output_folder, template_cmd):
         all_dags[(src, dst)][delay]["path"] = output_path
         # print("Running: {}".format(' '.join(get_dag_cmd))) #uncomment for debug
         with open(output_path, "a") as outfile_dag:
-            ret = subprocess.run(get_dag_cmd, capture_output=True)
-            outfile_dag.write(ret.stdout.decode())
+            ret = subprocess.run(get_dag_cmd, stdout=outfile_dag)
             if ret.returncode != 0:
                 print("get_segments_list: Invalid return code: {}".format(ret.returncode))
                 print(ret.stdout)
@@ -88,7 +87,7 @@ def write_dags(distances_df, output_folder, template_cmd):
         all_dags[(src, dst)][delay]["weights_path"] = output_weights_path
         # print("Running: {}".format(' '.join(get_dag_weights_cmd))) #uncomment for debug
         with open(output_weights_path, "a") as outfile_dag_weights:
-            ret = subprocess.run(get_dag_weights_cmd, stdout=outfile_dag_weights, stderr=None)
+            ret = subprocess.run(get_dag_weights_cmd, stdout=outfile_dag_weights)
             if ret.returncode != 0:
                 print("get_segments_list: Invalid return code: {}".format(ret.returncode))
                 print(ret.stdout)
@@ -105,7 +104,7 @@ def init_dag(dag_df: pandas.DataFrame):
     dag = nx.MultiDiGraph()
     for _, row in dag_df.iterrows():
         src, dst, node_adj, delay = row["src"], row["dst"], row["node/adj"], row["delay"]
-        dag.add_edge(src, dst, sum_weight=delay, label=node_adj)
+        dag.add_edge(src, dst, sum_weight=delay, node_adj=node_adj)
     return dag
 
 def init_dag_weights(weights_dag_df, dag: nx.MultiDiGraph):
@@ -149,8 +148,26 @@ def get_all_seg_lists(all_dags):
             all_dags[(src, dst)][delay]["seg_lists"] = traversal_get_seg_lists(dag, src, dst, delay, paths=[])
     return all_dags
     
+### Basicallly an importable version of what main() does
+def get_all_segment_lists(topo_path: str):
+    get_distances_cmd = sim.runOnFileCmd(topo_path, use_cases=base_use_case, force=True)
 
+    (distances_file, output_folder) = init_paths(topo_path)
+    distances_df = get_distances(distances_file)
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    else:
+        shutil.rmtree(output_folder)
+        os.makedirs(output_folder)
+    
+    get_dag_template_cmd = [x for x in get_distances_cmd if(not x.startswith("--all-nodes"))]
 
+    init_files(distances_df, output_folder)
+    all_output_dag_files = write_dags(distances_df, output_folder, get_dag_template_cmd)
+    all_dags = init_all_dags(all_output_dag_files)
+    all_dags = get_all_seg_lists(all_dags)
+
+    return all_dags
 
 ###
 ### In order to retrieve the DAGs we need : 
