@@ -232,6 +232,7 @@ control MyIngress(inout headers hdr,
         actions = {
             sr_forward;
             set_ecmp_group;
+            ipv4_forward;
             NoAction;
         }
         default_action = NoAction();
@@ -251,16 +252,7 @@ control MyIngress(inout headers hdr,
     }
 
     apply {
-        // Ingress router
-        if (hdr.ipv4.isValid()){
-            switch (ipv4_lpm.apply().action_run){
-                set_sr_group: {
-                    FEC_tbl.apply();
-                }
-            }
-        }
-
-        // SR-Forwarding
+        // Pop segment if segment is the current switch 
         if(hdr.sr[0].isValid()){
             sr_id_register.read(meta.sr_id, 0);
             if(hdr.sr[0].label == meta.sr_id)
@@ -271,14 +263,26 @@ control MyIngress(inout headers hdr,
                 }
                 hdr.sr.pop_front(1);
             }
+        }
 
-            
+        // Ingress router
+        if (hdr.ipv4.isValid() && !(hdr.sr[0].isValid())){
+            switch (ipv4_lpm.apply().action_run){
+                set_sr_group: {
+                    FEC_tbl.apply();
+                }
+            }
+        }
+
+        // SR-Forwarding
+        if(hdr.sr[0].isValid()){
             switch (sr_tbl.apply().action_run){
                 set_ecmp_group: {
                     ecmp_group_to_nhop.apply();
                 }
             }
 
+            // Pop adjacency segment
             if((hdr.ethernet.etherType == TYPE_SR) && (hdr.sr[0].label & SR_ADJ_SEGMENT_MASK) != 0)
             {
                 if(hdr.sr[0].s == 1)

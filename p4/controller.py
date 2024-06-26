@@ -70,12 +70,13 @@ class RoutingController(object):
             else:
                 self.controllers[ir].table_add("ipv4_lpm", "ipv4_forward", [host_prefix], [link["addr1"], str(link["port2"])])
 
+
             # Init forwarding to distant hosts
             for ir2 in self.ingress_routers:
                 if(ir == ir2):
                     continue
                 host_prefix = self.topo.nodes[ir2]["host_prefix"]
-                self.controllers[ir].table_add("ipv4_lpm", "set_sr_group", [host_prefix], [base_flow_group, "0"])
+                self.controllers[ir].table_add("ipv4_lpm", "set_sr_group", [host_prefix], [self.mininet_to_gofor[ir2], "0"])
 
     # Only for the ingress routers ( = connected to a prefix in this example)
     def initialize_segment_lists(self):
@@ -101,19 +102,24 @@ class RoutingController(object):
 
     def initialize_segment_list(self, src, dst):
         (gofor_src, gofor_dst) = (self.mininet_to_gofor[src], self.mininet_to_gofor[dst])
+        seg_list_index = 0
         for delay in self.dags[(gofor_src, gofor_dst)].keys():
-            for i, seg_list in enumerate(self.dags[(gofor_src, gofor_dst)][delay]["seg_lists"]):
+            for seg_list in self.dags[(gofor_src, gofor_dst)][delay]["seg_lists"]:
                 segment_list_arg = []
                 for segment in seg_list:
+                    print(gofor_src, gofor_dst, delay, seg_list)
                     if(segment[-1]["node_adj"] == "Adj"):
                         (seg_src, seg_dst) = (segment[0], segment[1])
                         adj_segment = self.get_link_id(seg_src, seg_dst)
                         segment_list_arg.insert(0, str(adj_segment))
                     else:
                         segment_list_arg.insert(0, str(segment[1]))
-                self.controllers[src].table_add("FEC_tbl", f"sr_ingress_{len(seg_list)}_hop", [base_flow_group, str(i)], segment_list_arg)
-                if(self.topo.nodes[dst].get("host_prefix") is not None):
-                    self.controllers[src].table_modify_match("ipv4_lpm", "set_sr_group", [self.topo.nodes[dst]["host_prefix"]], [base_flow_group, str(i + 1)])
+
+                self.controllers[src].table_add("FEC_tbl", f"sr_ingress_{len(seg_list)}_hop", [gofor_dst, str(seg_list_index)], segment_list_arg)
+                seg_list_index += 1
+
+        if(self.topo.nodes[dst].get("host_prefix") is not None):
+            self.controllers[src].table_modify_match("ipv4_lpm", "set_sr_group", [self.topo.nodes[dst]["host_prefix"]], [gofor_dst, str(seg_list_index)])
 
     def add_sr_forward_entry(self, src, dest_segment, next_hop):
         if(src == self.topo.edges[(src, next_hop)]["node1"]):

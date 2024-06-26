@@ -3,3 +3,4 @@ pcap
 *.p4i
 *topology.json
 *__pycache__*
+*data*
