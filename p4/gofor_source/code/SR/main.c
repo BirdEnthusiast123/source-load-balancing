@@ -360,10 +360,10 @@ DistVector_t find_src_dist(SamcraContext_t *ctx, int dst, DistVector_t dstDist, 
 void recursive_solution(SamcraContext_t *ctx, Dag_t *dag, int dst, DistVector_t dstDist, int level, DistVector_t *ignoredPred)
 {
     // ignored if already computed
-    if (Dag_get(dag, dst, dstDist) != NULL)
-    {
-        return;
-    }
+    // if (Dag_get(dag, dst, dstDist) != NULL)
+    // {
+    //     return;
+    // }
 
     // find the index of the path that leads to the current path
     for (int j = 0; j < ctx->dist[dst].actSize; j++)

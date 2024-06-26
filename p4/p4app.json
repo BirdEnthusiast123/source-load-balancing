@@ -5,7 +5,7 @@
   "enable_log": true,
   "exec_scripts": [
     {
-      "cmd": "sudo python controller.py",
+      "cmd": "python3 controller.py",
       "reboot_run": true
     }
   ],
@@ -38,7 +38,7 @@
       }
     },
     "switches": {
-      "s0": {"host_prefix": "10.1.0.0/8"
+      "s0": {"host_prefix": "10.1.0.0/16"
       },
       "s1": {
       },
@@ -54,7 +54,7 @@
       },
       "s7": {
       },
-      "s8": {"host_prefix": "10.9.0.0/8"
+      "s8": {"host_prefix": "10.9.0.0/16"
       },
       "s21": {
       },

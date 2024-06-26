@@ -2,4 +2,4 @@ log
 pcap
 *.p4i
 *topology.json
-
+*__pycache__*
