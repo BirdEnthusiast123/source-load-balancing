@@ -84,7 +84,6 @@ class RoutingController(object):
             for dest_ir in self.ingress_routers:
                 if (source_ir == dest_ir):
                     continue
-                print(source_ir, dest_ir)
                 self.initialize_segment_list(source_ir, dest_ir)
 
     # do special magic cool stuff (hashing/masking)
@@ -107,7 +106,6 @@ class RoutingController(object):
             for seg_list in self.dags[(gofor_src, gofor_dst)][delay]["seg_lists"]:
                 segment_list_arg = []
                 for segment in seg_list:
-                    print(gofor_src, gofor_dst, delay, seg_list)
                     if(segment[-1]["node_adj"] == "Adj"):
                         (seg_src, seg_dst) = (segment[0], segment[1])
                         adj_segment = self.get_link_id(seg_src, seg_dst)
