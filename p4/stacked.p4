@@ -7,6 +7,11 @@
 #include "include/headers.p4"
 #include "include/parsers.p4"
 
+#define REGISTER_SIZE 8192
+#define TIMESTAMP_WIDTH 48
+#define ID_WIDTH 16
+#define FLOWLET_TIMEOUT 48w200000
+
 /*************************************************************************
 ************   C H E C K S U M    V E R I F I C A T I O N   *************
 *************************************************************************/
@@ -14,7 +19,6 @@
 control MyVerifyChecksum(inout headers hdr, inout metadata meta) {
     apply {  }
 }
-
 
 /*************************************************************************
 **************  I N G R E S S   P R O C E S S I N G   *******************
@@ -29,6 +33,32 @@ control MyIngress(inout headers hdr,
     }
 
     register<bit<20>>(1) sr_id_register;
+    register<bit<ID_WIDTH>>(REGISTER_SIZE) flowlet_to_id;
+    register<bit<TIMESTAMP_WIDTH>>(REGISTER_SIZE) flowlet_time_stamp;
+
+    action read_flowlet_registers(){
+        //compute register index
+        hash(meta.flowlet_register_index, HashAlgorithm.crc16,
+            (bit<16>)0,
+            { hdr.ipv4.srcAddr, hdr.ipv4.dstAddr, hdr.tcp.srcPort, hdr.tcp.dstPort,hdr.ipv4.protocol},
+            (bit<14>)8192);
+
+         //Read previous time stamp
+        flowlet_time_stamp.read(meta.flowlet_last_stamp, (bit<32>)meta.flowlet_register_index);
+
+        //Read previous flowlet id
+        flowlet_to_id.read(meta.flowlet_id, (bit<32>)meta.flowlet_register_index);
+
+        //Update timestamp
+        flowlet_time_stamp.write((bit<32>)meta.flowlet_register_index, standard_metadata.ingress_global_timestamp);
+    }
+
+    action update_flowlet_id(){
+        bit<32> random_t;
+        random(random_t, (bit<32>)0, (bit<32>)65000);
+        meta.flowlet_id = (bit<16>)random_t;
+        flowlet_to_id.write((bit<32>)meta.flowlet_register_index, (bit<16>)meta.flowlet_id);
+    }
 
 
     // DST @ -> CLASSIFICATION OF FLOWS//////////////////////////////////
@@ -48,7 +78,8 @@ control MyIngress(inout headers hdr,
 	      hdr.ipv4.dstAddr,
           hdr.tcp.srcPort,
           hdr.tcp.dstPort,
-          hdr.ipv4.protocol},
+          hdr.ipv4.protocol, 
+          meta.flowlet_id},
 	    num_shops);
 
 	    meta.sr_group_id = sr_group_id;
@@ -219,7 +250,8 @@ control MyIngress(inout headers hdr,
 	      hdr.ipv4.dstAddr,
           hdr.tcp.srcPort,
           hdr.tcp.dstPort,
-          hdr.ipv4.protocol},
+          hdr.ipv4.protocol,
+          meta.flowlet_id},
 	    num_nhops);
 
 	    meta.ecmp_group_id = ecmp_group_id;
@@ -267,6 +299,15 @@ control MyIngress(inout headers hdr,
 
         // Ingress router
         if (hdr.ipv4.isValid() && !(hdr.sr[0].isValid())){
+            @atomic {
+                read_flowlet_registers();
+                meta.flowlet_time_diff = standard_metadata.ingress_global_timestamp - meta.flowlet_last_stamp;
+
+                //check if inter-packet gap is > 100ms
+                if (meta.flowlet_time_diff > FLOWLET_TIMEOUT){
+                    update_flowlet_id();
+                }
+            }
             switch (ipv4_lpm.apply().action_run){
                 set_sr_group: {
                     FEC_tbl.apply();

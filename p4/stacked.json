@@ -11,15 +11,32 @@
         ["tmp_3", 8, false],
         ["tmp_4", 32, false],
         ["tmp_5", 32, false],
-        ["tmp_6", 16, false],
-        ["tmp_7", 16, false],
-        ["tmp_8", 8, false],
+        ["tmp_6", 32, false],
+        ["tmp_7", 32, false],
+        ["tmp_8", 16, false],
+        ["tmp_9", 32, false],
+        ["tmp_10", 32, false],
+        ["tmp_11", 16, false],
+        ["tmp_12", 16, false],
+        ["tmp_13", 8, false],
+        ["tmp_14", 16, false],
+        ["tmp_15", 32, false],
+        ["tmp_16", 32, false],
+        ["tmp_17", 16, false],
+        ["tmp_18", 16, false],
+        ["tmp_19", 8, false],
+        ["tmp_20", 16, false],
+        ["random_t_0", 32, false],
         ["key_0", 20, false],
         ["metadata.sr_id", 20, false],
         ["metadata.packet_hash", 14, false],
         ["metadata.sr_group_id", 14, false],
         ["metadata.ecmp_group_id", 14, false],
-        ["_padding_0", 6, false]
+        ["metadata.flowlet_last_stamp", 48, false],
+        ["metadata.flowlet_time_diff", 48, false],
+        ["metadata.flowlet_register_index", 13, false],
+        ["metadata.flowlet_id", 16, false],
+        ["_padding_0", 1, false]
       ]
     },
     {
@@ -389,12 +406,36 @@
       "id" : 0,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-        "line" : 31,
+        "line" : 35,
         "column" : 25,
         "source_fragment" : "sr_id_register"
       },
       "size" : 1,
       "bitwidth" : 20
+    },
+    {
+      "name" : "MyIngress.flowlet_to_id",
+      "id" : 1,
+      "source_info" : {
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+        "line" : 36,
+        "column" : 28,
+        "source_fragment" : "flowlet_to_id"
+      },
+      "size" : 8192,
+      "bitwidth" : 16
+    },
+    {
+      "name" : "MyIngress.flowlet_time_stamp",
+      "id" : 2,
+      "source_info" : {
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+        "line" : 37,
+        "column" : 28,
+        "source_fragment" : "flowlet_time_stamp"
+      },
+      "size" : 8192,
+      "bitwidth" : 48
     }
   ],
   "calculations" : [
@@ -432,32 +473,67 @@
       "input" : [
         {
           "type" : "field",
-          "value" : ["scalars", "tmp_4"]
+          "value" : ["scalars", "tmp_9"]
         },
         {
           "type" : "field",
-          "value" : ["scalars", "tmp_5"]
+          "value" : ["scalars", "tmp_10"]
         },
         {
           "type" : "field",
-          "value" : ["scalars", "tmp_6"]
+          "value" : ["scalars", "tmp_11"]
         },
         {
           "type" : "field",
-          "value" : ["scalars", "tmp_7"]
+          "value" : ["scalars", "tmp_12"]
         },
         {
           "type" : "field",
-          "value" : ["scalars", "tmp_8"]
+          "value" : ["scalars", "tmp_13"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_14"]
         }
       ]
     },
     {
       "name" : "calc_1",
       "id" : 2,
+      "algo" : "crc16",
+      "input" : [
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_15"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_16"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_17"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_18"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_19"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_20"]
+        }
+      ]
+    },
+    {
+      "name" : "calc_2",
+      "id" : 3,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-        "line" : 319,
+        "line" : 360,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
@@ -551,7 +627,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 28,
+            "line" : 32,
             "column" : 8,
             "source_fragment" : "mark_to_drop(standard_metadata)"
           }
@@ -559,248 +635,9 @@
       ]
     },
     {
-      "name" : "MyIngress.ipv4_forward",
+      "name" : "MyIngress.read_flowlet_registers",
       "id" : 5,
-      "runtime_data" : [
-        {
-          "name" : "dstAddr",
-          "bitwidth" : 48
-        },
-        {
-          "name" : "port",
-          "bitwidth" : 9
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "field",
-              "value" : ["ethernet", "dstAddr"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 36,
-            "column" : 8,
-            "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "dstAddr"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 37,
-            "column" : 8,
-            "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "egress_spec"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 1
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 39,
-            "column" : 8,
-            "source_fragment" : "standard_metadata.egress_spec = port"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "ttl"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "+",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["ipv4", "ttl"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0xff"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 40,
-            "column" : 8,
-            "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.ipv4_forward",
-      "id" : 6,
-      "runtime_data" : [
-        {
-          "name" : "dstAddr",
-          "bitwidth" : 48
-        },
-        {
-          "name" : "port",
-          "bitwidth" : 9
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "field",
-              "value" : ["ethernet", "dstAddr"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 36,
-            "column" : 8,
-            "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "dstAddr"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 37,
-            "column" : 8,
-            "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "egress_spec"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 1
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 39,
-            "column" : 8,
-            "source_fragment" : "standard_metadata.egress_spec = port"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "ttl"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "+",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["ipv4", "ttl"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0xff"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 40,
-            "column" : 8,
-            "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_sr_group",
-      "id" : 7,
-      "runtime_data" : [
-        {
-          "name" : "sr_group_id",
-          "bitwidth" : 14
-        },
-        {
-          "name" : "num_shops",
-          "bitwidth" : 16
-        }
-      ],
+      "runtime_data" : [],
       "primitives" : [
         {
           "op" : "assign",
@@ -816,8 +653,8 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 47,
-            "column" : 7,
+            "line" : 43,
+            "column" : 14,
             "source_fragment" : "hdr.ipv4.srcAddr"
           }
         },
@@ -835,8 +672,8 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 48,
-            "column" : 7,
+            "line" : 43,
+            "column" : 32,
             "source_fragment" : "hdr.ipv4.dstAddr"
           }
         },
@@ -854,8 +691,8 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 49,
-            "column" : 10,
+            "line" : 43,
+            "column" : 50,
             "source_fragment" : "hdr.tcp.srcPort"
           }
         },
@@ -873,8 +710,8 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 50,
-            "column" : 10,
+            "line" : 43,
+            "column" : 67,
             "source_fragment" : "hdr.tcp.dstPort"
           }
         },
@@ -892,9 +729,730 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 51,
+            "line" : 43,
+            "column" : 83,
+            "source_fragment" : "hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "modify_field_with_hash_based_offset",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_register_index"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0000"
+            },
+            {
+              "type" : "calculation",
+              "value" : "calc"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x2000"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 41,
+            "column" : 8,
+            "source_fragment" : "hash(meta.flowlet_register_index, HashAlgorithm.crc16, ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_4"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["scalars", "metadata.flowlet_register_index"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 47,
+            "column" : 57,
+            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
+          }
+        },
+        {
+          "op" : "register_read",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_last_stamp"]
+            },
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.flowlet_time_stamp"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_4"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 47,
+            "column" : 8,
+            "source_fragment" : "flowlet_time_stamp.read(meta.flowlet_last_stamp, (bit<32>)meta.flowlet_register_index)"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_5"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["scalars", "metadata.flowlet_register_index"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 50,
+            "column" : 44,
+            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
+          }
+        },
+        {
+          "op" : "register_read",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_id"]
+            },
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.flowlet_to_id"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_5"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 50,
+            "column" : 8,
+            "source_fragment" : "flowlet_to_id.read(meta.flowlet_id, (bit<32>)meta.flowlet_register_index)"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_6"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["scalars", "metadata.flowlet_register_index"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 53,
+            "column" : 33,
+            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.flowlet_time_stamp"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_6"]
+            },
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "ingress_global_timestamp"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 53,
+            "column" : 8,
+            "source_fragment" : "flowlet_time_stamp.write((bit<32>)meta.flowlet_register_index, standard_metadata.ingress_global_timestamp)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.update_flowlet_id",
+      "id" : 6,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "modify_field_rng_uniform",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "random_t_0"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00000000"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0000fde8"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 58,
+            "column" : 8,
+            "source_fragment" : "random(random_t, (bit<32>)0, (bit<32>)65000)"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_id"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "&",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "random_t_0"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0x0000ffff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 59,
+            "column" : 8,
+            "source_fragment" : "meta.flowlet_id = (bit<16>)random_t"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_7"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["scalars", "metadata.flowlet_register_index"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 60,
+            "column" : 28,
+            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_8"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "&",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "random_t_0"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0x0000ffff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 60,
+            "column" : 75,
+            "source_fragment" : "meta.flowlet_id"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.flowlet_to_id"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_7"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_8"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 60,
+            "column" : 8,
+            "source_fragment" : "flowlet_to_id.write((bit<32>)meta.flowlet_register_index, (bit<16>)meta.flowlet_id)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.ipv4_forward",
+      "id" : 7,
+      "runtime_data" : [
+        {
+          "name" : "dstAddr",
+          "bitwidth" : 48
+        },
+        {
+          "name" : "port",
+          "bitwidth" : 9
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ethernet", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 66,
+            "column" : 8,
+            "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 67,
+            "column" : 8,
+            "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 69,
+            "column" : 8,
+            "source_fragment" : "standard_metadata.egress_spec = port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 70,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.ipv4_forward",
+      "id" : 8,
+      "runtime_data" : [
+        {
+          "name" : "dstAddr",
+          "bitwidth" : 48
+        },
+        {
+          "name" : "port",
+          "bitwidth" : 9
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ethernet", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 66,
+            "column" : 8,
+            "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 67,
+            "column" : 8,
+            "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 69,
+            "column" : 8,
+            "source_fragment" : "standard_metadata.egress_spec = port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 70,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.set_sr_group",
+      "id" : 9,
+      "runtime_data" : [
+        {
+          "name" : "sr_group_id",
+          "bitwidth" : 14
+        },
+        {
+          "name" : "num_shops",
+          "bitwidth" : 16
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_9"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 77,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_10"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 78,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_11"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 79,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.srcPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_12"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 80,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.dstPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_13"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "protocol"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 81,
             "column" : 10,
             "source_fragment" : "hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_14"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_id"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 82,
+            "column" : 10,
+            "source_fragment" : "meta.flowlet_id"
           }
         },
         {
@@ -910,7 +1468,7 @@
             },
             {
               "type" : "calculation",
-              "value" : "calc"
+              "value" : "calc_0"
             },
             {
               "type" : "runtime_data",
@@ -919,7 +1477,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 44,
+            "line" : 74,
             "column" : 8,
             "source_fragment" : "hash(meta.packet_hash, ..."
           }
@@ -938,7 +1496,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 54,
+            "line" : 85,
             "column" : 5,
             "source_fragment" : "meta.sr_group_id = sr_group_id"
           }
@@ -947,7 +1505,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_1_hop",
-      "id" : 8,
+      "id" : 10,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -988,7 +1546,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 76,
+            "line" : 107,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1003,7 +1561,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 77,
+            "line" : 108,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1022,7 +1580,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 78,
+            "line" : 109,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
           }
@@ -1064,7 +1622,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 79,
+            "line" : 110,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -1083,7 +1641,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 80,
+            "line" : 111,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -1092,7 +1650,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_2_hop",
-      "id" : 9,
+      "id" : 11,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -1137,7 +1695,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 87,
+            "line" : 118,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1152,7 +1710,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 88,
+            "line" : 119,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1171,7 +1729,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 89,
+            "line" : 120,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
           }
@@ -1213,7 +1771,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 90,
+            "line" : 121,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -1232,7 +1790,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 91,
+            "line" : 122,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -1251,7 +1809,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 93,
+            "line" : 124,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1266,7 +1824,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 94,
+            "line" : 125,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1285,7 +1843,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 95,
+            "line" : 126,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_2"
           }
@@ -1327,7 +1885,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 96,
+            "line" : 127,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -1346,7 +1904,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 97,
+            "line" : 128,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -1355,7 +1913,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_3_hop",
-      "id" : 10,
+      "id" : 12,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -1404,7 +1962,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 104,
+            "line" : 135,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1419,7 +1977,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 105,
+            "line" : 136,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1438,7 +1996,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 106,
+            "line" : 137,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
           }
@@ -1480,7 +2038,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 107,
+            "line" : 138,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -1499,7 +2057,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 108,
+            "line" : 139,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -1518,7 +2076,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 110,
+            "line" : 141,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1533,7 +2091,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 111,
+            "line" : 142,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1552,7 +2110,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 112,
+            "line" : 143,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_2"
           }
@@ -1594,7 +2152,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 113,
+            "line" : 144,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -1613,7 +2171,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 114,
+            "line" : 145,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -1632,7 +2190,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 116,
+            "line" : 147,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1647,7 +2205,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 117,
+            "line" : 148,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1666,7 +2224,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 118,
+            "line" : 149,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_3"
           }
@@ -1708,7 +2266,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 119,
+            "line" : 150,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -1727,7 +2285,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 120,
+            "line" : 151,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -1736,7 +2294,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_4_hop",
-      "id" : 11,
+      "id" : 13,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -1789,7 +2347,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 127,
+            "line" : 158,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1804,7 +2362,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 128,
+            "line" : 159,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1823,7 +2381,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 129,
+            "line" : 160,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
           }
@@ -1865,7 +2423,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 130,
+            "line" : 161,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -1884,7 +2442,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 131,
+            "line" : 162,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -1903,7 +2461,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 133,
+            "line" : 164,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1918,7 +2476,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 134,
+            "line" : 165,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1937,7 +2495,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 135,
+            "line" : 166,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_2"
           }
@@ -1979,7 +2537,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 136,
+            "line" : 167,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -1998,7 +2556,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 137,
+            "line" : 168,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2017,7 +2575,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 139,
+            "line" : 170,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2032,7 +2590,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 140,
+            "line" : 171,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2051,7 +2609,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 141,
+            "line" : 172,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_3"
           }
@@ -2093,7 +2651,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 142,
+            "line" : 173,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2112,7 +2670,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 143,
+            "line" : 174,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2131,7 +2689,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 145,
+            "line" : 176,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2146,7 +2704,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 146,
+            "line" : 177,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2165,7 +2723,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 147,
+            "line" : 178,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_4"
           }
@@ -2207,7 +2765,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 148,
+            "line" : 179,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2226,7 +2784,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 149,
+            "line" : 180,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2235,7 +2793,7 @@
     },
     {
       "name" : "MyIngress.sr_ingress_5_hop",
-      "id" : 12,
+      "id" : 14,
       "runtime_data" : [
         {
           "name" : "label_1",
@@ -2292,7 +2850,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 156,
+            "line" : 187,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2307,7 +2865,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 157,
+            "line" : 188,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2326,7 +2884,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 158,
+            "line" : 189,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_1"
           }
@@ -2368,7 +2926,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 159,
+            "line" : 190,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2387,7 +2945,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 160,
+            "line" : 191,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -2406,7 +2964,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 162,
+            "line" : 193,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2421,7 +2979,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 163,
+            "line" : 194,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2440,7 +2998,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 164,
+            "line" : 195,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_2"
           }
@@ -2482,7 +3040,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 165,
+            "line" : 196,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2501,7 +3059,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 166,
+            "line" : 197,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2520,7 +3078,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 168,
+            "line" : 199,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2535,7 +3093,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 169,
+            "line" : 200,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2554,7 +3112,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 170,
+            "line" : 201,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_3"
           }
@@ -2596,7 +3154,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 171,
+            "line" : 202,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2615,7 +3173,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 172,
+            "line" : 203,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2634,7 +3192,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 174,
+            "line" : 205,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2649,7 +3207,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 175,
+            "line" : 206,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2668,7 +3226,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 176,
+            "line" : 207,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_4"
           }
@@ -2710,7 +3268,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 177,
+            "line" : 208,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2729,7 +3287,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 178,
+            "line" : 209,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2748,7 +3306,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 180,
+            "line" : 211,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2763,7 +3321,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 181,
+            "line" : 212,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2782,7 +3340,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 182,
+            "line" : 213,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label_5"
           }
@@ -2824,7 +3382,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 183,
+            "line" : 214,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2843,7 +3401,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 184,
+            "line" : 215,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2852,7 +3410,7 @@
     },
     {
       "name" : "MyIngress.sr_forward",
-      "id" : 13,
+      "id" : 15,
       "runtime_data" : [
         {
           "name" : "dstAddr",
@@ -2878,7 +3436,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 207,
+            "line" : 238,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
           }
@@ -2897,7 +3455,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 208,
+            "line" : 239,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
           }
@@ -2916,7 +3474,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 210,
+            "line" : 241,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
           }
@@ -2958,7 +3516,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 211,
+            "line" : 242,
             "column" : 8,
             "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
           }
@@ -2967,7 +3525,7 @@
     },
     {
       "name" : "MyIngress.sr_forward",
-      "id" : 14,
+      "id" : 16,
       "runtime_data" : [
         {
           "name" : "dstAddr",
@@ -2993,7 +3551,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 207,
+            "line" : 238,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
           }
@@ -3012,7 +3570,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 208,
+            "line" : 239,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
           }
@@ -3031,7 +3589,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 210,
+            "line" : 241,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
           }
@@ -3073,7 +3631,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 211,
+            "line" : 242,
             "column" : 8,
             "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
           }
@@ -3082,7 +3640,7 @@
     },
     {
       "name" : "MyIngress.set_ecmp_group",
-      "id" : 15,
+      "id" : 17,
       "runtime_data" : [
         {
           "name" : "ecmp_group_id",
@@ -3099,7 +3657,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_4"]
+              "value" : ["scalars", "tmp_15"]
             },
             {
               "type" : "field",
@@ -3108,7 +3666,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 218,
+            "line" : 249,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.srcAddr"
           }
@@ -3118,7 +3676,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_5"]
+              "value" : ["scalars", "tmp_16"]
             },
             {
               "type" : "field",
@@ -3127,7 +3685,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 219,
+            "line" : 250,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.dstAddr"
           }
@@ -3137,7 +3695,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_6"]
+              "value" : ["scalars", "tmp_17"]
             },
             {
               "type" : "field",
@@ -3146,7 +3704,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 220,
+            "line" : 251,
             "column" : 10,
             "source_fragment" : "hdr.tcp.srcPort"
           }
@@ -3156,7 +3714,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_7"]
+              "value" : ["scalars", "tmp_18"]
             },
             {
               "type" : "field",
@@ -3165,7 +3723,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 221,
+            "line" : 252,
             "column" : 10,
             "source_fragment" : "hdr.tcp.dstPort"
           }
@@ -3175,7 +3733,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_8"]
+              "value" : ["scalars", "tmp_19"]
             },
             {
               "type" : "field",
@@ -3184,9 +3742,28 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 222,
+            "line" : 253,
             "column" : 10,
             "source_fragment" : "hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_20"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_id"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 254,
+            "column" : 10,
+            "source_fragment" : "meta.flowlet_id"
           }
         },
         {
@@ -3202,7 +3779,7 @@
             },
             {
               "type" : "calculation",
-              "value" : "calc_0"
+              "value" : "calc_1"
             },
             {
               "type" : "runtime_data",
@@ -3211,7 +3788,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 215,
+            "line" : 246,
             "column" : 8,
             "source_fragment" : "hash(meta.packet_hash, ..."
           }
@@ -3230,7 +3807,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 225,
+            "line" : 257,
             "column" : 5,
             "source_fragment" : "meta.ecmp_group_id = ecmp_group_id"
           }
@@ -3238,8 +3815,8 @@
       ]
     },
     {
-      "name" : "stacked262",
-      "id" : 16,
+      "name" : "stacked294",
+      "id" : 18,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3264,8 +3841,8 @@
       ]
     },
     {
-      "name" : "stacked264",
-      "id" : 17,
+      "name" : "stacked296",
+      "id" : 19,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3282,7 +3859,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 264,
+            "line" : 296,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           }
@@ -3290,8 +3867,8 @@
       ]
     },
     {
-      "name" : "stacked257",
-      "id" : 18,
+      "name" : "stacked289",
+      "id" : 20,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3312,7 +3889,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 257,
+            "line" : 289,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           }
@@ -3320,8 +3897,57 @@
       ]
     },
     {
-      "name" : "stacked230",
-      "id" : 19,
+      "name" : "stacked304",
+      "id" : 21,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_time_diff"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "-",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["standard_metadata", "ingress_global_timestamp"]
+                      },
+                      "right" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata.flowlet_last_stamp"]
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 304,
+            "column" : 16,
+            "source_fragment" : "meta.flowlet_time_diff = standard_metadata.ingress_global_timestamp - meta.flowlet_last_stamp"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "stacked262",
+      "id" : 22,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3338,7 +3964,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 230,
+            "line" : 262,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           }
@@ -3346,8 +3972,8 @@
       ]
     },
     {
-      "name" : "stacked290",
-      "id" : 20,
+      "name" : "stacked331",
+      "id" : 23,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3372,8 +3998,8 @@
       ]
     },
     {
-      "name" : "stacked292",
-      "id" : 21,
+      "name" : "stacked333",
+      "id" : 24,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3390,7 +4016,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 292,
+            "line" : 333,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           }
@@ -3404,18 +4030,18 @@
       "id" : 0,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-        "line" : 23,
+        "line" : 27,
         "column" : 8,
         "source_fragment" : "MyIngress"
       },
       "init_table" : "node_2",
       "tables" : [
         {
-          "name" : "tbl_stacked257",
+          "name" : "tbl_stacked289",
           "id" : 0,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 257,
+            "line" : 289,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           },
@@ -3426,25 +4052,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [18],
-          "actions" : ["stacked257"],
+          "action_ids" : [20],
+          "actions" : ["stacked289"],
           "base_default_next" : "node_4",
           "next_tables" : {
-            "stacked257" : "node_4"
+            "stacked289" : "node_4"
           },
           "default_entry" : {
-            "action_id" : 18,
+            "action_id" : 20,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_stacked262",
+          "name" : "tbl_stacked294",
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 262,
+            "line" : 294,
             "column" : 43,
             "source_fragment" : "="
           },
@@ -3455,25 +4081,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [16],
-          "actions" : ["stacked262"],
-          "base_default_next" : "tbl_stacked264",
+          "action_ids" : [18],
+          "actions" : ["stacked294"],
+          "base_default_next" : "tbl_stacked296",
           "next_tables" : {
-            "stacked262" : "tbl_stacked264"
+            "stacked294" : "tbl_stacked296"
           },
           "default_entry" : {
-            "action_id" : 16,
+            "action_id" : 18,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_stacked264",
+          "name" : "tbl_stacked296",
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 264,
+            "line" : 296,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           },
@@ -3484,14 +4110,101 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [17],
-          "actions" : ["stacked264"],
+          "action_ids" : [19],
+          "actions" : ["stacked296"],
           "base_default_next" : "node_8",
           "next_tables" : {
-            "stacked264" : "node_8"
+            "stacked296" : "node_8"
           },
           "default_entry" : {
-            "action_id" : 17,
+            "action_id" : 19,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_read_flowlet_registers",
+          "id" : 3,
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 303,
+            "column" : 16,
+            "source_fragment" : "read_flowlet_registers()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [5],
+          "actions" : ["MyIngress.read_flowlet_registers"],
+          "base_default_next" : "tbl_stacked304",
+          "next_tables" : {
+            "MyIngress.read_flowlet_registers" : "tbl_stacked304"
+          },
+          "default_entry" : {
+            "action_id" : 5,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_stacked304",
+          "id" : 4,
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 304,
+            "column" : 39,
+            "source_fragment" : "="
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [21],
+          "actions" : ["stacked304"],
+          "base_default_next" : "node_11",
+          "next_tables" : {
+            "stacked304" : "node_11"
+          },
+          "default_entry" : {
+            "action_id" : 21,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_update_flowlet_id",
+          "id" : 5,
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 308,
+            "column" : 20,
+            "source_fragment" : "update_flowlet_id()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [6],
+          "actions" : ["MyIngress.update_flowlet_id"],
+          "base_default_next" : "MyIngress.ipv4_lpm",
+          "next_tables" : {
+            "MyIngress.update_flowlet_id" : "MyIngress.ipv4_lpm"
+          },
+          "default_entry" : {
+            "action_id" : 6,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -3499,10 +4212,10 @@
         },
         {
           "name" : "MyIngress.ipv4_lpm",
-          "id" : 3,
+          "id" : 6,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 57,
+            "line" : 88,
             "column" : 10,
             "source_fragment" : "ipv4_lpm"
           },
@@ -3520,13 +4233,13 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [5, 7, 0],
+          "action_ids" : [7, 9, 0],
           "actions" : ["MyIngress.ipv4_forward", "MyIngress.set_sr_group", "NoAction"],
-          "base_default_next" : "node_11",
+          "base_default_next" : "node_15",
           "next_tables" : {
             "MyIngress.set_sr_group" : "MyIngress.FEC_tbl",
-            "MyIngress.ipv4_forward" : "node_11",
-            "NoAction" : "node_11"
+            "MyIngress.ipv4_forward" : "node_15",
+            "NoAction" : "node_15"
           },
           "default_entry" : {
             "action_id" : 0,
@@ -3537,10 +4250,10 @@
         },
         {
           "name" : "MyIngress.FEC_tbl",
-          "id" : 4,
+          "id" : 7,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 187,
+            "line" : 218,
             "column" : 10,
             "source_fragment" : "FEC_tbl"
           },
@@ -3564,16 +4277,16 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [8, 9, 10, 11, 12, 1],
+          "action_ids" : [10, 11, 12, 13, 14, 1],
           "actions" : ["MyIngress.sr_ingress_1_hop", "MyIngress.sr_ingress_2_hop", "MyIngress.sr_ingress_3_hop", "MyIngress.sr_ingress_4_hop", "MyIngress.sr_ingress_5_hop", "NoAction"],
-          "base_default_next" : "node_11",
+          "base_default_next" : "node_15",
           "next_tables" : {
-            "MyIngress.sr_ingress_1_hop" : "node_11",
-            "MyIngress.sr_ingress_2_hop" : "node_11",
-            "MyIngress.sr_ingress_3_hop" : "node_11",
-            "MyIngress.sr_ingress_4_hop" : "node_11",
-            "MyIngress.sr_ingress_5_hop" : "node_11",
-            "NoAction" : "node_11"
+            "MyIngress.sr_ingress_1_hop" : "node_15",
+            "MyIngress.sr_ingress_2_hop" : "node_15",
+            "MyIngress.sr_ingress_3_hop" : "node_15",
+            "MyIngress.sr_ingress_4_hop" : "node_15",
+            "MyIngress.sr_ingress_5_hop" : "node_15",
+            "NoAction" : "node_15"
           },
           "default_entry" : {
             "action_id" : 1,
@@ -3583,11 +4296,11 @@
           }
         },
         {
-          "name" : "tbl_stacked230",
-          "id" : 5,
+          "name" : "tbl_stacked262",
+          "id" : 8,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 230,
+            "line" : 262,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           },
@@ -3598,14 +4311,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [19],
-          "actions" : ["stacked230"],
+          "action_ids" : [22],
+          "actions" : ["stacked262"],
           "base_default_next" : "MyIngress.sr_tbl",
           "next_tables" : {
-            "stacked230" : "MyIngress.sr_tbl"
+            "stacked262" : "MyIngress.sr_tbl"
           },
           "default_entry" : {
-            "action_id" : 19,
+            "action_id" : 22,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -3613,10 +4326,10 @@
         },
         {
           "name" : "MyIngress.sr_tbl",
-          "id" : 6,
+          "id" : 9,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 228,
+            "line" : 260,
             "column" : 10,
             "source_fragment" : "sr_tbl"
           },
@@ -3634,14 +4347,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [13, 15, 6, 2],
+          "action_ids" : [15, 17, 8, 2],
           "actions" : ["MyIngress.sr_forward", "MyIngress.set_ecmp_group", "MyIngress.ipv4_forward", "NoAction"],
-          "base_default_next" : "node_15",
+          "base_default_next" : "node_19",
           "next_tables" : {
             "MyIngress.set_ecmp_group" : "MyIngress.ecmp_group_to_nhop",
-            "MyIngress.sr_forward" : "node_15",
-            "MyIngress.ipv4_forward" : "node_15",
-            "NoAction" : "node_15"
+            "MyIngress.sr_forward" : "node_19",
+            "MyIngress.ipv4_forward" : "node_19",
+            "NoAction" : "node_19"
           },
           "default_entry" : {
             "action_id" : 2,
@@ -3652,10 +4365,10 @@
         },
         {
           "name" : "MyIngress.ecmp_group_to_nhop",
-          "id" : 7,
+          "id" : 10,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 242,
+            "line" : 274,
             "column" : 10,
             "source_fragment" : "ecmp_group_to_nhop"
           },
@@ -3679,13 +4392,13 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [4, 14, 3],
+          "action_ids" : [4, 16, 3],
           "actions" : ["MyIngress.drop", "MyIngress.sr_forward", "NoAction"],
-          "base_default_next" : "node_15",
+          "base_default_next" : "node_19",
           "next_tables" : {
-            "MyIngress.drop" : "node_15",
-            "MyIngress.sr_forward" : "node_15",
-            "NoAction" : "node_15"
+            "MyIngress.drop" : "node_19",
+            "MyIngress.sr_forward" : "node_19",
+            "NoAction" : "node_19"
           },
           "default_entry" : {
             "action_id" : 3,
@@ -3695,11 +4408,11 @@
           }
         },
         {
-          "name" : "tbl_stacked290",
-          "id" : 8,
+          "name" : "tbl_stacked331",
+          "id" : 11,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 290,
+            "line" : 331,
             "column" : 43,
             "source_fragment" : "="
           },
@@ -3710,25 +4423,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [20],
-          "actions" : ["stacked290"],
-          "base_default_next" : "tbl_stacked292",
+          "action_ids" : [23],
+          "actions" : ["stacked331"],
+          "base_default_next" : "tbl_stacked333",
           "next_tables" : {
-            "stacked290" : "tbl_stacked292"
+            "stacked331" : "tbl_stacked333"
           },
           "default_entry" : {
-            "action_id" : 20,
+            "action_id" : 23,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_stacked292",
-          "id" : 9,
+          "name" : "tbl_stacked333",
+          "id" : 12,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 292,
+            "line" : 333,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           },
@@ -3739,14 +4452,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [21],
-          "actions" : ["stacked292"],
+          "action_ids" : [24],
+          "actions" : ["stacked333"],
           "base_default_next" : null,
           "next_tables" : {
-            "stacked292" : null
+            "stacked333" : null
           },
           "default_entry" : {
-            "action_id" : 21,
+            "action_id" : 24,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -3760,7 +4473,7 @@
           "id" : 0,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 256,
+            "line" : 288,
             "column" : 11,
             "source_fragment" : "hdr.sr[0].isValid()"
           },
@@ -3775,7 +4488,7 @@
               }
             }
           },
-          "true_next" : "tbl_stacked257",
+          "true_next" : "tbl_stacked289",
           "false_next" : "node_8"
         },
         {
@@ -3783,7 +4496,7 @@
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 258,
+            "line" : 290,
             "column" : 15,
             "source_fragment" : "hdr.sr[0].label == meta.sr_id"
           },
@@ -3809,7 +4522,7 @@
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 260,
+            "line" : 292,
             "column" : 19,
             "source_fragment" : "hdr.sr[0].s == 1"
           },
@@ -3827,15 +4540,15 @@
               }
             }
           },
-          "true_next" : "tbl_stacked262",
-          "false_next" : "tbl_stacked264"
+          "true_next" : "tbl_stacked294",
+          "false_next" : "tbl_stacked296"
         },
         {
           "name" : "node_8",
           "id" : 3,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 269,
+            "line" : 301,
             "column" : 12,
             "source_fragment" : "hdr.ipv4.isValid() && !(hdr.sr[0].isValid())"
           },
@@ -3874,15 +4587,61 @@
               }
             }
           },
-          "true_next" : "MyIngress.ipv4_lpm",
-          "false_next" : "node_11"
+          "true_next" : "tbl_read_flowlet_registers",
+          "false_next" : "node_15"
         },
         {
           "name" : "node_11",
           "id" : 4,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 278,
+            "line" : 307,
+            "column" : 20,
+            "source_fragment" : "meta.flowlet_time_diff > 48w200000"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : ">",
+              "left" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "-",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["standard_metadata", "ingress_global_timestamp"]
+                      },
+                      "right" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata.flowlet_last_stamp"]
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffffffff"
+                  }
+                }
+              },
+              "right" : {
+                "type" : "hexstr",
+                "value" : "0x000000030d40"
+              }
+            }
+          },
+          "true_next" : "tbl_update_flowlet_id",
+          "false_next" : "MyIngress.ipv4_lpm"
+        },
+        {
+          "name" : "node_15",
+          "id" : 5,
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
+            "line" : 319,
             "column" : 11,
             "source_fragment" : "hdr.sr[0].isValid()"
           },
@@ -3898,14 +4657,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_stacked230"
+          "true_next" : "tbl_stacked262"
         },
         {
-          "name" : "node_15",
-          "id" : 5,
+          "name" : "node_19",
+          "id" : 6,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 286,
+            "line" : 327,
             "column" : 15,
             "source_fragment" : "(hdr.ethernet.etherType == TYPE_SR) && (hdr.sr[0].label & 1<<18) != 0"
           },
@@ -3954,14 +4713,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "node_16"
+          "true_next" : "node_20"
         },
         {
-          "name" : "node_16",
-          "id" : 6,
+          "name" : "node_20",
+          "id" : 7,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-            "line" : 288,
+            "line" : 329,
             "column" : 19,
             "source_fragment" : "hdr.sr[0].s == 1"
           },
@@ -3979,8 +4738,8 @@
               }
             }
           },
-          "true_next" : "tbl_stacked290",
-          "false_next" : "tbl_stacked292"
+          "true_next" : "tbl_stacked331",
+          "false_next" : "tbl_stacked333"
         }
       ]
     },
@@ -3989,7 +4748,7 @@
       "id" : 1,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-        "line" : 302,
+        "line" : 343,
         "column" : 8,
         "source_fragment" : "MyEgress"
       },
@@ -4005,13 +4764,13 @@
       "id" : 0,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/stacked.p4",
-        "line" : 319,
+        "line" : 360,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
       "target" : ["ipv4", "hdrChecksum"],
       "type" : "generic",
-      "calculation" : "calc_1",
+      "calculation" : "calc_2",
       "verify" : false,
       "update" : true,
       "if_cond" : {
