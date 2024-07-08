@@ -70,7 +70,6 @@ class RoutingController(object):
             else:
                 self.controllers[ir].table_add("ipv4_lpm", "ipv4_forward", [host_prefix], [link["addr1"], str(link["port2"])])
 
-
             # Init forwarding to distant hosts
             for ir2 in self.ingress_routers:
                 if(ir == ir2):
@@ -92,8 +91,9 @@ class RoutingController(object):
     # 5 for the link index (hash of the weights of the link)
     def get_link_id(self, src, dst):
         (src, dst) = (int(src), int(dst))
-        link_igp = self.topo.edges[self.gofor_to_mininet[str(src)], self.gofor_to_mininet[str(dst)]]["igp_cost"]
-        link_delay = self.topo.edges[self.gofor_to_mininet[str(src)], self.gofor_to_mininet[str(dst)]]["delay"]
+        (mn_src, mn_dst) = (self.gofor_to_mininet[str(src)], self.gofor_to_mininet[str(dst)])
+        link_igp = self.topo.edges[(mn_src, mn_dst)]["igp_cost"]
+        link_delay = self.topo.edges[(mn_src, mn_dst)]["delay"]
         link_hash = hash(str(link_igp) + str(link_delay)) % 32
         bit_segment = (1 << 18) + (src << 12) + (dst << 5) + link_hash
         return bit_segment
@@ -104,7 +104,8 @@ class RoutingController(object):
         seg_list_index = 0
         for delay in self.dags[(gofor_src, gofor_dst)].keys():
             for seg_list in self.dags[(gofor_src, gofor_dst)][delay]["seg_lists"]:
-                segment_list_arg = []
+                print(seg_list)
+                segment_list_arg = [str(int(int(delay) * 2 * 1000 * 1.1))]
                 for segment in seg_list:
                     if(segment[-1]["node_adj"] == "Adj"):
                         (seg_src, seg_dst) = (segment[0], segment[1])

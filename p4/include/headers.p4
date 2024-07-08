@@ -66,14 +66,16 @@ struct metadata {
     bit<20> sr_id;
     
     bit<14> packet_hash;
+    bit<14> segment_list_hash;
     bit<14> sr_group_id;
     bit<14> ecmp_group_id;
 
-    bit<48> flowlet_last_stamp;
-    bit<48> flowlet_time_diff;
-
     bit<13> flowlet_register_index;
     bit<16> flowlet_id;
+    bit<13> flowlet_timeout_index;
+    bit<48> flowlet_timeout_value;
+    bit<48> flowlet_last_stamp;
+    bit<48> flowlet_time_diff;
 }
 
 struct headers {

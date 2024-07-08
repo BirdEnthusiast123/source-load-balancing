@@ -12,6 +12,8 @@
 #define ID_WIDTH 16
 #define FLOWLET_TIMEOUT 48w200000
 
+typedef bit<TIMESTAMP_WIDTH> timestamp_t;
+
 /*************************************************************************
 ************   C H E C K S U M    V E R I F I C A T I O N   *************
 *************************************************************************/
@@ -35,22 +37,23 @@ control MyIngress(inout headers hdr,
     register<bit<20>>(1) sr_id_register;
     register<bit<ID_WIDTH>>(REGISTER_SIZE) flowlet_to_id;
     register<bit<TIMESTAMP_WIDTH>>(REGISTER_SIZE) flowlet_time_stamp;
+    register<bit<TIMESTAMP_WIDTH>>(REGISTER_SIZE) flowlet_timeout;
 
     action read_flowlet_registers(){
         //compute register index
         hash(meta.flowlet_register_index, HashAlgorithm.crc16,
             (bit<16>)0,
             { hdr.ipv4.srcAddr, hdr.ipv4.dstAddr, hdr.tcp.srcPort, hdr.tcp.dstPort,hdr.ipv4.protocol},
-            (bit<14>)8192);
-
-         //Read previous time stamp
+            (bit<14>)REGISTER_SIZE);
+        // Read previous time stamp
         flowlet_time_stamp.read(meta.flowlet_last_stamp, (bit<32>)meta.flowlet_register_index);
-
-        //Read previous flowlet id
+        // Read previous flowlet id
         flowlet_to_id.read(meta.flowlet_id, (bit<32>)meta.flowlet_register_index);
-
-        //Update timestamp
+        // Update timestamp
         flowlet_time_stamp.write((bit<32>)meta.flowlet_register_index, standard_metadata.ingress_global_timestamp);
+
+        // Get the timeout value for this particular flowlet 
+        flowlet_timeout.read(meta.flowlet_timeout_value, (bit<32>)meta.flowlet_register_index);
     }
 
     action update_flowlet_id(){
@@ -61,7 +64,7 @@ control MyIngress(inout headers hdr,
     }
 
 
-    // DST @ -> CLASSIFICATION OF FLOWS//////////////////////////////////
+    // DST @ -> CLASSIFICATION OF FLOWLETS//////////////////////////////////
     action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
         hdr.ethernet.dstAddr = dstAddr;
@@ -78,7 +81,7 @@ control MyIngress(inout headers hdr,
 	      hdr.ipv4.dstAddr,
           hdr.tcp.srcPort,
           hdr.tcp.dstPort,
-          hdr.ipv4.protocol, 
+          hdr.ipv4.protocol,
           meta.flowlet_id},
 	    num_shops);
 
@@ -99,8 +102,8 @@ control MyIngress(inout headers hdr,
     }
 
 
-    // GROUPS OF FLOWS -> LISTS OF SEGMENTS //////////////////////////////
-    action sr_ingress_1_hop(label_t label_1) {
+    // GROUPS OF FLOWLETS -> LISTS OF SEGMENTS ////////////////////////////// 
+    action sr_ingress_1_hop(label_t label_1, timestamp_t flowlet_timeout_value) {
 
         hdr.ethernet.etherType = TYPE_SR;
 
@@ -109,9 +112,11 @@ control MyIngress(inout headers hdr,
         hdr.sr[0].label = label_1;
         hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
         hdr.sr[0].s = 1;
+
+        flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
     }
 
-    action sr_ingress_2_hop(label_t label_1, label_t label_2) {
+    action sr_ingress_2_hop(label_t label_1, label_t label_2, timestamp_t flowlet_timeout_value) {
 
         hdr.ethernet.etherType = TYPE_SR;
 
@@ -126,9 +131,11 @@ control MyIngress(inout headers hdr,
         hdr.sr[0].label = label_2;
         hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
         hdr.sr[0].s = 0;
+
+        flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
     }
 
-    action sr_ingress_3_hop(label_t label_1, label_t label_2, label_t label_3) {
+    action sr_ingress_3_hop(label_t label_1, label_t label_2, label_t label_3, timestamp_t flowlet_timeout_value) {
 
         hdr.ethernet.etherType = TYPE_SR;
 
@@ -149,9 +156,11 @@ control MyIngress(inout headers hdr,
         hdr.sr[0].label = label_3;
         hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
         hdr.sr[0].s = 0;
+
+        flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
     }
 
-    action sr_ingress_4_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4) {
+    action sr_ingress_4_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4, timestamp_t flowlet_timeout_value) {
 
         hdr.ethernet.etherType = TYPE_SR;
 
@@ -178,10 +187,11 @@ control MyIngress(inout headers hdr,
         hdr.sr[0].label = label_4;
         hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
         hdr.sr[0].s = 0;
+
+        flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
     }
 
-    action sr_ingress_5_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4, label_t label_5) {
-
+    action sr_ingress_5_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4, label_t label_5, timestamp_t flowlet_timeout_value) {
         hdr.ethernet.etherType = TYPE_SR;
 
         hdr.sr.push_front(1);
@@ -213,6 +223,8 @@ control MyIngress(inout headers hdr,
         hdr.sr[0].label = label_5;
         hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
         hdr.sr[0].s = 0;
+
+        flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
     }
 
     table FEC_tbl {
@@ -284,7 +296,7 @@ control MyIngress(inout headers hdr,
     }
 
     apply {
-        // Pop segment if segment is the current switch 
+        // Pop segment if the segment represents the current switch 
         if(hdr.sr[0].isValid()){
             sr_id_register.read(meta.sr_id, 0);
             if(hdr.sr[0].label == meta.sr_id)
@@ -297,14 +309,14 @@ control MyIngress(inout headers hdr,
             }
         }
 
-        // Ingress router
+        // Ingress router stuff
         if (hdr.ipv4.isValid() && !(hdr.sr[0].isValid())){
             @atomic {
                 read_flowlet_registers();
                 meta.flowlet_time_diff = standard_metadata.ingress_global_timestamp - meta.flowlet_last_stamp;
 
-                //check if inter-packet gap is > 100ms
-                if (meta.flowlet_time_diff > FLOWLET_TIMEOUT){
+                //check if inter-packet gap is > timeout value
+                if (meta.flowlet_time_diff > meta.flowlet_timeout_value){
                     update_flowlet_id();
                 }
             }
