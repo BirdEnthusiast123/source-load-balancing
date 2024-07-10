@@ -2,9 +2,10 @@
 *********************** H E A D E R S  ***********************************
 *************************************************************************/
 
-#define CONST_MAX_LABELS 	128
+#define CONST_MAX_LABELS 	255
 #define CONST_MAX_SR_HOPS 8
-#define SR_ADJ_SEGMENT_MASK 1<<18
+// might be wrong, feels wrong at least should be << 19, change after it all works
+#define SR_ADJ_SEGMENT_MASK 1<<18 
 
 const bit<16> TYPE_IPV4 = 0x800;
 const bit<16> TYPE_SR   = 0x8847;
@@ -65,8 +66,10 @@ header tcp_t{
 struct metadata {
     bit<20> sr_id;
     
+    bit<20> current_seg;
+    bit<20> sr_dest;
     bit<14> packet_hash;
-    bit<14> segment_list_hash;
+    bit<14> meta_path_differentiator;
     bit<14> sr_group_id;
     bit<14> ecmp_group_id;
 

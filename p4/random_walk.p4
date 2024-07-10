@@ -64,7 +64,6 @@ control MyIngress(inout headers hdr,
     }
 
 
-    // DST @ -> CLASSIFICATION OF FLOWLETS//////////////////////////////////
     action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
         hdr.ethernet.dstAddr = dstAddr;
@@ -73,6 +72,7 @@ control MyIngress(inout headers hdr,
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
 
+    // DST @ -> CLASSIFICATION OF FLOWLETS//////////////////////////////////
     action set_sr_group(bit<14> sr_group_id, bit<16> num_shops){
         hash(meta.packet_hash,
 	    HashAlgorithm.crc16,
@@ -86,6 +86,8 @@ control MyIngress(inout headers hdr,
 	    num_shops);
 
 	    meta.sr_group_id = sr_group_id;
+        meta.current_seg = meta.sr_id;
+        meta.meta_path_differentiator = 0;
     }
 
     table ipv4_lpm {
@@ -101,143 +103,107 @@ control MyIngress(inout headers hdr,
         default_action = NoAction();
     }
 
-
-    // GROUPS OF FLOWLETS -> LISTS OF SEGMENTS ////////////////////////////// 
-    action sr_ingress_1_hop(label_t label_1, timestamp_t flowlet_timeout_value) {
-
+    action set_segment_hop(label_t label){
         hdr.ethernet.etherType = TYPE_SR;
 
         hdr.sr.push_front(1);
         hdr.sr[0].setValid();
-        hdr.sr[0].label = label_1;
+        hdr.sr[0].label = label;
+        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
+        hdr.sr[0].s = 0;
+
+        meta.current_seg = label;
+        if(meta.current_seg & SR_ADJ_SEGMENT_MASK != 0){
+            meta.current_seg = meta.current_seg & 31;
+        }
+    }
+
+    action set_last_segment_hop(label_t label, timestamp_t flowlet_timeout_value){
+        hdr.ethernet.etherType = TYPE_SR;
+
+        hdr.sr.push_front(1);
+        hdr.sr[0].setValid();
+        hdr.sr[0].label = label;
         hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
         hdr.sr[0].s = 1;
 
         flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
     }
 
-    action sr_ingress_2_hop(label_t label_1, label_t label_2, timestamp_t flowlet_timeout_value) {
-
-        hdr.ethernet.etherType = TYPE_SR;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_1;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 1;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_2;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
-    }
-
-    action sr_ingress_3_hop(label_t label_1, label_t label_2, label_t label_3, timestamp_t flowlet_timeout_value) {
-
-        hdr.ethernet.etherType = TYPE_SR;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_1;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 1;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_2;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_3;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
-    }
-
-    action sr_ingress_4_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4, timestamp_t flowlet_timeout_value) {
-
-        hdr.ethernet.etherType = TYPE_SR;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_1;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 1;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_2;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_3;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_4;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
-    }
-
-    action sr_ingress_5_hop(label_t label_1, label_t label_2, label_t label_3, label_t label_4, label_t label_5, timestamp_t flowlet_timeout_value) {
-        hdr.ethernet.etherType = TYPE_SR;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_1;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 1;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_2;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_3;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_4;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        hdr.sr.push_front(1);
-        hdr.sr[0].setValid();
-        hdr.sr[0].label = label_5;
-        hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
-
-        flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
-    }
-
-    table FEC_tbl {
+    table segment_hop_1 {
         key = {
             meta.sr_group_id: exact;
             meta.packet_hash: exact;
+            meta.current_seg: exact;
+            meta.meta_path_differentiator: exact;
         }
         actions = {
-            sr_ingress_1_hop;
-            sr_ingress_2_hop;
-            sr_ingress_3_hop;
-            sr_ingress_4_hop;
-            sr_ingress_5_hop;
+            set_segment_hop;
+            set_last_segment_hop;
+            NoAction;
+        }
+        default_action = NoAction();
+        size = 256;
+    }
+
+    table segment_hop_2 {
+        key = {
+            meta.sr_group_id: exact;
+            meta.packet_hash: exact;
+            meta.current_seg: exact;
+            meta.meta_path_differentiator: exact;
+        }
+        actions = {
+            set_segment_hop;
+            set_last_segment_hop;
+            NoAction;
+        }
+        default_action = NoAction();
+        size = 256;
+    }
+
+    table segment_hop_3 {
+        key = {
+            meta.sr_group_id: exact;
+            meta.packet_hash: exact;
+            meta.current_seg: exact;
+            meta.meta_path_differentiator: exact;
+        }
+        actions = {
+            set_segment_hop;
+            set_last_segment_hop;
+            NoAction;
+        }
+        default_action = NoAction();
+        size = 256;
+    }
+
+    table segment_hop_4 {
+        key = {
+            meta.sr_group_id: exact;
+            meta.packet_hash: exact;
+            meta.current_seg: exact;
+            meta.meta_path_differentiator: exact;
+        }
+        actions = {
+            set_segment_hop;
+            set_last_segment_hop;
+            NoAction;
+        }
+        default_action = NoAction();
+        size = 256;
+    }
+
+    table segment_hop_5 {
+        key = {
+            meta.sr_group_id: exact;
+            meta.packet_hash: exact;
+            meta.current_seg: exact;
+            meta.meta_path_differentiator: exact;
+        }
+        actions = {
+            set_segment_hop;
+            set_last_segment_hop;
             NoAction;
         }
         default_action = NoAction();
@@ -320,9 +286,24 @@ control MyIngress(inout headers hdr,
                     update_flowlet_id();
                 }
             }
+            
             switch (ipv4_lpm.apply().action_run){
-                set_sr_group: {
-                    FEC_tbl.apply();
+                set_sr_group: { 
+                    switch(segment_hop_1.apply().action_run){
+                        set_segment_hop: { 
+                            switch(segment_hop_2.apply().action_run){
+                                set_segment_hop: { 
+                                    switch(segment_hop_3.apply().action_run){
+                                        set_segment_hop: { 
+                                            switch(segment_hop_4.apply().action_run){
+                                                set_segment_hop: { segment_hop_5.apply(); }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

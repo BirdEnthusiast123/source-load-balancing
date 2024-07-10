@@ -1,0 +1,57 @@
+{
+    "p4_src": "distribution.p4",
+    "cli": true,
+    "enable_log": true,
+    "exec_scripts": [
+      {
+        "cmd": "python controller.py",
+        "reboot_run": true
+      }
+    ],
+    "topology": {
+      "assignment_strategy": "l3",
+      "links": [["s1", "s2", {"igp_cost": 2, "delay": 1.0}],
+                ["s1", "s3", {"igp_cost": 1, "delay": 0.1}],
+                ["s1", "s4", {"igp_cost": 1, "delay": 0.1}],
+                ["s3", "s2", {"igp_cost": 2, "delay": 0.8}],
+                ["s4", "s5", {"igp_cost": 1, "delay": 0.2}],
+                ["s4", "s6", {"igp_cost": 1, "delay": 0.3}],
+                ["s4", "s7", {"igp_cost": 1, "delay": 0.4}],
+                ["s4", "s8", {"igp_cost": 1, "delay": 0.5}],
+                ["s4", "s2", {"igp_cost": 1, "delay": 0.9}],
+                ["s5", "s2", {"igp_cost": 1, "delay": 0.6}],
+                ["s6", "s2", {"igp_cost": 1, "delay": 0.5}],
+                ["s7", "s2", {"igp_cost": 1, "delay": 0.4}],
+                ["s8", "s2", {"igp_cost": 1, "delay": 0.3}],
+                ["s1", "s9", {"igp_cost": 1, "delay": 0.1}],
+                ["s9", "h11"],
+                ["s2", "h12"]],
+      "hosts": {
+        "h11": {
+        },
+        "h12": {
+        }
+      },
+      "switches": {
+        "s1": {
+        },
+        "s2": {"host_prefix": "10.2.0.0/16"
+        },
+        "s3": {
+        },
+        "s4": {
+        },
+        "s5": {
+        },
+        "s6": {
+        },
+        "s7": {
+        },
+        "s8": {
+        },
+        "s9": {"host_prefix": "10.9.0.0/16"
+        }
+      }
+    }
+  }
+  

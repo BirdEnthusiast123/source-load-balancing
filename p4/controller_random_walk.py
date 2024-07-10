@@ -23,7 +23,7 @@ class RoutingController(object):
 
         self.init_registers()
         self.initialize_tables()
-        self.initialize_segment_lists()
+        self.initialize_all_dags()
         self.init_sr_forward_node()
         self.init_sr_forward_adj()
 
@@ -78,12 +78,12 @@ class RoutingController(object):
                 self.controllers[ir].table_add("ipv4_lpm", "set_sr_group", [host_prefix], [self.mininet_to_gofor[ir2], "0"])
 
     # Only for the ingress routers ( = connected to a prefix in this example)
-    def initialize_segment_lists(self):
+    def initialize_all_dags(self):
         for source_ir in self.ingress_routers:
             for dest_ir in self.ingress_routers:
                 if (source_ir == dest_ir):
                     continue
-                self.initialize_segment_list(source_ir, dest_ir)
+                self.initialize_dags(source_ir, dest_ir)
 
     # do special magic cool stuff (hashing/masking)
     # over 20 bits : 1 bit of label mask
@@ -95,50 +95,62 @@ class RoutingController(object):
         link_igp = self.topo.edges[(mn_src, mn_dst)]["igp_cost"]
         link_delay = self.topo.edges[(mn_src, mn_dst)]["delay"]
         link_hash = hash(str(link_igp) + str(link_delay)) % 32
-        bit_segment = (1 << 18) + (src << 12) + (dst << 5) + link_hash
-        return bit_segment
+        bit_segment = (1 << 18) + (link_hash << 14) + (src << 7) + dst
+        return bit_segment      
 
-
-    def initialize_segment_list(self, src, dst):
+    def initialize_dags(self, src, dst):
         (gofor_src, gofor_dst) = (self.mininet_to_gofor[src], self.mininet_to_gofor[dst])
-        seg_list_index = 0
         for delay in self.dags[(gofor_src, gofor_dst)].keys():
-            for seg_list in self.dags[(gofor_src, gofor_dst)][delay]["seg_lists"]:
-                print(seg_list)
-                segment_list_arg = [str(int(int(delay) * 2 * 1000 * 1.1))]
-                for segment in seg_list:
-                    if(segment[-1]["node_adj"] == "Adj"):
-                        (seg_src, seg_dst) = (segment[0], segment[1])
-                        adj_segment = self.get_link_id(seg_src, seg_dst)
-                        segment_list_arg.insert(0, str(adj_segment))
-                    else:
-                        segment_list_arg.insert(0, str(segment[1]))
+            dag = self.dags[(gofor_src, gofor_dst)][delay]["dag"]
+            self.traversal_and_initialize_dag(dag, src, dst, self.mininet_to_gofor[src])
 
-                self.controllers[src].table_add("FEC_tbl", f"sr_ingress_{len(seg_list)}_hop", [gofor_dst, str(seg_list_index)], segment_list_arg)
-                seg_list_index += 1
+    def traversal_and_initialize_dag(self, dag : get_dag.nx.MultiDiGraph, src, dst, current_segment, depth=1, current_sum_of_costs=0):
+        if(int(current_segment) == int(self.mininet_to_gofor[dst])):
+            return
 
-        if(self.topo.nodes[dst].get("host_prefix") is not None):
-            self.controllers[src].table_modify_match("ipv4_lpm", "set_sr_group", [self.topo.nodes[dst]["host_prefix"]], [gofor_dst, str(seg_list_index)])
+        path_differenciators = {} # meta-dags can have multiple paths traversing a single node, we need to differentiate them
+        out_edges = dag.out_edges([int(self.mininet_to_gofor[str(current_segment)])], keys=True, data=True)
+        for index, edge in enumerate(out_edges):
+            if(current_sum_of_costs + int(edge[-1]["weight"]) == edge[-1]["sum_weight"]):
+                (edge_src, edge_dst) = (edge[0], edge[1])
+
+                if(edge[-1][(edge_src, "sum_weight")] not in path_differenciators):
+                    path_differenciators[edge[-1][(edge_src, "sum_weight")]] = len(path_differenciators) + 1
+
+                segment = self.get_link_id(edge_src, edge_dst) if (edge[-1]["node_adj"] == "Adj") else edge_dst
+                if(int(edge_dst) != int(self.mininet_to_gofor[dst])):
+                    self.controllers[src].table_add("segment_hop_" + str(depth), 
+                                                    "set_segment_hop", 
+                                                    [str(edge_dst), str(index), str(self.mininet_to_gofor[str(current_segment)]), str(path_differenciators[edge_src, edge[-1]["sum_weight"]])], 
+                                                    [str(segment)])
+                else:
+                    rtt = (current_sum_of_costs + edge[-1]["weight"]) * 1000 * 2
+                    rtt_with_leniency = int(rtt * 1.1)
+                    self.controllers[src].table_add("segment_hop_" + str(depth), 
+                                                    "set_last_segment_hop", 
+                                                    [str(edge_dst), str(index), str(self.mininet_to_gofor[str(current_segment)]), str(path_differenciators[edge_src, edge[-1]["sum_weight"]])], 
+                                                    [str(segment), str(rtt_with_leniency)])
+                self.traversal_and_initialize_dag(dag, src, dst, edge_dst, depth + 1, current_sum_of_costs + edge[-1]["weight"])
 
     def add_sr_forward_entry(self, src, dest_segment, next_hop):
         if(src == self.topo.edges[(src, next_hop)]["node1"]):
             mac_addr = self.topo.edges[(src, next_hop)]["addr2"]
             port = self.topo.edges[(src, next_hop)]["port1"]
-            self.controllers[src]. table_add("sr_tbl", "sr_forward", [str(dest_segment)], [mac_addr, str(port)])
+            self.controllers[src].table_add("sr_tbl", "sr_forward", [str(dest_segment)], [mac_addr, str(port)])
         else:
             mac_addr = self.topo.edges[(src, next_hop)]["addr1"]
             port = self.topo.edges[(src, next_hop)]["port2"]
-            self.controllers[src]. table_add("sr_tbl", "sr_forward", [str(dest_segment)], [mac_addr, str(port)])
+            self.controllers[src].table_add("sr_tbl", "sr_forward", [str(dest_segment)], [mac_addr, str(port)])
 
     def add_sr_ecmp_forward_entry(self, src, dest_segment, next_hop, index):
         if(src == self.topo.edges[(src, next_hop)]["node1"]):
             mac_addr = self.topo.edges[(src, next_hop)]["addr2"]
             port = self.topo.edges[(src, next_hop)]["port1"]
-            self.controllers[src]. table_add("ecmp_group_to_nhop", "sr_forward", [str(dest_segment), str(index)], [mac_addr, str(port)])
+            self.controllers[src].table_add("ecmp_group_to_nhop", "sr_forward", [str(dest_segment), str(index)], [mac_addr, str(port)])
         else:
             mac_addr = self.topo.edges[(src, next_hop)]["addr1"]
             port = self.topo.edges[(src, next_hop)]["port2"]
-            self.controllers[src]. table_add("ecmp_group_to_nhop", "sr_forward", [str(dest_segment), str(index)], [mac_addr, str(port)])
+            self.controllers[src].table_add("ecmp_group_to_nhop", "sr_forward", [str(dest_segment), str(index)], [mac_addr, str(port)])
 
 
     ###

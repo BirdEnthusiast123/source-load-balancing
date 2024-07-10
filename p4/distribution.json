@@ -35,8 +35,6 @@
         ["random_t_0", 32, false],
         ["key_0", 20, false],
         ["metadata.sr_id", 20, false],
-        ["metadata.current_seg", 20, false],
-        ["metadata.sr_dest", 20, false],
         ["metadata.packet_hash", 14, false],
         ["metadata.meta_path_differentiator", 14, false],
         ["metadata.sr_group_id", 14, false],
@@ -416,7 +414,7 @@
       "name" : "MyIngress.sr_id_register",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
         "line" : 37,
         "column" : 25,
         "source_fragment" : "sr_id_register"
@@ -428,7 +426,7 @@
       "name" : "MyIngress.flowlet_to_id",
       "id" : 1,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
         "line" : 38,
         "column" : 28,
         "source_fragment" : "flowlet_to_id"
@@ -440,7 +438,7 @@
       "name" : "MyIngress.flowlet_time_stamp",
       "id" : 2,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
         "line" : 39,
         "column" : 28,
         "source_fragment" : "flowlet_time_stamp"
@@ -452,7 +450,7 @@
       "name" : "MyIngress.flowlet_timeout",
       "id" : 3,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
         "line" : 40,
         "column" : 28,
         "source_fragment" : "flowlet_timeout"
@@ -555,8 +553,8 @@
       "name" : "calc_2",
       "id" : 3,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-        "line" : 353,
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+        "line" : 372,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
@@ -636,32 +634,8 @@
       "primitives" : []
     },
     {
-      "name" : "NoAction",
-      "id" : 4,
-      "runtime_data" : [],
-      "primitives" : []
-    },
-    {
-      "name" : "NoAction",
-      "id" : 5,
-      "runtime_data" : [],
-      "primitives" : []
-    },
-    {
-      "name" : "NoAction",
-      "id" : 6,
-      "runtime_data" : [],
-      "primitives" : []
-    },
-    {
-      "name" : "NoAction",
-      "id" : 7,
-      "runtime_data" : [],
-      "primitives" : []
-    },
-    {
       "name" : "MyIngress.drop",
-      "id" : 8,
+      "id" : 4,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -673,7 +647,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 34,
             "column" : 8,
             "source_fragment" : "mark_to_drop(standard_metadata)"
@@ -683,7 +657,7 @@
     },
     {
       "name" : "MyIngress.read_flowlet_registers",
-      "id" : 9,
+      "id" : 5,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -699,7 +673,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 46,
             "column" : 14,
             "source_fragment" : "hdr.ipv4.srcAddr"
@@ -718,7 +692,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 46,
             "column" : 32,
             "source_fragment" : "hdr.ipv4.dstAddr"
@@ -737,7 +711,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 46,
             "column" : 50,
             "source_fragment" : "hdr.tcp.srcPort"
@@ -756,7 +730,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 46,
             "column" : 67,
             "source_fragment" : "hdr.tcp.dstPort"
@@ -775,7 +749,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 46,
             "column" : 83,
             "source_fragment" : "hdr.ipv4.protocol"
@@ -802,7 +776,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 44,
             "column" : 8,
             "source_fragment" : "hash(meta.flowlet_register_index, HashAlgorithm.crc16, ..."
@@ -834,7 +808,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 49,
             "column" : 57,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
@@ -857,7 +831,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 49,
             "column" : 8,
             "source_fragment" : "flowlet_time_stamp.read(meta.flowlet_last_stamp, (bit<32>)meta.flowlet_register_index)"
@@ -889,7 +863,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 51,
             "column" : 44,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
@@ -912,7 +886,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 51,
             "column" : 8,
             "source_fragment" : "flowlet_to_id.read(meta.flowlet_id, (bit<32>)meta.flowlet_register_index)"
@@ -944,7 +918,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 53,
             "column" : 33,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
@@ -967,7 +941,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 53,
             "column" : 8,
             "source_fragment" : "flowlet_time_stamp.write((bit<32>)meta.flowlet_register_index, standard_metadata.ingress_global_timestamp)"
@@ -999,7 +973,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 56,
             "column" : 57,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
@@ -1022,7 +996,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 56,
             "column" : 8,
             "source_fragment" : "flowlet_timeout.read(meta.flowlet_timeout_value, (bit<32>)meta.flowlet_register_index)"
@@ -1032,7 +1006,7 @@
     },
     {
       "name" : "MyIngress.update_flowlet_id",
-      "id" : 10,
+      "id" : 6,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -1052,7 +1026,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 61,
             "column" : 8,
             "source_fragment" : "random(random_t, (bit<32>)0, (bit<32>)65000)"
@@ -1094,7 +1068,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 62,
             "column" : 8,
             "source_fragment" : "meta.flowlet_id = (bit<16>)random_t"
@@ -1126,7 +1100,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 63,
             "column" : 28,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
@@ -1168,7 +1142,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 63,
             "column" : 75,
             "source_fragment" : "meta.flowlet_id"
@@ -1191,7 +1165,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 63,
             "column" : 8,
             "source_fragment" : "flowlet_to_id.write((bit<32>)meta.flowlet_register_index, (bit<16>)meta.flowlet_id)"
@@ -1201,7 +1175,7 @@
     },
     {
       "name" : "MyIngress.ipv4_forward",
-      "id" : 11,
+      "id" : 7,
       "runtime_data" : [
         {
           "name" : "dstAddr",
@@ -1226,7 +1200,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 68,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
@@ -1245,7 +1219,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 69,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
@@ -1264,7 +1238,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 71,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
@@ -1306,7 +1280,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 72,
             "column" : 8,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
@@ -1316,7 +1290,7 @@
     },
     {
       "name" : "MyIngress.ipv4_forward",
-      "id" : 12,
+      "id" : 8,
       "runtime_data" : [
         {
           "name" : "dstAddr",
@@ -1341,7 +1315,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 68,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
@@ -1360,7 +1334,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 69,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
@@ -1379,7 +1353,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 71,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
@@ -1421,7 +1395,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 72,
             "column" : 8,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
@@ -1431,7 +1405,7 @@
     },
     {
       "name" : "MyIngress.set_sr_group",
-      "id" : 13,
+      "id" : 9,
       "runtime_data" : [
         {
           "name" : "sr_group_id",
@@ -1456,7 +1430,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 80,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.srcAddr"
@@ -1475,7 +1449,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 81,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.dstAddr"
@@ -1494,7 +1468,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 82,
             "column" : 10,
             "source_fragment" : "hdr.tcp.srcPort"
@@ -1513,7 +1487,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 83,
             "column" : 10,
             "source_fragment" : "hdr.tcp.dstPort"
@@ -1532,7 +1506,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 84,
             "column" : 10,
             "source_fragment" : "hdr.ipv4.protocol"
@@ -1551,7 +1525,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 85,
             "column" : 10,
             "source_fragment" : "meta.flowlet_id"
@@ -1578,7 +1552,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 77,
             "column" : 8,
             "source_fragment" : "hash(meta.packet_hash, ..."
@@ -1597,29 +1571,79 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
             "line" : 88,
             "column" : 5,
             "source_fragment" : "meta.sr_group_id = sr_group_id"
           }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.sr_ingress_1_hop",
+      "id" : 10,
+      "runtime_data" : [
+        {
+          "name" : "label_1",
+          "bitwidth" : 20
         },
+        {
+          "name" : "flowlet_timeout_value",
+          "bitwidth" : 48
+        }
+      ],
+      "primitives" : [
         {
           "op" : "assign",
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
+              "value" : ["ethernet", "etherType"]
             },
             {
-              "type" : "field",
-              "value" : ["scalars", "metadata.sr_id"]
+              "type" : "hexstr",
+              "value" : "0x8847"
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 89,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
+            "line" : 10,
+            "column" : 24,
+            "source_fragment" : "0x8847; ..."
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 110,
             "column" : 8,
-            "source_fragment" : "meta.current_seg = meta.sr_id"
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 111,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
           }
         },
         {
@@ -1627,1148 +1651,1480 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "metadata.meta_path_differentiator"]
+              "value" : ["sr[0]", "label"]
             },
             {
-              "type" : "hexstr",
-              "value" : "0x0000"
+              "type" : "runtime_data",
+              "value" : 0
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 90,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 112,
             "column" : 8,
-            "source_fragment" : "meta.meta_path_differentiator = 0"
+            "source_fragment" : "hdr.sr[0].label = label_1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 113,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 114,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_16"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["scalars", "metadata.flowlet_register_index"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 116,
+            "column" : 30,
+            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.flowlet_timeout"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_16"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 116,
+            "column" : 8,
+            "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
           }
         }
       ]
     },
     {
-      "name" : "MyIngress.set_segment_hop",
+      "name" : "MyIngress.sr_ingress_2_hop",
+      "id" : 11,
+      "runtime_data" : [
+        {
+          "name" : "label_1",
+          "bitwidth" : 20
+        },
+        {
+          "name" : "label_2",
+          "bitwidth" : 20
+        },
+        {
+          "name" : "flowlet_timeout_value",
+          "bitwidth" : 48
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "etherType"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x8847"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
+            "line" : 10,
+            "column" : 24,
+            "source_fragment" : "0x8847; ..."
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 123,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 124,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "label"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 125,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].label = label_1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 126,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 127,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 1"
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 129,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 130,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "label"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 131,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].label = label_2"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 132,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 133,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 0"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_17"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["scalars", "metadata.flowlet_register_index"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 135,
+            "column" : 30,
+            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.flowlet_timeout"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_17"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 135,
+            "column" : 8,
+            "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.sr_ingress_3_hop",
+      "id" : 12,
+      "runtime_data" : [
+        {
+          "name" : "label_1",
+          "bitwidth" : 20
+        },
+        {
+          "name" : "label_2",
+          "bitwidth" : 20
+        },
+        {
+          "name" : "label_3",
+          "bitwidth" : 20
+        },
+        {
+          "name" : "flowlet_timeout_value",
+          "bitwidth" : 48
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "etherType"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x8847"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
+            "line" : 10,
+            "column" : 24,
+            "source_fragment" : "0x8847; ..."
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 142,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 143,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "label"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 144,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].label = label_1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 145,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 146,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 1"
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 148,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 149,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "label"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 150,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].label = label_2"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 151,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 152,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 0"
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 154,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 155,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "label"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 156,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].label = label_3"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 157,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 158,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 0"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_18"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["scalars", "metadata.flowlet_register_index"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 160,
+            "column" : 30,
+            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.flowlet_timeout"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_18"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 3
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 160,
+            "column" : 8,
+            "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.sr_ingress_4_hop",
+      "id" : 13,
+      "runtime_data" : [
+        {
+          "name" : "label_1",
+          "bitwidth" : 20
+        },
+        {
+          "name" : "label_2",
+          "bitwidth" : 20
+        },
+        {
+          "name" : "label_3",
+          "bitwidth" : 20
+        },
+        {
+          "name" : "label_4",
+          "bitwidth" : 20
+        },
+        {
+          "name" : "flowlet_timeout_value",
+          "bitwidth" : 48
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "etherType"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x8847"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
+            "line" : 10,
+            "column" : 24,
+            "source_fragment" : "0x8847; ..."
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 167,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 168,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "label"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 169,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].label = label_1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 170,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 171,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 1"
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 173,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 174,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "label"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 175,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].label = label_2"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 176,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 177,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 0"
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 179,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 180,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "label"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 181,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].label = label_3"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 182,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 183,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 0"
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 185,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 186,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "label"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 3
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 187,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].label = label_4"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 188,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["sr[0]", "s"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 189,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].s = 0"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_19"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["scalars", "metadata.flowlet_register_index"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 191,
+            "column" : 30,
+            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.flowlet_timeout"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_19"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 4
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 191,
+            "column" : 8,
+            "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.sr_ingress_5_hop",
       "id" : 14,
       "runtime_data" : [
         {
-          "name" : "label",
+          "name" : "label_1",
           "bitwidth" : 20
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "etherType"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x8847"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
-            "column" : 24,
-            "source_fragment" : "0x8847; ..."
-          }
         },
         {
-          "op" : "push",
-          "parameters" : [
-            {
-              "type" : "header_stack",
-              "value" : "sr"
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x1"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
-            "column" : 8,
-            "source_fragment" : "hdr.sr.push_front(1)"
-          }
-        },
-        {
-          "op" : "add_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "sr[0]"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].setValid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "label"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "ttl"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "+",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["ipv4", "ttl"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0xff"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "s"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].s = 0"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
-            "column" : 8,
-            "source_fragment" : "meta.current_seg = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "?",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "&",
-                      "left" : {
-                        "type" : "local",
-                        "value" : 0
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x00001f"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "local",
-                    "value" : 0
-                  },
-                  "cond" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "!=",
-                      "left" : {
-                        "type" : "expression",
-                        "value" : {
-                          "op" : "&",
-                          "left" : {
-                            "type" : "local",
-                            "value" : 0
-                          },
-                          "right" : {
-                            "type" : "hexstr",
-                            "value" : "0x040000"
-                          }
-                        }
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x000000"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_segment_hop",
-      "id" : 15,
-      "runtime_data" : [
-        {
-          "name" : "label",
+          "name" : "label_2",
           "bitwidth" : 20
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "etherType"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x8847"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
-            "column" : 24,
-            "source_fragment" : "0x8847; ..."
-          }
         },
         {
-          "op" : "push",
-          "parameters" : [
-            {
-              "type" : "header_stack",
-              "value" : "sr"
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x1"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
-            "column" : 8,
-            "source_fragment" : "hdr.sr.push_front(1)"
-          }
-        },
-        {
-          "op" : "add_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "sr[0]"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].setValid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "label"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "ttl"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "+",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["ipv4", "ttl"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0xff"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "s"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].s = 0"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
-            "column" : 8,
-            "source_fragment" : "meta.current_seg = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "?",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "&",
-                      "left" : {
-                        "type" : "local",
-                        "value" : 0
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x00001f"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "local",
-                    "value" : 0
-                  },
-                  "cond" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "!=",
-                      "left" : {
-                        "type" : "expression",
-                        "value" : {
-                          "op" : "&",
-                          "left" : {
-                            "type" : "local",
-                            "value" : 0
-                          },
-                          "right" : {
-                            "type" : "hexstr",
-                            "value" : "0x040000"
-                          }
-                        }
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x000000"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_segment_hop",
-      "id" : 16,
-      "runtime_data" : [
-        {
-          "name" : "label",
+          "name" : "label_3",
           "bitwidth" : 20
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "etherType"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x8847"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
-            "column" : 24,
-            "source_fragment" : "0x8847; ..."
-          }
         },
         {
-          "op" : "push",
-          "parameters" : [
-            {
-              "type" : "header_stack",
-              "value" : "sr"
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x1"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
-            "column" : 8,
-            "source_fragment" : "hdr.sr.push_front(1)"
-          }
-        },
-        {
-          "op" : "add_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "sr[0]"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].setValid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "label"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "ttl"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "+",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["ipv4", "ttl"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0xff"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "s"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].s = 0"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
-            "column" : 8,
-            "source_fragment" : "meta.current_seg = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "?",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "&",
-                      "left" : {
-                        "type" : "local",
-                        "value" : 0
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x00001f"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "local",
-                    "value" : 0
-                  },
-                  "cond" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "!=",
-                      "left" : {
-                        "type" : "expression",
-                        "value" : {
-                          "op" : "&",
-                          "left" : {
-                            "type" : "local",
-                            "value" : 0
-                          },
-                          "right" : {
-                            "type" : "hexstr",
-                            "value" : "0x040000"
-                          }
-                        }
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x000000"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_segment_hop",
-      "id" : 17,
-      "runtime_data" : [
-        {
-          "name" : "label",
+          "name" : "label_4",
           "bitwidth" : 20
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "etherType"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x8847"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
-            "column" : 24,
-            "source_fragment" : "0x8847; ..."
-          }
         },
         {
-          "op" : "push",
-          "parameters" : [
-            {
-              "type" : "header_stack",
-              "value" : "sr"
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x1"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
-            "column" : 8,
-            "source_fragment" : "hdr.sr.push_front(1)"
-          }
-        },
-        {
-          "op" : "add_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "sr[0]"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].setValid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "label"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "ttl"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "+",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["ipv4", "ttl"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0xff"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "s"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].s = 0"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
-            "column" : 8,
-            "source_fragment" : "meta.current_seg = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "?",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "&",
-                      "left" : {
-                        "type" : "local",
-                        "value" : 0
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x00001f"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "local",
-                    "value" : 0
-                  },
-                  "cond" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "!=",
-                      "left" : {
-                        "type" : "expression",
-                        "value" : {
-                          "op" : "&",
-                          "left" : {
-                            "type" : "local",
-                            "value" : 0
-                          },
-                          "right" : {
-                            "type" : "hexstr",
-                            "value" : "0x040000"
-                          }
-                        }
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x000000"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_segment_hop",
-      "id" : 18,
-      "runtime_data" : [
-        {
-          "name" : "label",
-          "bitwidth" : 20
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "etherType"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x8847"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
-            "column" : 24,
-            "source_fragment" : "0x8847; ..."
-          }
-        },
-        {
-          "op" : "push",
-          "parameters" : [
-            {
-              "type" : "header_stack",
-              "value" : "sr"
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x1"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
-            "column" : 8,
-            "source_fragment" : "hdr.sr.push_front(1)"
-          }
-        },
-        {
-          "op" : "add_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "sr[0]"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].setValid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "label"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "ttl"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "+",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["ipv4", "ttl"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0xff"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "s"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].s = 0"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
-            "column" : 8,
-            "source_fragment" : "meta.current_seg = label"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "?",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "&",
-                      "left" : {
-                        "type" : "local",
-                        "value" : 0
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x00001f"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "local",
-                    "value" : 0
-                  },
-                  "cond" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "!=",
-                      "left" : {
-                        "type" : "expression",
-                        "value" : {
-                          "op" : "&",
-                          "left" : {
-                            "type" : "local",
-                            "value" : 0
-                          },
-                          "right" : {
-                            "type" : "hexstr",
-                            "value" : "0x040000"
-                          }
-                        }
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x000000"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_last_segment_hop",
-      "id" : 19,
-      "runtime_data" : [
-        {
-          "name" : "label",
+          "name" : "label_5",
           "bitwidth" : 20
         },
         {
@@ -2809,8 +3165,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 197,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2824,8 +3180,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 198,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2843,10 +3199,10 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 199,
             "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
+            "source_fragment" : "hdr.sr[0].label = label_1"
           }
         },
         {
@@ -2885,8 +3241,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 200,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2904,10 +3260,44 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 201,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
+          }
+        },
+        {
+          "op" : "push",
+          "parameters" : [
+            {
+              "type" : "header_stack",
+              "value" : "sr"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 203,
+            "column" : 8,
+            "source_fragment" : "hdr.sr.push_front(1)"
+          }
+        },
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "sr[0]"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 204,
+            "column" : 8,
+            "source_fragment" : "hdr.sr[0].setValid()"
           }
         },
         {
@@ -2915,43 +3305,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_16"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "field",
-                    "value" : ["scalars", "metadata.flowlet_register_index"]
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xffffffff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
-            "column" : 30,
-            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
-          }
-        },
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.flowlet_timeout"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "tmp_16"]
+              "value" : ["sr[0]", "label"]
             },
             {
               "type" : "runtime_data",
@@ -2959,98 +3313,10 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 205,
             "column" : 8,
-            "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_last_segment_hop",
-      "id" : 20,
-      "runtime_data" : [
-        {
-          "name" : "label",
-          "bitwidth" : 20
-        },
-        {
-          "name" : "flowlet_timeout_value",
-          "bitwidth" : 48
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "etherType"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x8847"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
-            "column" : 24,
-            "source_fragment" : "0x8847; ..."
-          }
-        },
-        {
-          "op" : "push",
-          "parameters" : [
-            {
-              "type" : "header_stack",
-              "value" : "sr"
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x1"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
-            "column" : 8,
-            "source_fragment" : "hdr.sr.push_front(1)"
-          }
-        },
-        {
-          "op" : "add_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "sr[0]"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].setValid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["sr[0]", "label"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 0
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
-            "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
+            "source_fragment" : "hdr.sr[0].label = label_2"
           }
         },
         {
@@ -3089,8 +3355,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 206,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -3104,104 +3370,14 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0x01"
+              "value" : "0x00"
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 207,
             "column" : 8,
-            "source_fragment" : "hdr.sr[0].s = 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "tmp_17"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "field",
-                    "value" : ["scalars", "metadata.flowlet_register_index"]
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xffffffff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
-            "column" : 30,
-            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
-          }
-        },
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.flowlet_timeout"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "tmp_17"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 1
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
-            "column" : 8,
-            "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_last_segment_hop",
-      "id" : 21,
-      "runtime_data" : [
-        {
-          "name" : "label",
-          "bitwidth" : 20
-        },
-        {
-          "name" : "flowlet_timeout_value",
-          "bitwidth" : 48
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "etherType"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x8847"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
-            "column" : 24,
-            "source_fragment" : "0x8847; ..."
+            "source_fragment" : "hdr.sr[0].s = 0"
           }
         },
         {
@@ -3217,8 +3393,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 209,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -3232,8 +3408,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 210,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -3247,14 +3423,14 @@
             },
             {
               "type" : "runtime_data",
-              "value" : 0
+              "value" : 2
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 211,
             "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
+            "source_fragment" : "hdr.sr[0].label = label_3"
           }
         },
         {
@@ -3293,8 +3469,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 212,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -3308,104 +3484,14 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0x01"
+              "value" : "0x00"
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 213,
             "column" : 8,
-            "source_fragment" : "hdr.sr[0].s = 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "tmp_18"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "field",
-                    "value" : ["scalars", "metadata.flowlet_register_index"]
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xffffffff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
-            "column" : 30,
-            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
-          }
-        },
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.flowlet_timeout"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "tmp_18"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 1
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
-            "column" : 8,
-            "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_last_segment_hop",
-      "id" : 22,
-      "runtime_data" : [
-        {
-          "name" : "label",
-          "bitwidth" : 20
-        },
-        {
-          "name" : "flowlet_timeout_value",
-          "bitwidth" : 48
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "etherType"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x8847"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
-            "column" : 24,
-            "source_fragment" : "0x8847; ..."
+            "source_fragment" : "hdr.sr[0].s = 0"
           }
         },
         {
@@ -3421,8 +3507,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 215,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -3436,8 +3522,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 216,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -3451,14 +3537,14 @@
             },
             {
               "type" : "runtime_data",
-              "value" : 0
+              "value" : 3
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 217,
             "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
+            "source_fragment" : "hdr.sr[0].label = label_4"
           }
         },
         {
@@ -3497,8 +3583,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 218,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -3512,104 +3598,14 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0x01"
+              "value" : "0x00"
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 219,
             "column" : 8,
-            "source_fragment" : "hdr.sr[0].s = 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "tmp_19"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "field",
-                    "value" : ["scalars", "metadata.flowlet_register_index"]
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xffffffff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
-            "column" : 30,
-            "source_fragment" : "(bit<32>)meta.flowlet_register_index"
-          }
-        },
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.flowlet_timeout"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "tmp_19"]
-            },
-            {
-              "type" : "runtime_data",
-              "value" : 1
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
-            "column" : 8,
-            "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.set_last_segment_hop",
-      "id" : 23,
-      "runtime_data" : [
-        {
-          "name" : "label",
-          "bitwidth" : 20
-        },
-        {
-          "name" : "flowlet_timeout_value",
-          "bitwidth" : 48
-        }
-      ],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "etherType"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x8847"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
-            "column" : 24,
-            "source_fragment" : "0x8847; ..."
+            "source_fragment" : "hdr.sr[0].s = 0"
           }
         },
         {
@@ -3625,8 +3621,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 221,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -3640,8 +3636,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 222,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -3655,14 +3651,14 @@
             },
             {
               "type" : "runtime_data",
-              "value" : 0
+              "value" : 4
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 223,
             "column" : 8,
-            "source_fragment" : "hdr.sr[0].label = label"
+            "source_fragment" : "hdr.sr[0].label = label_5"
           }
         },
         {
@@ -3701,8 +3697,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 224,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -3716,14 +3712,14 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0x01"
+              "value" : "0x00"
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 225,
             "column" : 8,
-            "source_fragment" : "hdr.sr[0].s = 1"
+            "source_fragment" : "hdr.sr[0].s = 0"
           }
         },
         {
@@ -3752,8 +3748,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 227,
             "column" : 30,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
           }
@@ -3771,12 +3767,12 @@
             },
             {
               "type" : "runtime_data",
-              "value" : 1
+              "value" : 5
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 227,
             "column" : 8,
             "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
           }
@@ -3785,7 +3781,7 @@
     },
     {
       "name" : "MyIngress.sr_forward",
-      "id" : 24,
+      "id" : 15,
       "runtime_data" : [
         {
           "name" : "dstAddr",
@@ -3810,8 +3806,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 216,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 250,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
           }
@@ -3829,8 +3825,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 217,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 251,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
           }
@@ -3848,8 +3844,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 219,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 253,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
           }
@@ -3890,8 +3886,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 220,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 254,
             "column" : 8,
             "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
           }
@@ -3900,7 +3896,7 @@
     },
     {
       "name" : "MyIngress.sr_forward",
-      "id" : 25,
+      "id" : 16,
       "runtime_data" : [
         {
           "name" : "dstAddr",
@@ -3925,8 +3921,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 216,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 250,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
           }
@@ -3944,8 +3940,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 217,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 251,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
           }
@@ -3963,8 +3959,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 219,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 253,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
           }
@@ -4005,8 +4001,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 220,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 254,
             "column" : 8,
             "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
           }
@@ -4015,7 +4011,7 @@
     },
     {
       "name" : "MyIngress.set_ecmp_group",
-      "id" : 26,
+      "id" : 17,
       "runtime_data" : [
         {
           "name" : "ecmp_group_id",
@@ -4040,8 +4036,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 227,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 261,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.srcAddr"
           }
@@ -4059,8 +4055,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 228,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 262,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.dstAddr"
           }
@@ -4078,8 +4074,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 229,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 263,
             "column" : 10,
             "source_fragment" : "hdr.tcp.srcPort"
           }
@@ -4097,8 +4093,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 230,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 264,
             "column" : 10,
             "source_fragment" : "hdr.tcp.dstPort"
           }
@@ -4116,8 +4112,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 231,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 265,
             "column" : 10,
             "source_fragment" : "hdr.ipv4.protocol"
           }
@@ -4135,8 +4131,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 232,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 266,
             "column" : 10,
             "source_fragment" : "meta.flowlet_id"
           }
@@ -4162,8 +4158,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 224,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 258,
             "column" : 8,
             "source_fragment" : "hash(meta.packet_hash, ..."
           }
@@ -4181,8 +4177,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 235,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 269,
             "column" : 5,
             "source_fragment" : "meta.ecmp_group_id = ecmp_group_id"
           }
@@ -4190,8 +4186,8 @@
       ]
     },
     {
-      "name" : "random_walk272",
-      "id" : 27,
+      "name" : "distribution306",
+      "id" : 18,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4216,8 +4212,8 @@
       ]
     },
     {
-      "name" : "random_walk274",
-      "id" : 28,
+      "name" : "distribution308",
+      "id" : 19,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4233,8 +4229,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 274,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 308,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           }
@@ -4242,8 +4238,8 @@
       ]
     },
     {
-      "name" : "random_walk267",
-      "id" : 29,
+      "name" : "distribution301",
+      "id" : 20,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4263,8 +4259,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 267,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 301,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           }
@@ -4272,8 +4268,8 @@
       ]
     },
     {
-      "name" : "random_walk282",
-      "id" : 30,
+      "name" : "distribution316",
+      "id" : 21,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4312,8 +4308,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 282,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 316,
             "column" : 16,
             "source_fragment" : "meta.flowlet_time_diff = standard_metadata.ingress_global_timestamp - meta.flowlet_last_stamp"
           }
@@ -4321,8 +4317,8 @@
       ]
     },
     {
-      "name" : "random_walk240",
-      "id" : 31,
+      "name" : "distribution274",
+      "id" : 22,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4338,8 +4334,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 240,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 274,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           }
@@ -4347,8 +4343,8 @@
       ]
     },
     {
-      "name" : "random_walk324",
-      "id" : 32,
+      "name" : "distribution343",
+      "id" : 23,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4373,8 +4369,8 @@
       ]
     },
     {
-      "name" : "random_walk326",
-      "id" : 33,
+      "name" : "distribution345",
+      "id" : 24,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4390,8 +4386,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 326,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 345,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           }
@@ -4404,7 +4400,7 @@
       "name" : "ingress",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
         "line" : 29,
         "column" : 8,
         "source_fragment" : "MyIngress"
@@ -4412,11 +4408,11 @@
       "init_table" : "node_2",
       "tables" : [
         {
-          "name" : "tbl_random_walk267",
+          "name" : "tbl_distribution301",
           "id" : 0,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 267,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 301,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           },
@@ -4427,25 +4423,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [29],
-          "actions" : ["random_walk267"],
+          "action_ids" : [20],
+          "actions" : ["distribution301"],
           "base_default_next" : "node_4",
           "next_tables" : {
-            "random_walk267" : "node_4"
+            "distribution301" : "node_4"
           },
           "default_entry" : {
-            "action_id" : 29,
+            "action_id" : 20,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_random_walk272",
+          "name" : "tbl_distribution306",
           "id" : 1,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 272,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 306,
             "column" : 43,
             "source_fragment" : "="
           },
@@ -4456,25 +4452,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [27],
-          "actions" : ["random_walk272"],
-          "base_default_next" : "tbl_random_walk274",
+          "action_ids" : [18],
+          "actions" : ["distribution306"],
+          "base_default_next" : "tbl_distribution308",
           "next_tables" : {
-            "random_walk272" : "tbl_random_walk274"
+            "distribution306" : "tbl_distribution308"
           },
           "default_entry" : {
-            "action_id" : 27,
+            "action_id" : 18,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_random_walk274",
+          "name" : "tbl_distribution308",
           "id" : 2,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 274,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 308,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           },
@@ -4485,14 +4481,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [28],
-          "actions" : ["random_walk274"],
+          "action_ids" : [19],
+          "actions" : ["distribution308"],
           "base_default_next" : "node_8",
           "next_tables" : {
-            "random_walk274" : "node_8"
+            "distribution308" : "node_8"
           },
           "default_entry" : {
-            "action_id" : 28,
+            "action_id" : 19,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4502,8 +4498,8 @@
           "name" : "tbl_read_flowlet_registers",
           "id" : 3,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 281,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 315,
             "column" : 16,
             "source_fragment" : "read_flowlet_registers()"
           },
@@ -4514,25 +4510,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [9],
+          "action_ids" : [5],
           "actions" : ["MyIngress.read_flowlet_registers"],
-          "base_default_next" : "tbl_random_walk282",
+          "base_default_next" : "tbl_distribution316",
           "next_tables" : {
-            "MyIngress.read_flowlet_registers" : "tbl_random_walk282"
+            "MyIngress.read_flowlet_registers" : "tbl_distribution316"
           },
           "default_entry" : {
-            "action_id" : 9,
+            "action_id" : 5,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_random_walk282",
+          "name" : "tbl_distribution316",
           "id" : 4,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 282,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 316,
             "column" : 39,
             "source_fragment" : "="
           },
@@ -4543,14 +4539,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [30],
-          "actions" : ["random_walk282"],
+          "action_ids" : [21],
+          "actions" : ["distribution316"],
           "base_default_next" : "node_11",
           "next_tables" : {
-            "random_walk282" : "node_11"
+            "distribution316" : "node_11"
           },
           "default_entry" : {
-            "action_id" : 30,
+            "action_id" : 21,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4560,8 +4556,8 @@
           "name" : "tbl_update_flowlet_id",
           "id" : 5,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 286,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 320,
             "column" : 20,
             "source_fragment" : "update_flowlet_id()"
           },
@@ -4572,14 +4568,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [10],
+          "action_ids" : [6],
           "actions" : ["MyIngress.update_flowlet_id"],
           "base_default_next" : "MyIngress.ipv4_lpm",
           "next_tables" : {
             "MyIngress.update_flowlet_id" : "MyIngress.ipv4_lpm"
           },
           "default_entry" : {
-            "action_id" : 10,
+            "action_id" : 6,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4589,8 +4585,8 @@
           "name" : "MyIngress.ipv4_lpm",
           "id" : 6,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 93,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 91,
             "column" : 10,
             "source_fragment" : "ipv4_lpm"
           },
@@ -4608,13 +4604,13 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [11, 13, 0],
+          "action_ids" : [7, 9, 0],
           "actions" : ["MyIngress.ipv4_forward", "MyIngress.set_sr_group", "NoAction"],
-          "base_default_next" : "node_19",
+          "base_default_next" : "node_15",
           "next_tables" : {
-            "MyIngress.set_sr_group" : "MyIngress.segment_hop_1",
-            "MyIngress.ipv4_forward" : "node_19",
-            "NoAction" : "node_19"
+            "MyIngress.set_sr_group" : "MyIngress.FEC_tbl",
+            "MyIngress.ipv4_forward" : "node_15",
+            "NoAction" : "node_15"
           },
           "default_entry" : {
             "action_id" : 0,
@@ -4624,13 +4620,13 @@
           }
         },
         {
-          "name" : "MyIngress.segment_hop_1",
+          "name" : "MyIngress.FEC_tbl",
           "id" : 7,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 133,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 230,
             "column" : 10,
-            "source_fragment" : "segment_hop_1"
+            "source_fragment" : "FEC_tbl"
           },
           "key" : [
             {
@@ -4644,18 +4640,6 @@
               "name" : "meta.packet_hash",
               "target" : ["scalars", "metadata.packet_hash"],
               "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.current_seg",
-              "target" : ["scalars", "metadata.current_seg"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.meta_path_differentiator",
-              "target" : ["scalars", "metadata.meta_path_differentiator"],
-              "mask" : null
             }
           ],
           "match_type" : "exact",
@@ -4664,13 +4648,16 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [14, 19, 1],
-          "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
+          "action_ids" : [10, 11, 12, 13, 14, 1],
+          "actions" : ["MyIngress.sr_ingress_1_hop", "MyIngress.sr_ingress_2_hop", "MyIngress.sr_ingress_3_hop", "MyIngress.sr_ingress_4_hop", "MyIngress.sr_ingress_5_hop", "NoAction"],
+          "base_default_next" : "node_15",
           "next_tables" : {
-            "MyIngress.set_segment_hop" : "MyIngress.segment_hop_2",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
+            "MyIngress.sr_ingress_1_hop" : "node_15",
+            "MyIngress.sr_ingress_2_hop" : "node_15",
+            "MyIngress.sr_ingress_3_hop" : "node_15",
+            "MyIngress.sr_ingress_4_hop" : "node_15",
+            "MyIngress.sr_ingress_5_hop" : "node_15",
+            "NoAction" : "node_15"
           },
           "default_entry" : {
             "action_id" : 1,
@@ -4680,235 +4667,11 @@
           }
         },
         {
-          "name" : "MyIngress.segment_hop_2",
+          "name" : "tbl_distribution274",
           "id" : 8,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 149,
-            "column" : 10,
-            "source_fragment" : "segment_hop_2"
-          },
-          "key" : [
-            {
-              "match_type" : "exact",
-              "name" : "meta.sr_group_id",
-              "target" : ["scalars", "metadata.sr_group_id"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.packet_hash",
-              "target" : ["scalars", "metadata.packet_hash"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.current_seg",
-              "target" : ["scalars", "metadata.current_seg"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.meta_path_differentiator",
-              "target" : ["scalars", "metadata.meta_path_differentiator"],
-              "mask" : null
-            }
-          ],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 256,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [15, 20, 2],
-          "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
-          "next_tables" : {
-            "MyIngress.set_segment_hop" : "MyIngress.segment_hop_3",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
-          },
-          "default_entry" : {
-            "action_id" : 2,
-            "action_const" : false,
-            "action_data" : [],
-            "action_entry_const" : false
-          }
-        },
-        {
-          "name" : "MyIngress.segment_hop_3",
-          "id" : 9,
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 165,
-            "column" : 10,
-            "source_fragment" : "segment_hop_3"
-          },
-          "key" : [
-            {
-              "match_type" : "exact",
-              "name" : "meta.sr_group_id",
-              "target" : ["scalars", "metadata.sr_group_id"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.packet_hash",
-              "target" : ["scalars", "metadata.packet_hash"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.current_seg",
-              "target" : ["scalars", "metadata.current_seg"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.meta_path_differentiator",
-              "target" : ["scalars", "metadata.meta_path_differentiator"],
-              "mask" : null
-            }
-          ],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 256,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [16, 21, 3],
-          "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
-          "next_tables" : {
-            "MyIngress.set_segment_hop" : "MyIngress.segment_hop_4",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
-          },
-          "default_entry" : {
-            "action_id" : 3,
-            "action_const" : false,
-            "action_data" : [],
-            "action_entry_const" : false
-          }
-        },
-        {
-          "name" : "MyIngress.segment_hop_4",
-          "id" : 10,
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 181,
-            "column" : 10,
-            "source_fragment" : "segment_hop_4"
-          },
-          "key" : [
-            {
-              "match_type" : "exact",
-              "name" : "meta.sr_group_id",
-              "target" : ["scalars", "metadata.sr_group_id"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.packet_hash",
-              "target" : ["scalars", "metadata.packet_hash"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.current_seg",
-              "target" : ["scalars", "metadata.current_seg"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.meta_path_differentiator",
-              "target" : ["scalars", "metadata.meta_path_differentiator"],
-              "mask" : null
-            }
-          ],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 256,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [17, 22, 4],
-          "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
-          "next_tables" : {
-            "MyIngress.set_segment_hop" : "MyIngress.segment_hop_5",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
-          },
-          "default_entry" : {
-            "action_id" : 4,
-            "action_const" : false,
-            "action_data" : [],
-            "action_entry_const" : false
-          }
-        },
-        {
-          "name" : "MyIngress.segment_hop_5",
-          "id" : 11,
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 197,
-            "column" : 10,
-            "source_fragment" : "segment_hop_5"
-          },
-          "key" : [
-            {
-              "match_type" : "exact",
-              "name" : "meta.sr_group_id",
-              "target" : ["scalars", "metadata.sr_group_id"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.packet_hash",
-              "target" : ["scalars", "metadata.packet_hash"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.current_seg",
-              "target" : ["scalars", "metadata.current_seg"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
-              "name" : "meta.meta_path_differentiator",
-              "target" : ["scalars", "metadata.meta_path_differentiator"],
-              "mask" : null
-            }
-          ],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 256,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [18, 23, 5],
-          "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
-          "next_tables" : {
-            "MyIngress.set_segment_hop" : "node_19",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
-          },
-          "default_entry" : {
-            "action_id" : 5,
-            "action_const" : false,
-            "action_data" : [],
-            "action_entry_const" : false
-          }
-        },
-        {
-          "name" : "tbl_random_walk240",
-          "id" : 12,
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 240,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 274,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           },
@@ -4919,14 +4682,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [31],
-          "actions" : ["random_walk240"],
+          "action_ids" : [22],
+          "actions" : ["distribution274"],
           "base_default_next" : "MyIngress.sr_tbl",
           "next_tables" : {
-            "random_walk240" : "MyIngress.sr_tbl"
+            "distribution274" : "MyIngress.sr_tbl"
           },
           "default_entry" : {
-            "action_id" : 31,
+            "action_id" : 22,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4934,10 +4697,10 @@
         },
         {
           "name" : "MyIngress.sr_tbl",
-          "id" : 13,
+          "id" : 9,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 238,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 272,
             "column" : 10,
             "source_fragment" : "sr_tbl"
           },
@@ -4955,17 +4718,17 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [24, 26, 12, 6],
+          "action_ids" : [15, 17, 8, 2],
           "actions" : ["MyIngress.sr_forward", "MyIngress.set_ecmp_group", "MyIngress.ipv4_forward", "NoAction"],
-          "base_default_next" : "node_23",
+          "base_default_next" : "node_19",
           "next_tables" : {
             "MyIngress.set_ecmp_group" : "MyIngress.ecmp_group_to_nhop",
-            "MyIngress.sr_forward" : "node_23",
-            "MyIngress.ipv4_forward" : "node_23",
-            "NoAction" : "node_23"
+            "MyIngress.sr_forward" : "node_19",
+            "MyIngress.ipv4_forward" : "node_19",
+            "NoAction" : "node_19"
           },
           "default_entry" : {
-            "action_id" : 6,
+            "action_id" : 2,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
@@ -4973,10 +4736,10 @@
         },
         {
           "name" : "MyIngress.ecmp_group_to_nhop",
-          "id" : 14,
+          "id" : 10,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 252,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 286,
             "column" : 10,
             "source_fragment" : "ecmp_group_to_nhop"
           },
@@ -5000,27 +4763,27 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [8, 25, 7],
+          "action_ids" : [4, 16, 3],
           "actions" : ["MyIngress.drop", "MyIngress.sr_forward", "NoAction"],
-          "base_default_next" : "node_23",
+          "base_default_next" : "node_19",
           "next_tables" : {
-            "MyIngress.drop" : "node_23",
-            "MyIngress.sr_forward" : "node_23",
-            "NoAction" : "node_23"
+            "MyIngress.drop" : "node_19",
+            "MyIngress.sr_forward" : "node_19",
+            "NoAction" : "node_19"
           },
           "default_entry" : {
-            "action_id" : 7,
+            "action_id" : 3,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
           }
         },
         {
-          "name" : "tbl_random_walk324",
-          "id" : 15,
+          "name" : "tbl_distribution343",
+          "id" : 11,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 324,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 343,
             "column" : 43,
             "source_fragment" : "="
           },
@@ -5031,25 +4794,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [32],
-          "actions" : ["random_walk324"],
-          "base_default_next" : "tbl_random_walk326",
+          "action_ids" : [23],
+          "actions" : ["distribution343"],
+          "base_default_next" : "tbl_distribution345",
           "next_tables" : {
-            "random_walk324" : "tbl_random_walk326"
+            "distribution343" : "tbl_distribution345"
           },
           "default_entry" : {
-            "action_id" : 32,
+            "action_id" : 23,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_random_walk326",
-          "id" : 16,
+          "name" : "tbl_distribution345",
+          "id" : 12,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 326,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 345,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           },
@@ -5060,14 +4823,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [33],
-          "actions" : ["random_walk326"],
+          "action_ids" : [24],
+          "actions" : ["distribution345"],
           "base_default_next" : null,
           "next_tables" : {
-            "random_walk326" : null
+            "distribution345" : null
           },
           "default_entry" : {
-            "action_id" : 33,
+            "action_id" : 24,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -5080,8 +4843,8 @@
           "name" : "node_2",
           "id" : 0,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 266,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 300,
             "column" : 11,
             "source_fragment" : "hdr.sr[0].isValid()"
           },
@@ -5096,15 +4859,15 @@
               }
             }
           },
-          "true_next" : "tbl_random_walk267",
+          "true_next" : "tbl_distribution301",
           "false_next" : "node_8"
         },
         {
           "name" : "node_4",
           "id" : 1,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 268,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 302,
             "column" : 15,
             "source_fragment" : "hdr.sr[0].label == meta.sr_id"
           },
@@ -5129,8 +4892,8 @@
           "name" : "node_5",
           "id" : 2,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 270,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 304,
             "column" : 19,
             "source_fragment" : "hdr.sr[0].s == 1"
           },
@@ -5148,15 +4911,15 @@
               }
             }
           },
-          "true_next" : "tbl_random_walk272",
-          "false_next" : "tbl_random_walk274"
+          "true_next" : "tbl_distribution306",
+          "false_next" : "tbl_distribution308"
         },
         {
           "name" : "node_8",
           "id" : 3,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 279,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 313,
             "column" : 12,
             "source_fragment" : "hdr.ipv4.isValid() && !(hdr.sr[0].isValid())"
           },
@@ -5196,14 +4959,14 @@
             }
           },
           "true_next" : "tbl_read_flowlet_registers",
-          "false_next" : "node_19"
+          "false_next" : "node_15"
         },
         {
           "name" : "node_11",
           "id" : 4,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 285,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 319,
             "column" : 20,
             "source_fragment" : "meta.flowlet_time_diff > meta.flowlet_timeout_value"
           },
@@ -5245,11 +5008,11 @@
           "false_next" : "MyIngress.ipv4_lpm"
         },
         {
-          "name" : "node_19",
+          "name" : "node_15",
           "id" : 5,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 312,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 331,
             "column" : 11,
             "source_fragment" : "hdr.sr[0].isValid()"
           },
@@ -5265,14 +5028,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_random_walk240"
+          "true_next" : "tbl_distribution274"
         },
         {
-          "name" : "node_23",
+          "name" : "node_19",
           "id" : 6,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 320,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 339,
             "column" : 15,
             "source_fragment" : "(hdr.ethernet.etherType == TYPE_SR) && (hdr.sr[0].label & 1<<18) != 0"
           },
@@ -5321,14 +5084,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "node_24"
+          "true_next" : "node_20"
         },
         {
-          "name" : "node_24",
+          "name" : "node_20",
           "id" : 7,
           "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 322,
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+            "line" : 341,
             "column" : 19,
             "source_fragment" : "hdr.sr[0].s == 1"
           },
@@ -5346,8 +5109,8 @@
               }
             }
           },
-          "true_next" : "tbl_random_walk324",
-          "false_next" : "tbl_random_walk326"
+          "true_next" : "tbl_distribution343",
+          "false_next" : "tbl_distribution345"
         }
       ]
     },
@@ -5355,8 +5118,8 @@
       "name" : "egress",
       "id" : 1,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-        "line" : 336,
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+        "line" : 355,
         "column" : 8,
         "source_fragment" : "MyEgress"
       },
@@ -5371,8 +5134,8 @@
       "name" : "cksum",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-        "line" : 353,
+        "filename" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4",
+        "line" : 372,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
@@ -5434,7 +5197,7 @@
       ["standard_metadata", "priority"]
     ]
   ],
-  "program" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4i",
+  "program" : "/home/p4/p4-utils/stage-2024/p4/distribution.p4i",
   "__meta__" : {
     "version" : [2, 23],
     "compiler" : "https://github.com/p4lang/p4c"
