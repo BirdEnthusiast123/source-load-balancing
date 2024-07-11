@@ -59,7 +59,7 @@ class RoutingController(object):
             self.controllers[p4switch].register_write("sr_id_register", 0, self.mininet_to_gofor[p4switch])
 
     def initialize_tables(self):
-        # Grouping of flows (unused as of now)
+        # Grouping of flows (unused as of now, only serves as a destination marker not as a real discriminator of flow according to their needs)
         for ir in self.ingress_routers:
             # Init forwarding to hosts directly connected to router
             host_prefix = self.topo.nodes[ir]["host_prefix"]
@@ -102,35 +102,49 @@ class RoutingController(object):
         (gofor_src, gofor_dst) = (self.mininet_to_gofor[src], self.mininet_to_gofor[dst])
         for delay in self.dags[(gofor_src, gofor_dst)].keys():
             dag = self.dags[(gofor_src, gofor_dst)][delay]["dag"]
-            self.traversal_and_initialize_dag(dag, src, dst, self.mininet_to_gofor[src])
+            path_differenciators = self.init_path_differenciators(dag)
+            self.traversal_and_initialize_dag(dag, src, dst, self.mininet_to_gofor[src], path_differenciators)
 
-    def traversal_and_initialize_dag(self, dag : get_dag.nx.MultiDiGraph, src, dst, current_segment, depth=1, current_sum_of_costs=0):
+    # meta-dags can have multiple paths traversing a single node, we need to differentiate them
+    def init_path_differenciators(self, dag: get_dag.nx.MultiDiGraph):
+        path_differenciators = {}
+        for node in dag.nodes():
+            for in_edge in dag.in_edges(node, data=True):
+                if(path_differenciators.get(node) is None):
+                    path_differenciators[node] = {}
+
+                if (node in path_differenciators and in_edge[-1]["sum_weight"] not in path_differenciators[node]):
+                    path_differenciators[node][in_edge[-1]["sum_weight"]] = len(path_differenciators[node])
+
+        return path_differenciators
+
+    def set_path_differenciators(self, path_differenciators, edge):
+        pass
+
+
+    def traversal_and_initialize_dag(self, dag : get_dag.nx.MultiDiGraph, src, dst, current_segment, path_differenciators, depth=1, current_sum_of_costs=0):
         if(int(current_segment) == int(self.mininet_to_gofor[dst])):
             return
 
-        path_differenciators = {} # meta-dags can have multiple paths traversing a single node, we need to differentiate them
         out_edges = dag.out_edges([int(self.mininet_to_gofor[str(current_segment)])], keys=True, data=True)
         for index, edge in enumerate(out_edges):
             if(current_sum_of_costs + int(edge[-1]["weight"]) == edge[-1]["sum_weight"]):
                 (edge_src, edge_dst) = (edge[0], edge[1])
 
-                if(edge[-1][(edge_src, "sum_weight")] not in path_differenciators):
-                    path_differenciators[edge[-1][(edge_src, "sum_weight")]] = len(path_differenciators) + 1
-
                 segment = self.get_link_id(edge_src, edge_dst) if (edge[-1]["node_adj"] == "Adj") else edge_dst
                 if(int(edge_dst) != int(self.mininet_to_gofor[dst])):
                     self.controllers[src].table_add("segment_hop_" + str(depth), 
                                                     "set_segment_hop", 
-                                                    [str(edge_dst), str(index), str(self.mininet_to_gofor[str(current_segment)]), str(path_differenciators[edge_src, edge[-1]["sum_weight"]])], 
+                                                    [str(edge_dst), str(index), str(self.mininet_to_gofor[str(current_segment)]), str(path_differenciators[edge_dst][edge[-1]["sum_weight"]])], 
                                                     [str(segment)])
                 else:
-                    rtt = (current_sum_of_costs + edge[-1]["weight"]) * 1000 * 2
-                    rtt_with_leniency = int(rtt * 1.1)
+                    rtt_in_ms = (current_sum_of_costs + edge[-1]["weight"]) * 1000 * 2
+                    rtt_with_leniency = int(rtt_in_ms * 1.1)
                     self.controllers[src].table_add("segment_hop_" + str(depth), 
                                                     "set_last_segment_hop", 
-                                                    [str(edge_dst), str(index), str(self.mininet_to_gofor[str(current_segment)]), str(path_differenciators[edge_src, edge[-1]["sum_weight"]])], 
+                                                    [str(edge_dst), str(index), str(self.mininet_to_gofor[str(current_segment)]), str(path_differenciators[edge_dst][edge[-1]["sum_weight"]])], 
                                                     [str(segment), str(rtt_with_leniency)])
-                self.traversal_and_initialize_dag(dag, src, dst, edge_dst, depth + 1, current_sum_of_costs + edge[-1]["weight"])
+                self.traversal_and_initialize_dag(dag, src, dst, edge_dst, path_differenciators, depth + 1, current_sum_of_costs + edge[-1]["weight"])
 
     def add_sr_forward_entry(self, src, dest_segment, next_hop):
         if(src == self.topo.edges[(src, next_hop)]["node1"]):

@@ -95,7 +95,7 @@ class RoutingController(object):
         link_igp = self.topo.edges[(mn_src, mn_dst)]["igp_cost"]
         link_delay = self.topo.edges[(mn_src, mn_dst)]["delay"]
         link_hash = hash(str(link_igp) + str(link_delay)) % 32
-        bit_segment = (1 << 18) + (link_hash << 12) + (src << 5) + dst
+        bit_segment = (1 << 18) + (link_hash << 14) + (src << 7) + dst
         return bit_segment
 
 

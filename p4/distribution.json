@@ -35,6 +35,8 @@
         ["random_t_0", 32, false],
         ["key_0", 20, false],
         ["metadata.sr_id", 20, false],
+        ["metadata.current_seg", 20, false],
+        ["metadata.sr_dest", 20, false],
         ["metadata.packet_hash", 14, false],
         ["metadata.meta_path_differentiator", 14, false],
         ["metadata.sr_group_id", 14, false],
@@ -1607,7 +1609,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
+            "line" : 11,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
           }
@@ -1815,7 +1817,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
+            "line" : 11,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
           }
@@ -2141,7 +2143,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
+            "line" : 11,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
           }
@@ -2585,7 +2587,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
+            "line" : 11,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
           }
@@ -3147,7 +3149,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 10,
+            "line" : 11,
             "column" : 24,
             "source_fragment" : "0x8847; ..."
           }
@@ -4204,7 +4206,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 9,
+            "line" : 10,
             "column" : 26,
             "source_fragment" : "0x800; ..."
           }
@@ -4361,7 +4363,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/include/headers.p4",
-            "line" : 9,
+            "line" : 10,
             "column" : 26,
             "source_fragment" : "0x800; ..."
           }
