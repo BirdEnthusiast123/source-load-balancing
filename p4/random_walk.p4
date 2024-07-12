@@ -86,7 +86,6 @@ control MyIngress(inout headers hdr,
 	    num_shops);
 
 	    meta.sr_group_id = sr_group_id;
-        meta.current_seg = meta.sr_id;
         meta.meta_path_differentiator = 0;
     }
 
@@ -103,7 +102,7 @@ control MyIngress(inout headers hdr,
         default_action = NoAction();
     }
 
-    action set_segment_hop(label_t label){
+    action set_segment_hop(label_t label, bit<14> meta_path_differentiator, bit<14> current_nb_of_shops){
         hdr.ethernet.etherType = TYPE_SR;
 
         hdr.sr.push_front(1);
@@ -116,6 +115,19 @@ control MyIngress(inout headers hdr,
         if(meta.current_seg & SR_ADJ_SEGMENT_MASK != 0){
             meta.current_seg = meta.current_seg & 31;
         }
+        meta.meta_path_differentiator = meta_path_differentiator;
+
+        hash(meta.packet_hash,
+	    HashAlgorithm.crc16,
+	    (bit<1>)0,
+	    { hdr.ipv4.srcAddr,
+	      hdr.ipv4.dstAddr,
+          hdr.tcp.srcPort,
+          hdr.tcp.dstPort,
+          hdr.ipv4.protocol,
+          meta.flowlet_id,
+          label},
+	    current_nb_of_shops);
     }
 
     action set_last_segment_hop(label_t label, timestamp_t flowlet_timeout_value){
@@ -133,9 +145,9 @@ control MyIngress(inout headers hdr,
     table segment_hop_1 {
         key = {
             meta.sr_group_id: exact;
-            meta.packet_hash: exact;
             meta.current_seg: exact;
             meta.meta_path_differentiator: exact;
+            meta.packet_hash: exact;
         }
         actions = {
             set_segment_hop;
@@ -149,9 +161,9 @@ control MyIngress(inout headers hdr,
     table segment_hop_2 {
         key = {
             meta.sr_group_id: exact;
-            meta.packet_hash: exact;
             meta.current_seg: exact;
             meta.meta_path_differentiator: exact;
+            meta.packet_hash: exact;
         }
         actions = {
             set_segment_hop;
@@ -165,9 +177,9 @@ control MyIngress(inout headers hdr,
     table segment_hop_3 {
         key = {
             meta.sr_group_id: exact;
-            meta.packet_hash: exact;
             meta.current_seg: exact;
             meta.meta_path_differentiator: exact;
+            meta.packet_hash: exact;
         }
         actions = {
             set_segment_hop;
@@ -181,9 +193,9 @@ control MyIngress(inout headers hdr,
     table segment_hop_4 {
         key = {
             meta.sr_group_id: exact;
-            meta.packet_hash: exact;
             meta.current_seg: exact;
             meta.meta_path_differentiator: exact;
+            meta.packet_hash: exact;
         }
         actions = {
             set_segment_hop;
@@ -197,9 +209,9 @@ control MyIngress(inout headers hdr,
     table segment_hop_5 {
         key = {
             meta.sr_group_id: exact;
-            meta.packet_hash: exact;
             meta.current_seg: exact;
             meta.meta_path_differentiator: exact;
+            meta.packet_hash: exact;
         }
         actions = {
             set_segment_hop;
@@ -289,6 +301,8 @@ control MyIngress(inout headers hdr,
             
             switch (ipv4_lpm.apply().action_run){
                 set_sr_group: { 
+                    sr_id_register.read(meta.sr_id, 0);
+                    meta.current_seg = meta.sr_id;
                     switch(segment_hop_1.apply().action_run){
                         set_segment_hop: { 
                             switch(segment_hop_2.apply().action_run){

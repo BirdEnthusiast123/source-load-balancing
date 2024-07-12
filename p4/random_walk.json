@@ -23,20 +23,54 @@
         ["tmp_15", 16, false],
         ["tmp_16", 32, false],
         ["tmp_17", 32, false],
-        ["tmp_18", 32, false],
-        ["tmp_19", 32, false],
-        ["tmp_20", 32, false],
-        ["tmp_21", 32, false],
-        ["tmp_22", 32, false],
-        ["tmp_23", 16, false],
-        ["tmp_24", 16, false],
-        ["tmp_25", 8, false],
+        ["tmp_18", 16, false],
+        ["tmp_19", 16, false],
+        ["tmp_20", 8, false],
+        ["tmp_21", 16, false],
+        ["tmp_22", 20, false],
+        ["tmp_23", 32, false],
+        ["tmp_24", 32, false],
+        ["tmp_25", 16, false],
         ["tmp_26", 16, false],
+        ["tmp_27", 8, false],
+        ["tmp_28", 16, false],
+        ["tmp_29", 20, false],
+        ["tmp_30", 32, false],
+        ["tmp_31", 32, false],
+        ["tmp_32", 16, false],
+        ["tmp_33", 16, false],
+        ["tmp_34", 8, false],
+        ["tmp_35", 16, false],
+        ["tmp_36", 20, false],
+        ["tmp_37", 32, false],
+        ["tmp_38", 32, false],
+        ["tmp_39", 16, false],
+        ["tmp_40", 16, false],
+        ["tmp_41", 8, false],
+        ["tmp_42", 16, false],
+        ["tmp_43", 20, false],
+        ["tmp_44", 32, false],
+        ["tmp_45", 32, false],
+        ["tmp_46", 16, false],
+        ["tmp_47", 16, false],
+        ["tmp_48", 8, false],
+        ["tmp_49", 16, false],
+        ["tmp_50", 20, false],
+        ["tmp_51", 32, false],
+        ["tmp_52", 32, false],
+        ["tmp_53", 32, false],
+        ["tmp_54", 32, false],
+        ["tmp_55", 32, false],
+        ["tmp_56", 32, false],
+        ["tmp_57", 32, false],
+        ["tmp_58", 16, false],
+        ["tmp_59", 16, false],
+        ["tmp_60", 8, false],
+        ["tmp_61", 16, false],
         ["random_t_0", 32, false],
         ["key_0", 20, false],
         ["metadata.sr_id", 20, false],
         ["metadata.current_seg", 20, false],
-        ["metadata.sr_dest", 20, false],
         ["metadata.packet_hash", 14, false],
         ["metadata.meta_path_differentiator", 14, false],
         ["metadata.sr_group_id", 14, false],
@@ -527,12 +561,39 @@
       "input" : [
         {
           "type" : "field",
+          "value" : ["scalars", "tmp_16"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_17"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_18"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_19"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_20"]
+        },
+        {
+          "type" : "field",
           "value" : ["scalars", "tmp_21"]
         },
         {
           "type" : "field",
           "value" : ["scalars", "tmp_22"]
-        },
+        }
+      ]
+    },
+    {
+      "name" : "calc_2",
+      "id" : 3,
+      "algo" : "crc16",
+      "input" : [
         {
           "type" : "field",
           "value" : ["scalars", "tmp_23"]
@@ -548,15 +609,163 @@
         {
           "type" : "field",
           "value" : ["scalars", "tmp_26"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_27"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_28"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_29"]
         }
       ]
     },
     {
-      "name" : "calc_2",
-      "id" : 3,
+      "name" : "calc_3",
+      "id" : 4,
+      "algo" : "crc16",
+      "input" : [
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_30"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_31"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_32"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_33"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_34"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_35"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_36"]
+        }
+      ]
+    },
+    {
+      "name" : "calc_4",
+      "id" : 5,
+      "algo" : "crc16",
+      "input" : [
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_37"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_38"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_39"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_40"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_41"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_42"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_43"]
+        }
+      ]
+    },
+    {
+      "name" : "calc_5",
+      "id" : 6,
+      "algo" : "crc16",
+      "input" : [
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_44"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_45"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_46"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_47"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_48"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_49"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_50"]
+        }
+      ]
+    },
+    {
+      "name" : "calc_6",
+      "id" : 7,
+      "algo" : "crc16",
+      "input" : [
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_56"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_57"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_58"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_59"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_60"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "tmp_61"]
+        }
+      ]
+    },
+    {
+      "name" : "calc_7",
+      "id" : 8,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-        "line" : 353,
+        "line" : 367,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
@@ -1608,25 +1817,6 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "metadata.current_seg"]
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.sr_id"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 89,
-            "column" : 8,
-            "source_fragment" : "meta.current_seg = meta.sr_id"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
               "value" : ["scalars", "metadata.meta_path_differentiator"]
             },
             {
@@ -1636,7 +1826,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 90,
+            "line" : 89,
             "column" : 8,
             "source_fragment" : "meta.meta_path_differentiator = 0"
           }
@@ -1650,6 +1840,14 @@
         {
           "name" : "label",
           "bitwidth" : 20
+        },
+        {
+          "name" : "meta_path_differentiator",
+          "bitwidth" : 14
+        },
+        {
+          "name" : "current_nb_of_shops",
+          "bitwidth" : 14
         }
       ],
       "primitives" : [
@@ -1686,7 +1884,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
+            "line" : 108,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1701,7 +1899,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
+            "line" : 109,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1720,7 +1918,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
+            "line" : 110,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -1762,7 +1960,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
+            "line" : 111,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -1781,7 +1979,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
+            "line" : 112,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -1800,7 +1998,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
+            "line" : 114,
             "column" : 8,
             "source_fragment" : "meta.current_seg = label"
           }
@@ -1864,6 +2062,185 @@
               }
             }
           ]
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.meta_path_differentiator"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 118,
+            "column" : 8,
+            "source_fragment" : "meta.meta_path_differentiator = meta_path_differentiator"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_16"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 123,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_17"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 124,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_18"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 125,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.srcPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_19"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 126,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.dstPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_20"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "protocol"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 127,
+            "column" : 10,
+            "source_fragment" : "hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_21"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_id"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 128,
+            "column" : 10,
+            "source_fragment" : "meta.flowlet_id"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_22"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 129,
+            "column" : 10,
+            "source_fragment" : "label"
+          }
+        },
+        {
+          "op" : "modify_field_with_hash_based_offset",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.packet_hash"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            },
+            {
+              "type" : "calculation",
+              "value" : "calc_1"
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 120,
+            "column" : 8,
+            "source_fragment" : "hash(meta.packet_hash, ..."
+          }
         }
       ]
     },
@@ -1874,6 +2251,14 @@
         {
           "name" : "label",
           "bitwidth" : 20
+        },
+        {
+          "name" : "meta_path_differentiator",
+          "bitwidth" : 14
+        },
+        {
+          "name" : "current_nb_of_shops",
+          "bitwidth" : 14
         }
       ],
       "primitives" : [
@@ -1910,7 +2295,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
+            "line" : 108,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -1925,7 +2310,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
+            "line" : 109,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -1944,7 +2329,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
+            "line" : 110,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -1986,7 +2371,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
+            "line" : 111,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2005,7 +2390,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
+            "line" : 112,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2024,7 +2409,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
+            "line" : 114,
             "column" : 8,
             "source_fragment" : "meta.current_seg = label"
           }
@@ -2088,6 +2473,185 @@
               }
             }
           ]
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.meta_path_differentiator"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 118,
+            "column" : 8,
+            "source_fragment" : "meta.meta_path_differentiator = meta_path_differentiator"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_23"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 123,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_24"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 124,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_25"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 125,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.srcPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_26"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 126,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.dstPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_27"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "protocol"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 127,
+            "column" : 10,
+            "source_fragment" : "hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_28"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_id"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 128,
+            "column" : 10,
+            "source_fragment" : "meta.flowlet_id"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_29"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 129,
+            "column" : 10,
+            "source_fragment" : "label"
+          }
+        },
+        {
+          "op" : "modify_field_with_hash_based_offset",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.packet_hash"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            },
+            {
+              "type" : "calculation",
+              "value" : "calc_2"
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 120,
+            "column" : 8,
+            "source_fragment" : "hash(meta.packet_hash, ..."
+          }
         }
       ]
     },
@@ -2098,6 +2662,14 @@
         {
           "name" : "label",
           "bitwidth" : 20
+        },
+        {
+          "name" : "meta_path_differentiator",
+          "bitwidth" : 14
+        },
+        {
+          "name" : "current_nb_of_shops",
+          "bitwidth" : 14
         }
       ],
       "primitives" : [
@@ -2134,7 +2706,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
+            "line" : 108,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2149,7 +2721,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
+            "line" : 109,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2168,7 +2740,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
+            "line" : 110,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -2210,7 +2782,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
+            "line" : 111,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2229,7 +2801,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
+            "line" : 112,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2248,7 +2820,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
+            "line" : 114,
             "column" : 8,
             "source_fragment" : "meta.current_seg = label"
           }
@@ -2312,6 +2884,185 @@
               }
             }
           ]
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.meta_path_differentiator"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 118,
+            "column" : 8,
+            "source_fragment" : "meta.meta_path_differentiator = meta_path_differentiator"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_30"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 123,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_31"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 124,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_32"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 125,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.srcPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_33"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 126,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.dstPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_34"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "protocol"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 127,
+            "column" : 10,
+            "source_fragment" : "hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_35"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_id"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 128,
+            "column" : 10,
+            "source_fragment" : "meta.flowlet_id"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_36"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 129,
+            "column" : 10,
+            "source_fragment" : "label"
+          }
+        },
+        {
+          "op" : "modify_field_with_hash_based_offset",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.packet_hash"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            },
+            {
+              "type" : "calculation",
+              "value" : "calc_3"
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 120,
+            "column" : 8,
+            "source_fragment" : "hash(meta.packet_hash, ..."
+          }
         }
       ]
     },
@@ -2322,6 +3073,14 @@
         {
           "name" : "label",
           "bitwidth" : 20
+        },
+        {
+          "name" : "meta_path_differentiator",
+          "bitwidth" : 14
+        },
+        {
+          "name" : "current_nb_of_shops",
+          "bitwidth" : 14
         }
       ],
       "primitives" : [
@@ -2358,7 +3117,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
+            "line" : 108,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2373,7 +3132,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
+            "line" : 109,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2392,7 +3151,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
+            "line" : 110,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -2434,7 +3193,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
+            "line" : 111,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2453,7 +3212,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
+            "line" : 112,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2472,7 +3231,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
+            "line" : 114,
             "column" : 8,
             "source_fragment" : "meta.current_seg = label"
           }
@@ -2536,6 +3295,185 @@
               }
             }
           ]
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.meta_path_differentiator"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 118,
+            "column" : 8,
+            "source_fragment" : "meta.meta_path_differentiator = meta_path_differentiator"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_37"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 123,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_38"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 124,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_39"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 125,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.srcPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_40"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 126,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.dstPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_41"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "protocol"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 127,
+            "column" : 10,
+            "source_fragment" : "hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_42"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_id"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 128,
+            "column" : 10,
+            "source_fragment" : "meta.flowlet_id"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_43"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 129,
+            "column" : 10,
+            "source_fragment" : "label"
+          }
+        },
+        {
+          "op" : "modify_field_with_hash_based_offset",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.packet_hash"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            },
+            {
+              "type" : "calculation",
+              "value" : "calc_4"
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 120,
+            "column" : 8,
+            "source_fragment" : "hash(meta.packet_hash, ..."
+          }
         }
       ]
     },
@@ -2546,6 +3484,14 @@
         {
           "name" : "label",
           "bitwidth" : 20
+        },
+        {
+          "name" : "meta_path_differentiator",
+          "bitwidth" : 14
+        },
+        {
+          "name" : "current_nb_of_shops",
+          "bitwidth" : 14
         }
       ],
       "primitives" : [
@@ -2582,7 +3528,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 109,
+            "line" : 108,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2597,7 +3543,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 110,
+            "line" : 109,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2616,7 +3562,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 111,
+            "line" : 110,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -2658,7 +3604,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 112,
+            "line" : 111,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2677,7 +3623,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 113,
+            "line" : 112,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 0"
           }
@@ -2696,7 +3642,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 115,
+            "line" : 114,
             "column" : 8,
             "source_fragment" : "meta.current_seg = label"
           }
@@ -2760,6 +3706,185 @@
               }
             }
           ]
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.meta_path_differentiator"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 118,
+            "column" : 8,
+            "source_fragment" : "meta.meta_path_differentiator = meta_path_differentiator"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_44"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 123,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_45"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 124,
+            "column" : 7,
+            "source_fragment" : "hdr.ipv4.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_46"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 125,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.srcPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_47"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 126,
+            "column" : 10,
+            "source_fragment" : "hdr.tcp.dstPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_48"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "protocol"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 127,
+            "column" : 10,
+            "source_fragment" : "hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_49"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.flowlet_id"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 128,
+            "column" : 10,
+            "source_fragment" : "meta.flowlet_id"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_50"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 129,
+            "column" : 10,
+            "source_fragment" : "label"
+          }
+        },
+        {
+          "op" : "modify_field_with_hash_based_offset",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.packet_hash"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00"
+            },
+            {
+              "type" : "calculation",
+              "value" : "calc_5"
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 120,
+            "column" : 8,
+            "source_fragment" : "hash(meta.packet_hash, ..."
+          }
         }
       ]
     },
@@ -2810,7 +3935,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
+            "line" : 136,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -2825,7 +3950,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
+            "line" : 137,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -2844,7 +3969,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
+            "line" : 138,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -2886,7 +4011,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "line" : 139,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -2905,7 +4030,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "line" : 140,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -2915,7 +4040,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_16"]
+              "value" : ["scalars", "tmp_51"]
             },
             {
               "type" : "expression",
@@ -2937,7 +4062,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 30,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
           }
@@ -2951,7 +4076,7 @@
             },
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_16"]
+              "value" : ["scalars", "tmp_51"]
             },
             {
               "type" : "runtime_data",
@@ -2960,7 +4085,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 8,
             "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
           }
@@ -3014,7 +4139,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
+            "line" : 136,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -3029,7 +4154,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
+            "line" : 137,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -3048,7 +4173,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
+            "line" : 138,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -3090,7 +4215,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "line" : 139,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -3109,7 +4234,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "line" : 140,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -3119,7 +4244,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_17"]
+              "value" : ["scalars", "tmp_52"]
             },
             {
               "type" : "expression",
@@ -3141,7 +4266,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 30,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
           }
@@ -3155,7 +4280,7 @@
             },
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_17"]
+              "value" : ["scalars", "tmp_52"]
             },
             {
               "type" : "runtime_data",
@@ -3164,7 +4289,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 8,
             "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
           }
@@ -3218,7 +4343,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
+            "line" : 136,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -3233,7 +4358,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
+            "line" : 137,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -3252,7 +4377,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
+            "line" : 138,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -3294,7 +4419,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "line" : 139,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -3313,7 +4438,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "line" : 140,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -3323,7 +4448,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_18"]
+              "value" : ["scalars", "tmp_53"]
             },
             {
               "type" : "expression",
@@ -3345,7 +4470,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 30,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
           }
@@ -3359,7 +4484,7 @@
             },
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_18"]
+              "value" : ["scalars", "tmp_53"]
             },
             {
               "type" : "runtime_data",
@@ -3368,7 +4493,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 8,
             "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
           }
@@ -3422,7 +4547,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
+            "line" : 136,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -3437,7 +4562,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
+            "line" : 137,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -3456,7 +4581,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
+            "line" : 138,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -3498,7 +4623,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "line" : 139,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -3517,7 +4642,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "line" : 140,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -3527,7 +4652,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_19"]
+              "value" : ["scalars", "tmp_54"]
             },
             {
               "type" : "expression",
@@ -3549,7 +4674,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 30,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
           }
@@ -3563,7 +4688,7 @@
             },
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_19"]
+              "value" : ["scalars", "tmp_54"]
             },
             {
               "type" : "runtime_data",
@@ -3572,7 +4697,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 8,
             "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
           }
@@ -3626,7 +4751,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 124,
+            "line" : 136,
             "column" : 8,
             "source_fragment" : "hdr.sr.push_front(1)"
           }
@@ -3641,7 +4766,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 125,
+            "line" : 137,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].setValid()"
           }
@@ -3660,7 +4785,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 126,
+            "line" : 138,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].label = label"
           }
@@ -3702,7 +4827,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 127,
+            "line" : 139,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].ttl = hdr.ipv4.ttl - 1"
           }
@@ -3721,7 +4846,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 128,
+            "line" : 140,
             "column" : 8,
             "source_fragment" : "hdr.sr[0].s = 1"
           }
@@ -3731,7 +4856,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_20"]
+              "value" : ["scalars", "tmp_55"]
             },
             {
               "type" : "expression",
@@ -3753,7 +4878,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 30,
             "source_fragment" : "(bit<32>)meta.flowlet_register_index"
           }
@@ -3767,7 +4892,7 @@
             },
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_20"]
+              "value" : ["scalars", "tmp_55"]
             },
             {
               "type" : "runtime_data",
@@ -3776,7 +4901,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 130,
+            "line" : 142,
             "column" : 8,
             "source_fragment" : "flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value)"
           }
@@ -3811,7 +4936,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 216,
+            "line" : 228,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
           }
@@ -3830,7 +4955,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 217,
+            "line" : 229,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
           }
@@ -3849,7 +4974,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 219,
+            "line" : 231,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
           }
@@ -3891,7 +5016,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 220,
+            "line" : 232,
             "column" : 8,
             "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
           }
@@ -3926,7 +5051,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 216,
+            "line" : 228,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
           }
@@ -3945,7 +5070,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 217,
+            "line" : 229,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
           }
@@ -3964,7 +5089,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 219,
+            "line" : 231,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
           }
@@ -4006,7 +5131,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 220,
+            "line" : 232,
             "column" : 8,
             "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
           }
@@ -4032,7 +5157,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_21"]
+              "value" : ["scalars", "tmp_56"]
             },
             {
               "type" : "field",
@@ -4041,7 +5166,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 227,
+            "line" : 239,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.srcAddr"
           }
@@ -4051,7 +5176,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_22"]
+              "value" : ["scalars", "tmp_57"]
             },
             {
               "type" : "field",
@@ -4060,7 +5185,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 228,
+            "line" : 240,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.dstAddr"
           }
@@ -4070,7 +5195,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_23"]
+              "value" : ["scalars", "tmp_58"]
             },
             {
               "type" : "field",
@@ -4079,7 +5204,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 229,
+            "line" : 241,
             "column" : 10,
             "source_fragment" : "hdr.tcp.srcPort"
           }
@@ -4089,7 +5214,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_24"]
+              "value" : ["scalars", "tmp_59"]
             },
             {
               "type" : "field",
@@ -4098,7 +5223,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 230,
+            "line" : 242,
             "column" : 10,
             "source_fragment" : "hdr.tcp.dstPort"
           }
@@ -4108,7 +5233,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_25"]
+              "value" : ["scalars", "tmp_60"]
             },
             {
               "type" : "field",
@@ -4117,7 +5242,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 231,
+            "line" : 243,
             "column" : 10,
             "source_fragment" : "hdr.ipv4.protocol"
           }
@@ -4127,7 +5252,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_26"]
+              "value" : ["scalars", "tmp_61"]
             },
             {
               "type" : "field",
@@ -4136,7 +5261,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 232,
+            "line" : 244,
             "column" : 10,
             "source_fragment" : "meta.flowlet_id"
           }
@@ -4154,7 +5279,7 @@
             },
             {
               "type" : "calculation",
-              "value" : "calc_1"
+              "value" : "calc_6"
             },
             {
               "type" : "runtime_data",
@@ -4163,7 +5288,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 224,
+            "line" : 236,
             "column" : 8,
             "source_fragment" : "hash(meta.packet_hash, ..."
           }
@@ -4182,7 +5307,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 235,
+            "line" : 247,
             "column" : 5,
             "source_fragment" : "meta.ecmp_group_id = ecmp_group_id"
           }
@@ -4190,7 +5315,7 @@
       ]
     },
     {
-      "name" : "random_walk272",
+      "name" : "random_walk284",
       "id" : 27,
       "runtime_data" : [],
       "primitives" : [
@@ -4216,7 +5341,7 @@
       ]
     },
     {
-      "name" : "random_walk274",
+      "name" : "random_walk286",
       "id" : 28,
       "runtime_data" : [],
       "primitives" : [
@@ -4234,7 +5359,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 274,
+            "line" : 286,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           }
@@ -4242,7 +5367,7 @@
       ]
     },
     {
-      "name" : "random_walk267",
+      "name" : "random_walk279",
       "id" : 29,
       "runtime_data" : [],
       "primitives" : [
@@ -4264,7 +5389,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 267,
+            "line" : 279,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           }
@@ -4272,7 +5397,7 @@
       ]
     },
     {
-      "name" : "random_walk282",
+      "name" : "random_walk294",
       "id" : 30,
       "runtime_data" : [],
       "primitives" : [
@@ -4313,7 +5438,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 282,
+            "line" : 294,
             "column" : 16,
             "source_fragment" : "meta.flowlet_time_diff = standard_metadata.ingress_global_timestamp - meta.flowlet_last_stamp"
           }
@@ -4321,8 +5446,57 @@
       ]
     },
     {
-      "name" : "random_walk240",
+      "name" : "random_walk304",
       "id" : 31,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "register_read",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.sr_id"]
+            },
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.sr_id_register"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00000000"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 304,
+            "column" : 20,
+            "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.current_seg"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata.sr_id"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 305,
+            "column" : 20,
+            "source_fragment" : "meta.current_seg = meta.sr_id"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "random_walk252",
+      "id" : 32,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4339,7 +5513,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 240,
+            "line" : 252,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           }
@@ -4347,8 +5521,8 @@
       ]
     },
     {
-      "name" : "random_walk324",
-      "id" : 32,
+      "name" : "random_walk338",
+      "id" : 33,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4373,8 +5547,8 @@
       ]
     },
     {
-      "name" : "random_walk326",
-      "id" : 33,
+      "name" : "random_walk340",
+      "id" : 34,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4391,7 +5565,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 326,
+            "line" : 340,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           }
@@ -4412,11 +5586,11 @@
       "init_table" : "node_2",
       "tables" : [
         {
-          "name" : "tbl_random_walk267",
+          "name" : "tbl_random_walk279",
           "id" : 0,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 267,
+            "line" : 279,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           },
@@ -4428,10 +5602,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [29],
-          "actions" : ["random_walk267"],
+          "actions" : ["random_walk279"],
           "base_default_next" : "node_4",
           "next_tables" : {
-            "random_walk267" : "node_4"
+            "random_walk279" : "node_4"
           },
           "default_entry" : {
             "action_id" : 29,
@@ -4441,11 +5615,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk272",
+          "name" : "tbl_random_walk284",
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 272,
+            "line" : 284,
             "column" : 43,
             "source_fragment" : "="
           },
@@ -4457,10 +5631,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [27],
-          "actions" : ["random_walk272"],
-          "base_default_next" : "tbl_random_walk274",
+          "actions" : ["random_walk284"],
+          "base_default_next" : "tbl_random_walk286",
           "next_tables" : {
-            "random_walk272" : "tbl_random_walk274"
+            "random_walk284" : "tbl_random_walk286"
           },
           "default_entry" : {
             "action_id" : 27,
@@ -4470,11 +5644,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk274",
+          "name" : "tbl_random_walk286",
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 274,
+            "line" : 286,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           },
@@ -4486,10 +5660,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [28],
-          "actions" : ["random_walk274"],
+          "actions" : ["random_walk286"],
           "base_default_next" : "node_8",
           "next_tables" : {
-            "random_walk274" : "node_8"
+            "random_walk286" : "node_8"
           },
           "default_entry" : {
             "action_id" : 28,
@@ -4503,7 +5677,7 @@
           "id" : 3,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 281,
+            "line" : 293,
             "column" : 16,
             "source_fragment" : "read_flowlet_registers()"
           },
@@ -4516,9 +5690,9 @@
           "direct_meters" : null,
           "action_ids" : [9],
           "actions" : ["MyIngress.read_flowlet_registers"],
-          "base_default_next" : "tbl_random_walk282",
+          "base_default_next" : "tbl_random_walk294",
           "next_tables" : {
-            "MyIngress.read_flowlet_registers" : "tbl_random_walk282"
+            "MyIngress.read_flowlet_registers" : "tbl_random_walk294"
           },
           "default_entry" : {
             "action_id" : 9,
@@ -4528,11 +5702,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk282",
+          "name" : "tbl_random_walk294",
           "id" : 4,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 282,
+            "line" : 294,
             "column" : 39,
             "source_fragment" : "="
           },
@@ -4544,10 +5718,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [30],
-          "actions" : ["random_walk282"],
+          "actions" : ["random_walk294"],
           "base_default_next" : "node_11",
           "next_tables" : {
-            "random_walk282" : "node_11"
+            "random_walk294" : "node_11"
           },
           "default_entry" : {
             "action_id" : 30,
@@ -4561,7 +5735,7 @@
           "id" : 5,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 286,
+            "line" : 298,
             "column" : 20,
             "source_fragment" : "update_flowlet_id()"
           },
@@ -4590,7 +5764,7 @@
           "id" : 6,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 93,
+            "line" : 92,
             "column" : 10,
             "source_fragment" : "ipv4_lpm"
           },
@@ -4610,11 +5784,11 @@
           "direct_meters" : null,
           "action_ids" : [11, 13, 0],
           "actions" : ["MyIngress.ipv4_forward", "MyIngress.set_sr_group", "NoAction"],
-          "base_default_next" : "node_19",
+          "base_default_next" : "node_20",
           "next_tables" : {
-            "MyIngress.set_sr_group" : "MyIngress.segment_hop_1",
-            "MyIngress.ipv4_forward" : "node_19",
-            "NoAction" : "node_19"
+            "MyIngress.set_sr_group" : "tbl_random_walk304",
+            "MyIngress.ipv4_forward" : "node_20",
+            "NoAction" : "node_20"
           },
           "default_entry" : {
             "action_id" : 0,
@@ -4624,11 +5798,40 @@
           }
         },
         {
-          "name" : "MyIngress.segment_hop_1",
+          "name" : "tbl_random_walk304",
           "id" : 7,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 133,
+            "line" : 304,
+            "column" : 20,
+            "source_fragment" : "sr_id_register.read(meta.sr_id, 0); ..."
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [31],
+          "actions" : ["random_walk304"],
+          "base_default_next" : "MyIngress.segment_hop_1",
+          "next_tables" : {
+            "random_walk304" : "MyIngress.segment_hop_1"
+          },
+          "default_entry" : {
+            "action_id" : 31,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "MyIngress.segment_hop_1",
+          "id" : 8,
+          "source_info" : {
+            "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
+            "line" : 145,
             "column" : 10,
             "source_fragment" : "segment_hop_1"
           },
@@ -4641,20 +5844,20 @@
             },
             {
               "match_type" : "exact",
-              "name" : "meta.packet_hash",
-              "target" : ["scalars", "metadata.packet_hash"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
               "name" : "meta.current_seg",
-              "target" : ["scalars", "metadata.current_seg"],
+              "target" : ["scalars", "metadata.sr_id"],
               "mask" : null
             },
             {
               "match_type" : "exact",
               "name" : "meta.meta_path_differentiator",
               "target" : ["scalars", "metadata.meta_path_differentiator"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.packet_hash",
+              "target" : ["scalars", "metadata.packet_hash"],
               "mask" : null
             }
           ],
@@ -4666,11 +5869,11 @@
           "direct_meters" : null,
           "action_ids" : [14, 19, 1],
           "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
+          "base_default_next" : "node_20",
           "next_tables" : {
             "MyIngress.set_segment_hop" : "MyIngress.segment_hop_2",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
+            "MyIngress.set_last_segment_hop" : "node_20",
+            "NoAction" : "node_20"
           },
           "default_entry" : {
             "action_id" : 1,
@@ -4681,10 +5884,10 @@
         },
         {
           "name" : "MyIngress.segment_hop_2",
-          "id" : 8,
+          "id" : 9,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 149,
+            "line" : 161,
             "column" : 10,
             "source_fragment" : "segment_hop_2"
           },
@@ -4697,12 +5900,6 @@
             },
             {
               "match_type" : "exact",
-              "name" : "meta.packet_hash",
-              "target" : ["scalars", "metadata.packet_hash"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
               "name" : "meta.current_seg",
               "target" : ["scalars", "metadata.current_seg"],
               "mask" : null
@@ -4711,6 +5908,12 @@
               "match_type" : "exact",
               "name" : "meta.meta_path_differentiator",
               "target" : ["scalars", "metadata.meta_path_differentiator"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.packet_hash",
+              "target" : ["scalars", "metadata.packet_hash"],
               "mask" : null
             }
           ],
@@ -4722,11 +5925,11 @@
           "direct_meters" : null,
           "action_ids" : [15, 20, 2],
           "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
+          "base_default_next" : "node_20",
           "next_tables" : {
             "MyIngress.set_segment_hop" : "MyIngress.segment_hop_3",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
+            "MyIngress.set_last_segment_hop" : "node_20",
+            "NoAction" : "node_20"
           },
           "default_entry" : {
             "action_id" : 2,
@@ -4737,10 +5940,10 @@
         },
         {
           "name" : "MyIngress.segment_hop_3",
-          "id" : 9,
+          "id" : 10,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 165,
+            "line" : 177,
             "column" : 10,
             "source_fragment" : "segment_hop_3"
           },
@@ -4753,12 +5956,6 @@
             },
             {
               "match_type" : "exact",
-              "name" : "meta.packet_hash",
-              "target" : ["scalars", "metadata.packet_hash"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
               "name" : "meta.current_seg",
               "target" : ["scalars", "metadata.current_seg"],
               "mask" : null
@@ -4767,6 +5964,12 @@
               "match_type" : "exact",
               "name" : "meta.meta_path_differentiator",
               "target" : ["scalars", "metadata.meta_path_differentiator"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.packet_hash",
+              "target" : ["scalars", "metadata.packet_hash"],
               "mask" : null
             }
           ],
@@ -4778,11 +5981,11 @@
           "direct_meters" : null,
           "action_ids" : [16, 21, 3],
           "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
+          "base_default_next" : "node_20",
           "next_tables" : {
             "MyIngress.set_segment_hop" : "MyIngress.segment_hop_4",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
+            "MyIngress.set_last_segment_hop" : "node_20",
+            "NoAction" : "node_20"
           },
           "default_entry" : {
             "action_id" : 3,
@@ -4793,10 +5996,10 @@
         },
         {
           "name" : "MyIngress.segment_hop_4",
-          "id" : 10,
+          "id" : 11,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 181,
+            "line" : 193,
             "column" : 10,
             "source_fragment" : "segment_hop_4"
           },
@@ -4809,12 +6012,6 @@
             },
             {
               "match_type" : "exact",
-              "name" : "meta.packet_hash",
-              "target" : ["scalars", "metadata.packet_hash"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
               "name" : "meta.current_seg",
               "target" : ["scalars", "metadata.current_seg"],
               "mask" : null
@@ -4823,6 +6020,12 @@
               "match_type" : "exact",
               "name" : "meta.meta_path_differentiator",
               "target" : ["scalars", "metadata.meta_path_differentiator"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.packet_hash",
+              "target" : ["scalars", "metadata.packet_hash"],
               "mask" : null
             }
           ],
@@ -4834,11 +6037,11 @@
           "direct_meters" : null,
           "action_ids" : [17, 22, 4],
           "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
+          "base_default_next" : "node_20",
           "next_tables" : {
             "MyIngress.set_segment_hop" : "MyIngress.segment_hop_5",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
+            "MyIngress.set_last_segment_hop" : "node_20",
+            "NoAction" : "node_20"
           },
           "default_entry" : {
             "action_id" : 4,
@@ -4849,10 +6052,10 @@
         },
         {
           "name" : "MyIngress.segment_hop_5",
-          "id" : 11,
+          "id" : 12,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 197,
+            "line" : 209,
             "column" : 10,
             "source_fragment" : "segment_hop_5"
           },
@@ -4865,12 +6068,6 @@
             },
             {
               "match_type" : "exact",
-              "name" : "meta.packet_hash",
-              "target" : ["scalars", "metadata.packet_hash"],
-              "mask" : null
-            },
-            {
-              "match_type" : "exact",
               "name" : "meta.current_seg",
               "target" : ["scalars", "metadata.current_seg"],
               "mask" : null
@@ -4879,6 +6076,12 @@
               "match_type" : "exact",
               "name" : "meta.meta_path_differentiator",
               "target" : ["scalars", "metadata.meta_path_differentiator"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.packet_hash",
+              "target" : ["scalars", "metadata.packet_hash"],
               "mask" : null
             }
           ],
@@ -4890,11 +6093,11 @@
           "direct_meters" : null,
           "action_ids" : [18, 23, 5],
           "actions" : ["MyIngress.set_segment_hop", "MyIngress.set_last_segment_hop", "NoAction"],
-          "base_default_next" : "node_19",
+          "base_default_next" : "node_20",
           "next_tables" : {
-            "MyIngress.set_segment_hop" : "node_19",
-            "MyIngress.set_last_segment_hop" : "node_19",
-            "NoAction" : "node_19"
+            "MyIngress.set_segment_hop" : "node_20",
+            "MyIngress.set_last_segment_hop" : "node_20",
+            "NoAction" : "node_20"
           },
           "default_entry" : {
             "action_id" : 5,
@@ -4904,11 +6107,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk240",
-          "id" : 12,
+          "name" : "tbl_random_walk252",
+          "id" : 13,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 240,
+            "line" : 252,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           },
@@ -4919,14 +6122,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [31],
-          "actions" : ["random_walk240"],
+          "action_ids" : [32],
+          "actions" : ["random_walk252"],
           "base_default_next" : "MyIngress.sr_tbl",
           "next_tables" : {
-            "random_walk240" : "MyIngress.sr_tbl"
+            "random_walk252" : "MyIngress.sr_tbl"
           },
           "default_entry" : {
-            "action_id" : 31,
+            "action_id" : 32,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4934,10 +6137,10 @@
         },
         {
           "name" : "MyIngress.sr_tbl",
-          "id" : 13,
+          "id" : 14,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 238,
+            "line" : 250,
             "column" : 10,
             "source_fragment" : "sr_tbl"
           },
@@ -4957,12 +6160,12 @@
           "direct_meters" : null,
           "action_ids" : [24, 26, 12, 6],
           "actions" : ["MyIngress.sr_forward", "MyIngress.set_ecmp_group", "MyIngress.ipv4_forward", "NoAction"],
-          "base_default_next" : "node_23",
+          "base_default_next" : "node_24",
           "next_tables" : {
             "MyIngress.set_ecmp_group" : "MyIngress.ecmp_group_to_nhop",
-            "MyIngress.sr_forward" : "node_23",
-            "MyIngress.ipv4_forward" : "node_23",
-            "NoAction" : "node_23"
+            "MyIngress.sr_forward" : "node_24",
+            "MyIngress.ipv4_forward" : "node_24",
+            "NoAction" : "node_24"
           },
           "default_entry" : {
             "action_id" : 6,
@@ -4973,10 +6176,10 @@
         },
         {
           "name" : "MyIngress.ecmp_group_to_nhop",
-          "id" : 14,
+          "id" : 15,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 252,
+            "line" : 264,
             "column" : 10,
             "source_fragment" : "ecmp_group_to_nhop"
           },
@@ -5002,11 +6205,11 @@
           "direct_meters" : null,
           "action_ids" : [8, 25, 7],
           "actions" : ["MyIngress.drop", "MyIngress.sr_forward", "NoAction"],
-          "base_default_next" : "node_23",
+          "base_default_next" : "node_24",
           "next_tables" : {
-            "MyIngress.drop" : "node_23",
-            "MyIngress.sr_forward" : "node_23",
-            "NoAction" : "node_23"
+            "MyIngress.drop" : "node_24",
+            "MyIngress.sr_forward" : "node_24",
+            "NoAction" : "node_24"
           },
           "default_entry" : {
             "action_id" : 7,
@@ -5016,11 +6219,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk324",
-          "id" : 15,
+          "name" : "tbl_random_walk338",
+          "id" : 16,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 324,
+            "line" : 338,
             "column" : 43,
             "source_fragment" : "="
           },
@@ -5031,25 +6234,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [32],
-          "actions" : ["random_walk324"],
-          "base_default_next" : "tbl_random_walk326",
+          "action_ids" : [33],
+          "actions" : ["random_walk338"],
+          "base_default_next" : "tbl_random_walk340",
           "next_tables" : {
-            "random_walk324" : "tbl_random_walk326"
+            "random_walk338" : "tbl_random_walk340"
           },
           "default_entry" : {
-            "action_id" : 32,
+            "action_id" : 33,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_random_walk326",
-          "id" : 16,
+          "name" : "tbl_random_walk340",
+          "id" : 17,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 326,
+            "line" : 340,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           },
@@ -5060,14 +6263,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [33],
-          "actions" : ["random_walk326"],
+          "action_ids" : [34],
+          "actions" : ["random_walk340"],
           "base_default_next" : null,
           "next_tables" : {
-            "random_walk326" : null
+            "random_walk340" : null
           },
           "default_entry" : {
-            "action_id" : 33,
+            "action_id" : 34,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -5081,7 +6284,7 @@
           "id" : 0,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 266,
+            "line" : 278,
             "column" : 11,
             "source_fragment" : "hdr.sr[0].isValid()"
           },
@@ -5096,7 +6299,7 @@
               }
             }
           },
-          "true_next" : "tbl_random_walk267",
+          "true_next" : "tbl_random_walk279",
           "false_next" : "node_8"
         },
         {
@@ -5104,7 +6307,7 @@
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 268,
+            "line" : 280,
             "column" : 15,
             "source_fragment" : "hdr.sr[0].label == meta.sr_id"
           },
@@ -5130,7 +6333,7 @@
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 270,
+            "line" : 282,
             "column" : 19,
             "source_fragment" : "hdr.sr[0].s == 1"
           },
@@ -5148,15 +6351,15 @@
               }
             }
           },
-          "true_next" : "tbl_random_walk272",
-          "false_next" : "tbl_random_walk274"
+          "true_next" : "tbl_random_walk284",
+          "false_next" : "tbl_random_walk286"
         },
         {
           "name" : "node_8",
           "id" : 3,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 279,
+            "line" : 291,
             "column" : 12,
             "source_fragment" : "hdr.ipv4.isValid() && !(hdr.sr[0].isValid())"
           },
@@ -5196,14 +6399,14 @@
             }
           },
           "true_next" : "tbl_read_flowlet_registers",
-          "false_next" : "node_19"
+          "false_next" : "node_20"
         },
         {
           "name" : "node_11",
           "id" : 4,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 285,
+            "line" : 297,
             "column" : 20,
             "source_fragment" : "meta.flowlet_time_diff > meta.flowlet_timeout_value"
           },
@@ -5245,11 +6448,11 @@
           "false_next" : "MyIngress.ipv4_lpm"
         },
         {
-          "name" : "node_19",
+          "name" : "node_20",
           "id" : 5,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 312,
+            "line" : 326,
             "column" : 11,
             "source_fragment" : "hdr.sr[0].isValid()"
           },
@@ -5265,14 +6468,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_random_walk240"
+          "true_next" : "tbl_random_walk252"
         },
         {
-          "name" : "node_23",
+          "name" : "node_24",
           "id" : 6,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 320,
+            "line" : 334,
             "column" : 15,
             "source_fragment" : "(hdr.ethernet.etherType == TYPE_SR) && (hdr.sr[0].label & 1<<18) != 0"
           },
@@ -5321,14 +6524,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "node_24"
+          "true_next" : "node_25"
         },
         {
-          "name" : "node_24",
+          "name" : "node_25",
           "id" : 7,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 322,
+            "line" : 336,
             "column" : 19,
             "source_fragment" : "hdr.sr[0].s == 1"
           },
@@ -5346,8 +6549,8 @@
               }
             }
           },
-          "true_next" : "tbl_random_walk324",
-          "false_next" : "tbl_random_walk326"
+          "true_next" : "tbl_random_walk338",
+          "false_next" : "tbl_random_walk340"
         }
       ]
     },
@@ -5356,7 +6559,7 @@
       "id" : 1,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-        "line" : 336,
+        "line" : 350,
         "column" : 8,
         "source_fragment" : "MyEgress"
       },
@@ -5372,13 +6575,13 @@
       "id" : 0,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-        "line" : 353,
+        "line" : 367,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
       "target" : ["ipv4", "hdrChecksum"],
       "type" : "generic",
-      "calculation" : "calc_2",
+      "calculation" : "calc_7",
       "verify" : false,
       "update" : true,
       "if_cond" : {
