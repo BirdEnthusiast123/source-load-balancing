@@ -107,9 +107,15 @@ control MyIngress(inout headers hdr,
 
         hdr.sr.push_front(1);
         hdr.sr[0].setValid();
-        hdr.sr[0].label = label;
+        // hdr.sr[0].label = label;
         hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 0;
+        // hdr.sr[0].s = 0;
+
+        // setup stack which will be inversed later
+        meta.tmp_sr.push_front(1);
+        meta.tmp_sr[0].label = label;
+        meta.tmp_sr[0].s = 0;
+        meta.tmp_sr_size = meta.tmp_sr_size + 1;
 
         meta.current_seg = label;
         if(meta.current_seg & SR_ADJ_SEGMENT_MASK != 0){
@@ -135,9 +141,15 @@ control MyIngress(inout headers hdr,
 
         hdr.sr.push_front(1);
         hdr.sr[0].setValid();
-        hdr.sr[0].label = label;
+        // hdr.sr[0].label = label;
         hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
-        hdr.sr[0].s = 1;
+        // hdr.sr[0].s = 1;
+
+        // setup stack which will be inversed later
+        meta.tmp_sr.push_front(1);
+        meta.tmp_sr[0].label = label;
+        meta.tmp_sr[0].s = 1;
+        meta.tmp_sr_size = meta.tmp_sr_size + 1;
 
         flowlet_timeout.write((bit<32>)meta.flowlet_register_index, flowlet_timeout_value);
     }
@@ -220,6 +232,30 @@ control MyIngress(inout headers hdr,
         }
         default_action = NoAction();
         size = 256;
+    }
+
+    // Since the meta-dag is traversed in the same way the packet would, the segments can't be stacked in order, we need a fifo
+    action reverse_segment_list(){
+        if(meta.tmp_sr_size >= 1){
+            hdr.sr[0].label = meta.tmp_sr[meta.tmp_sr_size - 1].label;
+            hdr.sr[0].s = meta.tmp_sr[meta.tmp_sr_size - 1].s;
+        }
+        if(meta.tmp_sr_size >= 2){
+            hdr.sr[1].label = meta.tmp_sr[meta.tmp_sr_size - 2].label;
+            hdr.sr[1].s = meta.tmp_sr[meta.tmp_sr_size - 2].s;
+        }
+        if(meta.tmp_sr_size >= 3){
+            hdr.sr[2].label = meta.tmp_sr[meta.tmp_sr_size - 3].label;
+            hdr.sr[2].s = meta.tmp_sr[meta.tmp_sr_size - 3].s;
+        }
+        if(meta.tmp_sr_size >= 4){
+            hdr.sr[3].label = meta.tmp_sr[meta.tmp_sr_size - 4].label;
+            hdr.sr[3].s = meta.tmp_sr[meta.tmp_sr_size - 4].s;
+        }
+        if(meta.tmp_sr_size >= 5){
+            hdr.sr[4].label = meta.tmp_sr[meta.tmp_sr_size - 5].label;
+            hdr.sr[4].s = meta.tmp_sr[meta.tmp_sr_size - 5].s;
+        }
     }
 
 
@@ -318,6 +354,7 @@ control MyIngress(inout headers hdr,
                             }
                         }
                     }
+                    reverse_segment_list();
                 }
             }
         }
