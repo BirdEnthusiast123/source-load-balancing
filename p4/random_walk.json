@@ -71,6 +71,7 @@
         ["key_0", 20, false],
         ["metadata.sr_id", 20, false],
         ["metadata.tmp_sr_size", 8, false],
+        ["metadata.sr_size", 8, false],
         ["metadata.current_seg", 20, false],
         ["metadata.packet_hash", 14, false],
         ["metadata.meta_path_differentiator", 14, false],
@@ -829,7 +830,7 @@
       "id" : 8,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-        "line" : 404,
+        "line" : 405,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },
@@ -6387,7 +6388,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 264,
+            "line" : 265,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
           }
@@ -6406,7 +6407,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 265,
+            "line" : 266,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
           }
@@ -6425,7 +6426,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 267,
+            "line" : 268,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
           }
@@ -6467,7 +6468,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 268,
+            "line" : 269,
             "column" : 8,
             "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
           }
@@ -6502,7 +6503,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 264,
+            "line" : 265,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
           }
@@ -6521,7 +6522,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 265,
+            "line" : 266,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
           }
@@ -6540,7 +6541,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 267,
+            "line" : 268,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
           }
@@ -6582,7 +6583,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 268,
+            "line" : 269,
             "column" : 8,
             "source_fragment" : "hdr.sr[1].ttl = hdr.sr[0].ttl - 1"
           }
@@ -6617,7 +6618,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 275,
+            "line" : 276,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.srcAddr"
           }
@@ -6636,7 +6637,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 276,
+            "line" : 277,
             "column" : 7,
             "source_fragment" : "hdr.ipv4.dstAddr"
           }
@@ -6655,7 +6656,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 277,
+            "line" : 278,
             "column" : 10,
             "source_fragment" : "hdr.tcp.srcPort"
           }
@@ -6674,7 +6675,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 278,
+            "line" : 279,
             "column" : 10,
             "source_fragment" : "hdr.tcp.dstPort"
           }
@@ -6693,7 +6694,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 279,
+            "line" : 280,
             "column" : 10,
             "source_fragment" : "hdr.ipv4.protocol"
           }
@@ -6712,7 +6713,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 280,
+            "line" : 281,
             "column" : 10,
             "source_fragment" : "meta.flowlet_id"
           }
@@ -6739,7 +6740,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 272,
+            "line" : 273,
             "column" : 8,
             "source_fragment" : "hash(meta.packet_hash, ..."
           }
@@ -6758,7 +6759,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 283,
+            "line" : 284,
             "column" : 5,
             "source_fragment" : "meta.ecmp_group_id = ecmp_group_id"
           }
@@ -6766,7 +6767,7 @@
       ]
     },
     {
-      "name" : "random_walk320",
+      "name" : "random_walk321",
       "id" : 28,
       "runtime_data" : [],
       "primitives" : [
@@ -6792,7 +6793,7 @@
       ]
     },
     {
-      "name" : "random_walk322",
+      "name" : "random_walk323",
       "id" : 29,
       "runtime_data" : [],
       "primitives" : [
@@ -6810,7 +6811,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 322,
+            "line" : 323,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           }
@@ -6818,7 +6819,7 @@
       ]
     },
     {
-      "name" : "random_walk315",
+      "name" : "random_walk316",
       "id" : 30,
       "runtime_data" : [],
       "primitives" : [
@@ -6840,7 +6841,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 315,
+            "line" : 316,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           }
@@ -6848,7 +6849,7 @@
       ]
     },
     {
-      "name" : "random_walk330",
+      "name" : "random_walk331",
       "id" : 31,
       "runtime_data" : [],
       "primitives" : [
@@ -6889,7 +6890,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 330,
+            "line" : 331,
             "column" : 16,
             "source_fragment" : "meta.flowlet_time_diff = standard_metadata.ingress_global_timestamp - meta.flowlet_last_stamp"
           }
@@ -6897,7 +6898,7 @@
       ]
     },
     {
-      "name" : "random_walk340",
+      "name" : "random_walk341",
       "id" : 32,
       "runtime_data" : [],
       "primitives" : [
@@ -6919,7 +6920,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 340,
+            "line" : 341,
             "column" : 20,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           }
@@ -6938,7 +6939,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 341,
+            "line" : 342,
             "column" : 20,
             "source_fragment" : "meta.current_seg = meta.sr_id"
           }
@@ -6946,7 +6947,7 @@
       ]
     },
     {
-      "name" : "random_walk288",
+      "name" : "random_walk289",
       "id" : 33,
       "runtime_data" : [],
       "primitives" : [
@@ -6964,7 +6965,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 288,
+            "line" : 289,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           }
@@ -6972,7 +6973,7 @@
       ]
     },
     {
-      "name" : "random_walk375",
+      "name" : "random_walk376",
       "id" : 34,
       "runtime_data" : [],
       "primitives" : [
@@ -6998,7 +6999,7 @@
       ]
     },
     {
-      "name" : "random_walk377",
+      "name" : "random_walk378",
       "id" : 35,
       "runtime_data" : [],
       "primitives" : [
@@ -7016,7 +7017,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 377,
+            "line" : 378,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           }
@@ -7037,11 +7038,11 @@
       "init_table" : "node_2",
       "tables" : [
         {
-          "name" : "tbl_random_walk315",
+          "name" : "tbl_random_walk316",
           "id" : 0,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 315,
+            "line" : 316,
             "column" : 12,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0)"
           },
@@ -7053,10 +7054,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [30],
-          "actions" : ["random_walk315"],
+          "actions" : ["random_walk316"],
           "base_default_next" : "node_4",
           "next_tables" : {
-            "random_walk315" : "node_4"
+            "random_walk316" : "node_4"
           },
           "default_entry" : {
             "action_id" : 30,
@@ -7066,11 +7067,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk320",
+          "name" : "tbl_random_walk321",
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 320,
+            "line" : 321,
             "column" : 43,
             "source_fragment" : "="
           },
@@ -7082,10 +7083,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [28],
-          "actions" : ["random_walk320"],
-          "base_default_next" : "tbl_random_walk322",
+          "actions" : ["random_walk321"],
+          "base_default_next" : "tbl_random_walk323",
           "next_tables" : {
-            "random_walk320" : "tbl_random_walk322"
+            "random_walk321" : "tbl_random_walk323"
           },
           "default_entry" : {
             "action_id" : 28,
@@ -7095,11 +7096,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk322",
+          "name" : "tbl_random_walk323",
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 322,
+            "line" : 323,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           },
@@ -7111,10 +7112,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [29],
-          "actions" : ["random_walk322"],
+          "actions" : ["random_walk323"],
           "base_default_next" : "node_8",
           "next_tables" : {
-            "random_walk322" : "node_8"
+            "random_walk323" : "node_8"
           },
           "default_entry" : {
             "action_id" : 29,
@@ -7128,7 +7129,7 @@
           "id" : 3,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 329,
+            "line" : 330,
             "column" : 16,
             "source_fragment" : "read_flowlet_registers()"
           },
@@ -7141,9 +7142,9 @@
           "direct_meters" : null,
           "action_ids" : [9],
           "actions" : ["MyIngress.read_flowlet_registers"],
-          "base_default_next" : "tbl_random_walk330",
+          "base_default_next" : "tbl_random_walk331",
           "next_tables" : {
-            "MyIngress.read_flowlet_registers" : "tbl_random_walk330"
+            "MyIngress.read_flowlet_registers" : "tbl_random_walk331"
           },
           "default_entry" : {
             "action_id" : 9,
@@ -7153,11 +7154,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk330",
+          "name" : "tbl_random_walk331",
           "id" : 4,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 330,
+            "line" : 331,
             "column" : 39,
             "source_fragment" : "="
           },
@@ -7169,10 +7170,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [31],
-          "actions" : ["random_walk330"],
+          "actions" : ["random_walk331"],
           "base_default_next" : "node_11",
           "next_tables" : {
-            "random_walk330" : "node_11"
+            "random_walk331" : "node_11"
           },
           "default_entry" : {
             "action_id" : 31,
@@ -7186,7 +7187,7 @@
           "id" : 5,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 334,
+            "line" : 335,
             "column" : 20,
             "source_fragment" : "update_flowlet_id()"
           },
@@ -7237,7 +7238,7 @@
           "actions" : ["MyIngress.ipv4_forward", "MyIngress.set_sr_group", "NoAction"],
           "base_default_next" : "node_21",
           "next_tables" : {
-            "MyIngress.set_sr_group" : "tbl_random_walk340",
+            "MyIngress.set_sr_group" : "tbl_random_walk341",
             "MyIngress.ipv4_forward" : "node_21",
             "NoAction" : "node_21"
           },
@@ -7249,11 +7250,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk340",
+          "name" : "tbl_random_walk341",
           "id" : 7,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 340,
+            "line" : 341,
             "column" : 20,
             "source_fragment" : "sr_id_register.read(meta.sr_id, 0); ..."
           },
@@ -7265,10 +7266,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [32],
-          "actions" : ["random_walk340"],
+          "actions" : ["random_walk341"],
           "base_default_next" : "MyIngress.segment_hop_1",
           "next_tables" : {
-            "random_walk340" : "MyIngress.segment_hop_1"
+            "random_walk341" : "MyIngress.segment_hop_1"
           },
           "default_entry" : {
             "action_id" : 32,
@@ -7562,7 +7563,7 @@
           "id" : 13,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 357,
+            "line" : 358,
             "column" : 20,
             "source_fragment" : "reverse_segment_list()"
           },
@@ -7587,11 +7588,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk288",
+          "name" : "tbl_random_walk289",
           "id" : 14,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 288,
+            "line" : 289,
             "column" : 12,
             "source_fragment" : "hdr.sr[0].label"
           },
@@ -7603,10 +7604,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [33],
-          "actions" : ["random_walk288"],
+          "actions" : ["random_walk289"],
           "base_default_next" : "MyIngress.sr_tbl",
           "next_tables" : {
-            "random_walk288" : "MyIngress.sr_tbl"
+            "random_walk289" : "MyIngress.sr_tbl"
           },
           "default_entry" : {
             "action_id" : 33,
@@ -7620,7 +7621,7 @@
           "id" : 15,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 286,
+            "line" : 287,
             "column" : 10,
             "source_fragment" : "sr_tbl"
           },
@@ -7659,7 +7660,7 @@
           "id" : 16,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 300,
+            "line" : 301,
             "column" : 10,
             "source_fragment" : "ecmp_group_to_nhop"
           },
@@ -7699,11 +7700,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk375",
+          "name" : "tbl_random_walk376",
           "id" : 17,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 375,
+            "line" : 376,
             "column" : 43,
             "source_fragment" : "="
           },
@@ -7715,10 +7716,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [34],
-          "actions" : ["random_walk375"],
-          "base_default_next" : "tbl_random_walk377",
+          "actions" : ["random_walk376"],
+          "base_default_next" : "tbl_random_walk378",
           "next_tables" : {
-            "random_walk375" : "tbl_random_walk377"
+            "random_walk376" : "tbl_random_walk378"
           },
           "default_entry" : {
             "action_id" : 34,
@@ -7728,11 +7729,11 @@
           }
         },
         {
-          "name" : "tbl_random_walk377",
+          "name" : "tbl_random_walk378",
           "id" : 18,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 377,
+            "line" : 378,
             "column" : 16,
             "source_fragment" : "hdr.sr.pop_front(1)"
           },
@@ -7744,10 +7745,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [35],
-          "actions" : ["random_walk377"],
+          "actions" : ["random_walk378"],
           "base_default_next" : null,
           "next_tables" : {
-            "random_walk377" : null
+            "random_walk378" : null
           },
           "default_entry" : {
             "action_id" : 35,
@@ -7764,7 +7765,7 @@
           "id" : 0,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 314,
+            "line" : 315,
             "column" : 11,
             "source_fragment" : "hdr.sr[0].isValid()"
           },
@@ -7779,7 +7780,7 @@
               }
             }
           },
-          "true_next" : "tbl_random_walk315",
+          "true_next" : "tbl_random_walk316",
           "false_next" : "node_8"
         },
         {
@@ -7787,7 +7788,7 @@
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 316,
+            "line" : 317,
             "column" : 15,
             "source_fragment" : "hdr.sr[0].label == meta.sr_id"
           },
@@ -7813,7 +7814,7 @@
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 318,
+            "line" : 319,
             "column" : 19,
             "source_fragment" : "hdr.sr[0].s == 1"
           },
@@ -7831,15 +7832,15 @@
               }
             }
           },
-          "true_next" : "tbl_random_walk320",
-          "false_next" : "tbl_random_walk322"
+          "true_next" : "tbl_random_walk321",
+          "false_next" : "tbl_random_walk323"
         },
         {
           "name" : "node_8",
           "id" : 3,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 327,
+            "line" : 328,
             "column" : 12,
             "source_fragment" : "hdr.ipv4.isValid() && !(hdr.sr[0].isValid())"
           },
@@ -7886,7 +7887,7 @@
           "id" : 4,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 333,
+            "line" : 334,
             "column" : 20,
             "source_fragment" : "meta.flowlet_time_diff > meta.flowlet_timeout_value"
           },
@@ -7932,7 +7933,7 @@
           "id" : 5,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 363,
+            "line" : 364,
             "column" : 11,
             "source_fragment" : "hdr.sr[0].isValid()"
           },
@@ -7948,14 +7949,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_random_walk288"
+          "true_next" : "tbl_random_walk289"
         },
         {
           "name" : "node_25",
           "id" : 6,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 371,
+            "line" : 372,
             "column" : 15,
             "source_fragment" : "(hdr.ethernet.etherType == TYPE_SR) && (hdr.sr[0].label & 1<<18) != 0"
           },
@@ -8011,7 +8012,7 @@
           "id" : 7,
           "source_info" : {
             "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-            "line" : 373,
+            "line" : 374,
             "column" : 19,
             "source_fragment" : "hdr.sr[0].s == 1"
           },
@@ -8029,8 +8030,8 @@
               }
             }
           },
-          "true_next" : "tbl_random_walk375",
-          "false_next" : "tbl_random_walk377"
+          "true_next" : "tbl_random_walk376",
+          "false_next" : "tbl_random_walk378"
         }
       ]
     },
@@ -8039,7 +8040,7 @@
       "id" : 1,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-        "line" : 387,
+        "line" : 388,
         "column" : 8,
         "source_fragment" : "MyEgress"
       },
@@ -8055,7 +8056,7 @@
       "id" : 0,
       "source_info" : {
         "filename" : "/home/p4/p4-utils/stage-2024/p4/random_walk.p4",
-        "line" : 404,
+        "line" : 405,
         "column" : 8,
         "source_fragment" : "update_checksum( ..."
       },

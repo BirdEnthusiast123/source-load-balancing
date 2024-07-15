@@ -145,7 +145,7 @@ control MyIngress(inout headers hdr,
         hdr.sr[0].ttl = hdr.ipv4.ttl - 1;
         // hdr.sr[0].s = 1;
 
-        // setup stack which will be inversed later
+        // setup stack which will be inversed and inserted in the header later
         meta.tmp_sr.push_front(1);
         meta.tmp_sr[0].label = label;
         meta.tmp_sr[0].s = 1;
@@ -234,7 +234,8 @@ control MyIngress(inout headers hdr,
         size = 256;
     }
 
-    // Since the meta-dag is traversed in the same way the packet would, the segments can't be stacked in order, we need a fifo
+    // Since the meta-dag is traversed in the same way the packet would, the resulting segment list is inversed  
+    // the segments can't be stacked in order, we need a fifo
     action reverse_segment_list(){
         if(meta.tmp_sr_size >= 1){
             hdr.sr[0].label = meta.tmp_sr[meta.tmp_sr_size - 1].label;

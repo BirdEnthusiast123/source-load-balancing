@@ -68,6 +68,7 @@ struct metadata {
 
     sr_t[CONST_MAX_SR_HOPS]         tmp_sr;
     bit<8> tmp_sr_size;
+    bit<8> sr_size;
     
     bit<20> current_seg;
     bit<14> packet_hash;

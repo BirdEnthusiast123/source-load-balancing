@@ -105,10 +105,11 @@ class RoutingController(object):
 
     def initialize_dags(self, src, dst):
         (gofor_src, gofor_dst) = (self.mininet_to_gofor[src], self.mininet_to_gofor[dst])
+        index_dict = {}
         for delay in self.dags[(gofor_src, gofor_dst)].keys():
             dag = self.dags[(gofor_src, gofor_dst)][delay]["dag"]
             # since multiple paths can travserse a node in a meta-dag, we need to keep track of how many hops there are per path and not in total
-            self.traversal_and_initialize_dag(dag, src, gofor_dst, self.mininet_to_gofor[src], index_dict={})
+            self.traversal_and_initialize_dag(dag, src, gofor_dst, self.mininet_to_gofor[src], index_dict)
     
     # necessary if current node has multiple paths passing through
     def get_nb_of_seg_hops(self, dag: get_dag.nx.MultiDiGraph, hop_dst, path_weight):
@@ -118,7 +119,7 @@ class RoutingController(object):
             nb = (nb + 1) if (path_weight == (out_edge[-1]["sum_weight"] - out_edge[-1]["weight"])) else nb
         return nb
 
-    def traversal_and_initialize_dag(self, dag: get_dag.nx.MultiDiGraph, src, dst, current_segment, depth=1, current_sum_of_costs=0, index_dict={}):
+    def traversal_and_initialize_dag(self, dag: get_dag.nx.MultiDiGraph, src, dst, current_segment, index_dict, depth=1, current_sum_of_costs=0):
         if(int(current_segment) == int(dst)):
             return
 
@@ -126,7 +127,6 @@ class RoutingController(object):
         for edge in out_edges:
             (edge_src, edge_dst, edge_attributes) = (edge[0], edge[1], edge[-1])
 
-            print("HERE", current_sum_of_costs, edge)
             if((current_sum_of_costs + edge_attributes["weight"]) != edge_attributes["sum_weight"]):
                 continue
 
@@ -135,10 +135,8 @@ class RoutingController(object):
 
             segment = self.get_link_id(edge_src, edge_dst) if (edge_attributes["node_adj"] == "Adj") else edge_dst
             index_dict[(edge_src, current_sum_of_costs)] = (index_dict[(edge_src, current_sum_of_costs)] + 1) if (index_dict.get((edge_src, current_sum_of_costs)) is not None) else 0
-            print(edge, index_dict)
             if(int(edge_dst) != int(dst)):
                 nb_of_seg_hops = self.get_nb_of_seg_hops(dag, edge_dst, future_path_weight)
-                print(nb_of_seg_hops)
                 self.controllers[src].table_add("segment_hop_" + str(depth), 
                                                 "set_segment_hop", 
                                                 [str(dst), str(current_segment), str(current_sum_of_costs), str(index_dict[(edge_src, current_sum_of_costs)])], 
@@ -151,7 +149,7 @@ class RoutingController(object):
                                                 [str(dst), str(current_segment), str(current_sum_of_costs), str(index_dict[(edge_src, current_sum_of_costs)])], 
                                                 [str(segment), str(rtt_with_leniency)])
                 
-            self.traversal_and_initialize_dag(dag, src, dst, edge_dst, depth + 1, current_sum_of_costs + edge_attributes["weight"], index_dict)
+            self.traversal_and_initialize_dag(dag, src, dst, edge_dst, index_dict, depth + 1, current_sum_of_costs + edge_attributes["weight"])
 
     def add_sr_forward_entry(self, src, dest_segment, next_hop):
         if(src == self.topo.edges[(src, next_hop)]["node1"]):
