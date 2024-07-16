@@ -35,8 +35,9 @@
         ["random_t_0", 32, false],
         ["key_0", 20, false],
         ["metadata.sr_id", 20, false],
+        ["metadata.tmp_sr_size", 8, false],
+        ["metadata.sr_size", 8, false],
         ["metadata.current_seg", 20, false],
-        ["metadata.sr_dest", 20, false],
         ["metadata.packet_hash", 14, false],
         ["metadata.meta_path_differentiator", 14, false],
         ["metadata.sr_group_id", 14, false],
@@ -47,7 +48,7 @@
         ["metadata.flowlet_timeout_value", 48, false],
         ["metadata.flowlet_last_stamp", 48, false],
         ["metadata.flowlet_time_diff", 48, false],
-        ["_padding_0", 6, false]
+        ["_padding_0", 2, false]
       ]
     },
     {
@@ -225,6 +226,62 @@
       "header_type" : "sr_t",
       "metadata" : false,
       "pi_omit" : true
+    },
+    {
+      "name" : "userMetadata.tmp_sr[0]",
+      "id" : 13,
+      "header_type" : "sr_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "userMetadata.tmp_sr[1]",
+      "id" : 14,
+      "header_type" : "sr_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "userMetadata.tmp_sr[2]",
+      "id" : 15,
+      "header_type" : "sr_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "userMetadata.tmp_sr[3]",
+      "id" : 16,
+      "header_type" : "sr_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "userMetadata.tmp_sr[4]",
+      "id" : 17,
+      "header_type" : "sr_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "userMetadata.tmp_sr[5]",
+      "id" : 18,
+      "header_type" : "sr_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "userMetadata.tmp_sr[6]",
+      "id" : 19,
+      "header_type" : "sr_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "userMetadata.tmp_sr[7]",
+      "id" : 20,
+      "header_type" : "sr_t",
+      "metadata" : false,
+      "pi_omit" : true
     }
   ],
   "header_stacks" : [
@@ -234,6 +291,13 @@
       "header_type" : "sr_t",
       "size" : 8,
       "header_ids" : [5, 6, 7, 8, 9, 10, 11, 12]
+    },
+    {
+      "name" : "userMetadata.tmp_sr",
+      "id" : 1,
+      "header_type" : "sr_t",
+      "size" : 8,
+      "header_ids" : [13, 14, 15, 16, 17, 18, 19, 20]
     }
   ],
   "header_union_types" : [],

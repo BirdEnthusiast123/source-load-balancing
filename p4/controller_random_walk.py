@@ -1,6 +1,6 @@
 from p4utils.utils.helper import load_topo
 from p4utils.utils.sswitch_thrift_API import SimpleSwitchThriftAPI
-# requires sim.py which requires a configures config.default.ini file
+# requires sim.py which requires a filled in config.default.ini file
 import get_dag
 
 base_name_topo_gofor = "topo-gofor.txt"
@@ -9,18 +9,19 @@ base_flow_group = "0"
 class RoutingController(object):
 
     def __init__(self):
+        # self.clean_workspace()
         self.topo = load_topo('topology.json')
+        self.init_translation_dicts() # gofor code does not support chars, p4-utils does not support the absence of "s" or "h" in the name
+        self.format_topo_for_gofor()
 
         self.controllers = {}
         self.connect_to_switches()
         self.reset_states()
-
-        self.init_translation_dicts() # gofor code does not support chars, p4-utils does not support the absence of "s" or "h" in the name
-
-        self.format_topo_for_gofor()
+        
         self.dags = get_dag.get_all_segment_lists(base_name_topo_gofor)
         self.ingress_routers = [x for x in self.topo.get_p4switches() if self.topo.nodes[x].get("host_prefix") is not None]
 
+    def init_routing(self):
         self.init_registers()
         self.initialize_tables()
         self.init_sr_forward_node()
@@ -62,13 +63,13 @@ class RoutingController(object):
         # Grouping of flows (unused as of now, only serves as a destination marker not as a real discriminator of flow according to their needs)
         for ir in self.ingress_routers:
             # Init forwarding to hosts directly connected to router
-            host_prefix = self.topo.nodes[ir]["host_prefix"]
-            host = self.topo.get_hosts_connected_to(ir)[0]
-            link = self.topo.edges[(ir, host)]
-            if(ir == link["node1"]):
-                self.controllers[ir].table_add("ipv4_lpm", "ipv4_forward", [host_prefix], [link["addr2"], str(link["port1"])])
-            else:
-                self.controllers[ir].table_add("ipv4_lpm", "ipv4_forward", [host_prefix], [link["addr1"], str(link["port2"])])
+            for host in self.topo.get_hosts_connected_to(ir):
+                link = self.topo.edges[(ir, host)]
+                ip_addr = self.topo.get_host_ip(host)
+                if(ir == link["node1"]):
+                    self.controllers[ir].table_add("ipv4_lpm", "ipv4_forward", [ip_addr + "/32"], [link["addr2"], str(link["port1"])])
+                else:
+                    self.controllers[ir].table_add("ipv4_lpm", "ipv4_forward", [ip_addr + "/32"], [link["addr1"], str(link["port2"])])
 
             # Init forwarding to distant hosts
             for ir2 in self.ingress_routers:
@@ -207,7 +208,11 @@ class RoutingController(object):
                 dest_segment = self.get_link_id(src_id, self.mininet_to_gofor[neighbor])
                 self.add_sr_forward_entry(switch, dest_segment, neighbor)
 
+    def clean_workspace(self):
+        if get_dag.os.path.exists("/".join(["gofor_source/data/model-real", base_name_topo_gofor, ""])):
+            get_dag.shutil.rmtree("/".join(["gofor_source/data/model-real", base_name_topo_gofor, ""]))
+
+
 if __name__ == "__main__":
-    if get_dag.os.path.exists("/".join(["gofor_source/data/model-real", base_name_topo_gofor, ""])):
-        get_dag.shutil.rmtree("/".join(["gofor_source/data/model-real", base_name_topo_gofor, ""]))
     controller = RoutingController()
+    controller.init_routing()
