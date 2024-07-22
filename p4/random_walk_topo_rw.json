@@ -1,5 +1,5 @@
 {
-    "p4_src": "random_walk.p4",
+    "p4_src": "randomwalk.p4",
     "cli": true,
     "enable_log": true,
     "exec_scripts": [

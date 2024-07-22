@@ -1,18 +1,18 @@
 import sys
-if(len(sys.argv) != 4):
-    print(f"Usage : sudo -E {sys.argv[0]} distribution.p4/random_walk.p4 <flow size ex: 100M, 15G> <nb of iperf hosts>")
+if(len(sys.argv) != 5):
+    print(f"Usage : sudo -E {sys.argv[0]} distribution.p4/randomwalk.p4 <flow size ex: 100M, 15G> <nb of iperf hosts> <flowlet leniency factor>")
     exit()
-(solution_version, flow_size, nb_of_hosts) = (x for x in sys.argv[1:])
+(solution_version, flow_size, nb_of_hosts, flowlet_leniency_factor) = (x for x in sys.argv[1:])
 
 import os
 from p4utils.mininetlib.network_API import NetworkAPI
 
 if solution_version == "distribution":
     import controller_distribution as Controller
-elif solution_version == "random_walk":
+elif solution_version == "randomwalk":
     import controller_random_walk as Controller
 
-NB_OF_SIMS = 100
+NB_OF_SIMS = 50
 output_folder = "output_data"
 
 net = NetworkAPI()
@@ -64,6 +64,7 @@ net.startNetwork()
 
 # Initialize controller
 controller = Controller.RoutingController()
+controller.flowlet_leniency_factor = float(flowlet_leniency_factor)
 
 # Fetch stats
 mininet_hosts = [net.net.get(x) for x in hosts]
@@ -83,7 +84,7 @@ for i in range(NB_OF_SIMS):
     for mininet_host in mininet_hosts:
         output[mininet_host].append(mininet_host.waitOutput().strip())
 
-output_file_name = f"{solution_version}_{nb_of_hosts}_{flow_size}.csv"
+output_file_name = f"{solution_version}_{nb_of_hosts}_{flow_size}_{flowlet_leniency_factor}.csv"
 
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)

@@ -20,6 +20,8 @@ class RoutingController(object):
         self.dags = get_dag.get_all_segment_lists(base_name_topo_gofor)
         self.ingress_routers = [x for x in self.topo.get_p4switches() if self.topo.nodes[x].get("host_prefix") is not None]
 
+        self.flowlet_leniency_factor = 1.1 # 10% of the RTT 
+
     def init_routing(self):
         self.init_registers()
         self.initialize_tables()
@@ -104,7 +106,7 @@ class RoutingController(object):
         seg_list_index = 0
         for delay in self.dags[(gofor_src, gofor_dst)].keys():
             for seg_list in self.dags[(gofor_src, gofor_dst)][delay]["seg_lists"]:
-                segment_list_arg = [str(int(int(delay) * 2 * 1000 * 1.1))]
+                segment_list_arg = [str(int(int(delay) * 2 * 1000 * self.flowlet_leniency_factor))]
                 for segment in seg_list:
                     if(segment[-1]["node_adj"] == "Adj"):
                         (seg_src, seg_dst) = (segment[0], segment[1])

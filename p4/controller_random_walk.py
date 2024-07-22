@@ -21,6 +21,8 @@ class RoutingController(object):
         self.dags = get_dag.get_all_segment_lists(base_name_topo_gofor)
         self.ingress_routers = [x for x in self.topo.get_p4switches() if self.topo.nodes[x].get("host_prefix") is not None]
 
+        self.flowlet_leniency_factor = 1.1 # 10% of the RTT 
+
     def init_routing(self):
         self.init_registers()
         self.initialize_tables()
@@ -144,7 +146,7 @@ class RoutingController(object):
                                                 [str(segment), str(future_path_weight), str(nb_of_seg_hops)])
             else:
                 rtt_in_ms = (current_sum_of_costs + edge_attributes["weight"]) * 1000 * 2
-                rtt_with_leniency = int(rtt_in_ms * 1.1)
+                rtt_with_leniency = int(rtt_in_ms * self.flowlet_leniency_factor)
                 self.controllers[src].table_add("segment_hop_" + str(depth), 
                                                 "set_last_segment_hop", 
                                                 [str(dst), str(current_segment), str(current_sum_of_costs), str(index_dict[(edge_src, current_sum_of_costs)])], 
