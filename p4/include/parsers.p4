@@ -55,10 +55,13 @@ control MyDeparser(packet_out packet, in headers hdr) {
 
         //parsed headers have to be added again into the packet.
         packet.emit(hdr.ethernet);
+        // to remove
+        packet.emit(hdr.cpu);
         packet.emit(hdr.sr);
         packet.emit(hdr.ipv4);
 
         //Only emited if valid
         packet.emit(hdr.tcp);
+
     }
 }

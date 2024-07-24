@@ -59,43 +59,44 @@ net.l3()
 
 # Nodes general options
 # net.enableLogAll()
-net.disableCli()
+# net.disableCli()
+net.enableCpuPortAll()
 net.startNetwork()
 
-# Initialize controller
-controller = Controller.RoutingController()
-controller.flowlet_leniency_factor = float(flowlet_leniency_factor)
+# # Initialize controller
+# controller = Controller.RoutingController()
+# controller.flowlet_leniency_factor = float(flowlet_leniency_factor)
 
-# Fetch stats
-mininet_hosts = [net.net.get(x) for x in hosts]
-server_node = net.net.get("h20")
-output = {x: [] for x in mininet_hosts}
+# # Fetch stats
+# mininet_hosts = [net.net.get(x) for x in hosts]
+# server_node = net.net.get("h20")
+# output = {x: [] for x in mininet_hosts}
 
-# Simulate
-server_node.sendCmd("iperf --server --daemon")
+# # Simulate
+# server_node.sendCmd("iperf --server --daemon")
 
-for i in range(NB_OF_SIMS):
-    controller.reset_states()
-    controller.init_routing()
+# for i in range(NB_OF_SIMS):
+#     controller.reset_states()
+#     controller.init_routing()
 
-    for mininet_host in mininet_hosts:
-        mininet_host.sendCmd(f"\\time -f \"%e\" iperf -c 10.2.20.2 -n {flow_size} > /dev/null")
+#     for mininet_host in mininet_hosts:
+#         mininet_host.sendCmd(f"\\time -f \"%e\" iperf -c 10.2.20.2 -n {flow_size} > /dev/null")
 
-    for mininet_host in mininet_hosts:
-        output[mininet_host].append(mininet_host.waitOutput().strip())
+#     for mininet_host in mininet_hosts:
+#         output[mininet_host].append(mininet_host.waitOutput().strip())
 
-output_file_name = f"{solution_version}_{nb_of_hosts}_{flow_size}_{flowlet_leniency_factor}.csv"
+# output_file_name = f"{solution_version}_{nb_of_hosts}_{flow_size}_{flowlet_leniency_factor}.csv"
 
-if not os.path.exists(output_folder):
-    os.makedirs(output_folder)
+# if not os.path.exists(output_folder):
+#     os.makedirs(output_folder)
 
-with open("/".join([output_folder, output_file_name]), "w") as f:
-    keys_string = " ".join([key.name for key in output.keys()])
-    f.write(keys_string + "\n")
+# with open("/".join([output_folder, output_file_name]), "w") as f:
+#     keys_string = " ".join([key.name for key in output.keys()])
+#     f.write(keys_string + "\n")
 
-    for i in range(NB_OF_SIMS):
-        values_str = ""
-        for host in output:
-            values_str += str(output[host][i]) + " "
-        f.write(values_str + "\n")
+#     for i in range(NB_OF_SIMS):
+#         values_str = ""
+#         for host in output:
+#             values_str += str(output[host][i]) + " "
+#         f.write(values_str + "\n")
 

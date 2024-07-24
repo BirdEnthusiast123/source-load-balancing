@@ -63,6 +63,10 @@ header tcp_t{
     bit<16> urgentPtr;
 }
 
+struct digest_timestamp_t {
+    bit<64> time_spent_in_router;
+}
+
 struct metadata {
     bit<20> sr_id;
 
@@ -82,6 +86,18 @@ struct metadata {
     bit<48> flowlet_timeout_value;
     bit<48> flowlet_last_stamp;
     bit<48> flowlet_time_diff;
+
+    digest_timestamp_t digest;
+    @field_list(0)
+    bit<48> ingress_ts;
+}
+
+
+const bit<16> L2_LEARN_ETHER_TYPE = 0x1234;
+header cpu_t{
+    bit<64> time_spent_in_pipeline;
+    bit<64> ingress;
+    bit<64> egress;
 }
 
 struct headers {
@@ -89,4 +105,5 @@ struct headers {
     sr_t[CONST_MAX_SR_HOPS]         sr;
     ipv4_t                          ipv4;
     tcp_t                           tcp;
+    cpu_t                           cpu;
 }

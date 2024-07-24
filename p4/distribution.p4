@@ -296,6 +296,9 @@ control MyIngress(inout headers hdr,
     }
 
     apply {
+        meta.ingress_ts = standard_metadata.ingress_global_timestamp;
+        clone_preserving_field_list(CloneType.I2E, 100, 0);
+
         // Pop segment if the segment represents the current switch 
         if(hdr.sr[0].isValid()){
             sr_id_register.read(meta.sr_id, 0);
@@ -357,7 +360,19 @@ control MyEgress(inout headers hdr,
                  inout standard_metadata_t standard_metadata) {
 
     apply {
-
+        // meta.digest.time_spent_in_router = (bit<64>)(standard_metadata.egress_global_timestamp - standard_metadata.ingress_global_timestamp);
+        // digest<digest_timestamp_t>(1, meta.digest);
+        
+        // If ingress clone
+        if (standard_metadata.instance_type == 1){
+            hdr.cpu.setValid();
+            bit<48> temp = standard_metadata.egress_global_timestamp - ((bit<48>) standard_metadata.deq_timedelta);
+            hdr.cpu.time_spent_in_pipeline = (bit<64>)(temp - meta.ingress_ts);
+            hdr.cpu.ingress = (bit<64>) meta.ingress_ts;
+            hdr.cpu.egress = (bit<64>)temp;
+            hdr.ethernet.etherType = L2_LEARN_ETHER_TYPE;
+            truncate((bit<32>)38); //ether+cpu header
+        }
     }
 }
 

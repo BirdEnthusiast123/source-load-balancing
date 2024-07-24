@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 
-import os
-
 directory_name = "output_data"
 directory = os.fsencode(directory_name)
 
@@ -21,16 +19,35 @@ for file in os.listdir(directory):
         df_dict[characteristrics] = {}
         df_dict[characteristrics]["df"] = one_dimensional_df
 
-for key, df in df_dict.items():
-    print(key)
-    pass    
 
 
-temp_df = df_dict[("randomwalk", "5", "100M", "1.1")]["df"].copy()
-temp_df["distribution"] = df_dict[("distribution", "5", "100M", "1.1")]["df"]["distribution"]
-temp_df.distribution = temp_df.distribution.astype(float)
+figure, axis = plt.subplots(2, 2)
 
-print(temp_df)
+temp_df1 = df_dict[("randomwalk", "5", "1M", "1.1")]["df"].copy()
+temp_df1["distribution"] = df_dict[("distribution", "5", "1M", "1.1")]["df"]["distribution"]
+temp_df1.distribution = temp_df1.distribution.astype(float)
 
-ax = temp_df.plot.density()
-plt.savefig("test.png")
+temp_df2 = df_dict[("randomwalk", "5", "10M", "1.1")]["df"].copy()
+temp_df2["distribution"] = df_dict[("distribution", "5", "10M", "1.1")]["df"]["distribution"]
+temp_df2.distribution = temp_df2.distribution.astype(float)
+
+temp_df3 = df_dict[("randomwalk", "5", "10M", "1.1")]["df"].copy()
+temp_df3["distribution"] = df_dict[("distribution", "5", "10M", "1.1")]["df"]["distribution"]
+temp_df3.distribution = temp_df3.distribution.astype(float)
+
+temp_df4 = df_dict[("randomwalk", "5", "100M", "1.1")]["df"].copy()
+temp_df4["distribution"] = df_dict[("distribution", "5", "100M", "1.1")]["df"]["distribution"]
+temp_df4.distribution = temp_df4.distribution.astype(float)
+
+
+temp_df1.plot.density(ax=axis[0, 0])
+temp_df2.plot.density(ax=axis[0, 1])
+temp_df3.plot.density(ax=axis[1, 0])
+temp_df4.plot.density(ax=axis[1, 1])
+axis[0, 0].set_title("Title 1") 
+axis[0, 1].set_title("Title 2") 
+axis[1, 0].set_title("Title 3") 
+axis[1, 1].set_title("Title 4") 
+
+plt.tight_layout()
+plt.savefig("test.svg")

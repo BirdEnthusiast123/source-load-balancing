@@ -1,21 +1,33 @@
 from p4utils.utils.helper import load_topo
 from p4utils.utils.sswitch_thrift_API import SimpleSwitchThriftAPI
+import nnpy
+import struct
+import pandas
+from scapy.all import Ether, sniff, Packet, BitField, raw
 # requires sim.py which requires a configures config.default.ini file
 import get_dag
 
 base_name_topo_gofor = "topo-gofor.txt"
 base_flow_group = "0"
 
+class CpuHeader(Packet):
+    name = 'CpuPacket'
+    fields_desc = [BitField('time_spent_in_pipeline',0,64), BitField('ingress',0,64), BitField('egress',0,64)]
+
 class RoutingController(object):
 
     def __init__(self):
+        self.digest = [] # TODO to remove
+        self.cpu_array = [] # TODO to remove
         self.topo = load_topo('topology.json')
+        self.cpu_port =  self.topo.get_cpu_port_index("s9") # TODO REMOVE
         self.init_translation_dicts() # gofor code does not support chars, p4-utils does not support the absence of "s" or "h" in the name
         self.format_topo_for_gofor()
 
         self.controllers = {}
         self.connect_to_switches()
         self.reset_states()
+        self.controllers["s9"].mirroring_add(100, self.cpu_port) # TODO REMOVE
 
         self.dags = get_dag.get_all_segment_lists(base_name_topo_gofor)
         self.ingress_routers = [x for x in self.topo.get_p4switches() if self.topo.nodes[x].get("host_prefix") is not None]
@@ -177,6 +189,52 @@ class RoutingController(object):
                 dest_segment = self.get_link_id(src_id, self.mininet_to_gofor[neighbor])
                 self.add_sr_forward_entry(switch, dest_segment, neighbor)
 
+
+# digests which contain the time passed in the data plane pipeline
+    def unpack_digest(self, msg, num_samples):
+        starting_index = 32
+        for sample in range(num_samples):
+            time_passed_in_pipeline = struct.unpack(">Q", msg[starting_index:starting_index+8])
+            starting_index +=8
+            self.digest.append(time_passed_in_pipeline[0])
+
+    def recv_msg_digest(self, msg):
+        topic, device_id, ctx_id, list_id, buffer_id, num = struct.unpack("<iQiiQi", msg[:32])
+        self.unpack_digest(msg, num)
+        #Acknowledge digest
+        self.controllers["s9"].client.bm_learning_ack_buffer(ctx_id, list_id, buffer_id)
+
+    def run_digest_loop(self):
+        sub = nnpy.Socket(nnpy.AF_SP, nnpy.SUB)
+        notifications_socket = self.controllers["s9"].client.bm_mgmt_get_info().notifications_socket
+        sub.connect(notifications_socket)
+        sub.setsockopt(nnpy.SUB, nnpy.SUB_SUBSCRIBE, '')
+        i = 0
+        while i < 5000:
+            msg = sub.recv()
+            self.recv_msg_digest(msg)
+            i += 1
+
+    def recv_msg_cpu(self, pkt):
+        packet = Ether(raw(pkt))
+        if packet.type == 0x1234:
+            cpu_header = CpuHeader(bytes(packet.load))
+            print(cpu_header.ingress, cpu_header.egress)
+            self.cpu_array.append(cpu_header.time_spent_in_pipeline)
+            if(len(self.cpu_array) % 100 == 0):
+                print(pandas.DataFrame(self.cpu_array).describe())
+
+
+    def run_cpu_port_loop(self):
+        cpu_port_intf = str(self.topo.get_cpu_port_intf("s9").replace("eth0", "eth1"))
+        sniff(iface=cpu_port_intf, prn=self.recv_msg_cpu)
+
 if __name__ == "__main__":
     controller = RoutingController()
     controller.init_routing()
+    controller.run_cpu_port_loop()
+
+    times_spent_in_pipeline = [x - controller.digest[i-1] for (i, x) in enumerate(controller.digest[1:])]
+    times_spent_in_pipeline = [x for x in times_spent_in_pipeline if abs(x) < 4000]
+    print(pandas.DataFrame(times_spent_in_pipeline).describe())
+        
