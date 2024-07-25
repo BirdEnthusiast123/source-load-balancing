@@ -59,7 +59,7 @@ net.l3()
 
 # Nodes general options
 # net.enableLogAll()
-# net.disableCli()
+net.disableCli()
 net.enableCpuPortAll()
 net.startNetwork()
 
