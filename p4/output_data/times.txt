@@ -1,0 +1,183 @@
+distribution 1M 3 1.1
+54.67
+distribution 1M 5 1.1
+80.50
+distribution 1M 7 1.1
+105.48
+distribution 10M 3 1.1
+324.75
+distribution 10M 5 1.1
+509.65
+distribution 10M 7 1.1
+722.02
+distribution 100M 3 1.1
+3020.76
+distribution 100M 5 1.1
+5621.89
+distribution 100M 7 1.1
+6874.03
+distribution 1M 3 1.2
+60.89
+distribution 1M 5 1.2
+88.05
+distribution 1M 7 1.2
+105.38
+distribution 10M 3 1.2
+306.66
+distribution 10M 5 1.2
+500.59
+distribution 10M 7 1.2
+706.44
+distribution 100M 3 1.2
+2746.70
+distribution 100M 5 1.2
+Command exited with non-zero status 1
+933.16
+distribution 100M 7 1.2
+6473.51
+distribution 1M 3 1.3
+54.54
+distribution 1M 5 1.3
+78.97
+distribution 1M 7 1.3
+102.06
+distribution 10M 3 1.3
+300.34
+distribution 10M 5 1.3
+488.99
+distribution 10M 7 1.3
+687.74
+distribution 100M 3 1.3
+2724.72
+distribution 100M 5 1.3
+4587.27
+distribution 100M 7 1.3
+6495.67
+distribution 1M 3 1.4
+54.58
+distribution 1M 5 1.4
+78.74
+distribution 1M 7 1.4
+102.33
+distribution 10M 3 1.4
+299.94
+distribution 10M 5 1.4
+493.56
+distribution 10M 7 1.4
+692.14
+distribution 100M 3 1.4
+2714.34
+distribution 100M 5 1.4
+4644.70
+distribution 100M 7 1.4
+6517.20
+distribution 1M 3 1.5
+56.59
+distribution 1M 5 1.5
+79.35
+distribution 1M 7 1.5
+104.63
+distribution 10M 3 1.5
+352.56
+distribution 10M 5 1.5
+493.61
+distribution 10M 7 1.5
+702.78
+distribution 100M 3 1.5
+2763.44
+distribution 100M 5 1.5
+4617.85
+distribution 100M 7 1.5
+6590.45
+random_walk 1M 3 1.1
+62.52
+random_walk 1M 5 1.1
+90.56
+random_walk 1M 7 1.1
+117.02
+random_walk 10M 3 1.1
+351.65
+random_walk 10M 5 1.1
+582.89
+random_walk 10M 7 1.1
+820.16
+random_walk 100M 3 1.1
+3247.29
+random_walk 100M 5 1.1
+5371.39
+random_walk 100M 7 1.1
+7810.85
+random_walk 1M 3 1.2
+68.44
+random_walk 1M 5 1.2
+104.48
+random_walk 1M 7 1.2
+132.64
+random_walk 10M 3 1.2
+432.69
+random_walk 10M 5 1.2
+676.04
+random_walk 10M 7 1.2
+884.41
+random_walk 100M 3 1.2
+3371.12
+random_walk 100M 5 1.2
+5638.82
+random_walk 100M 7 1.2
+7792.47
+random_walk 1M 3 1.3
+63.95
+random_walk 1M 5 1.3
+90.41
+random_walk 1M 7 1.3
+120.93
+random_walk 10M 3 1.3
+359.94
+random_walk 10M 5 1.3
+589.73
+random_walk 10M 7 1.3
+3012.93
+random_walk 100M 3 1.3
+3353.10
+random_walk 100M 5 1.3
+5542.59
+random_walk 100M 7 1.3
+7837.62
+random_walk 1M 3 1.4
+64.40
+random_walk 1M 5 1.4
+92.71
+random_walk 1M 7 1.4
+120.04
+random_walk 10M 3 1.4
+357.38
+random_walk 10M 5 1.4
+599.87
+random_walk 10M 7 1.4
+Command exited with non-zero status 1
+1480.82
+random_walk 100M 3 1.4
+3277.77
+random_walk 100M 5 1.4
+5794.19
+random_walk 100M 7 1.4
+8682.77
+random_walk 1M 3 1.5
+64.33
+random_walk 1M 5 1.5
+92.12
+random_walk 1M 7 1.5
+121.24
+random_walk 10M 3 1.5
+Command exited with non-zero status 1
+1414.47
+random_walk 10M 5 1.5
+2557.96
+random_walk 10M 7 1.5
+1763.27
+random_walk 100M 3 1.5
+3902.61
+random_walk 100M 5 1.5
+5535.84
+random_walk 100M 7 1.5
+8430.77

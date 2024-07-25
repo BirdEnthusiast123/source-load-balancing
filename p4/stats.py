@@ -23,21 +23,21 @@ for file in os.listdir(directory):
 
 figure, axis = plt.subplots(2, 2)
 
-temp_df1 = df_dict[("randomwalk", "5", "1M", "1.1")]["df"].copy()
-temp_df1["distribution"] = df_dict[("distribution", "5", "1M", "1.1")]["df"]["distribution"]
-temp_df1.distribution = temp_df1.distribution.astype(float)
+temp_df1 = df_dict[("ecmp", "3", "1M")]["df"].copy()
+temp_df1["randomwalk"] = df_dict[("randomwalk", "3", "1M", "1.1")]["df"]["randomwalk"]
+temp_df1.randomwalk = temp_df1.randomwalk.astype(float)
 
-temp_df2 = df_dict[("randomwalk", "5", "10M", "1.1")]["df"].copy()
-temp_df2["distribution"] = df_dict[("distribution", "5", "10M", "1.1")]["df"]["distribution"]
-temp_df2.distribution = temp_df2.distribution.astype(float)
+temp_df2 = df_dict[("ecmp", "3", "10M")]["df"].copy()
+temp_df2["randomwalk"] = df_dict[("randomwalk", "3", "10M", "1.1")]["df"]["randomwalk"]
+temp_df2.randomwalk = temp_df2.randomwalk.astype(float)
 
-temp_df3 = df_dict[("randomwalk", "5", "10M", "1.1")]["df"].copy()
-temp_df3["distribution"] = df_dict[("distribution", "5", "10M", "1.1")]["df"]["distribution"]
-temp_df3.distribution = temp_df3.distribution.astype(float)
+temp_df3 = df_dict[("ecmp", "3", "10M")]["df"].copy()
+temp_df3["randomwalk"] = df_dict[("randomwalk", "3", "10M", "1.1")]["df"]["randomwalk"]
+temp_df3.randomwalk = temp_df3.randomwalk.astype(float)
 
-temp_df4 = df_dict[("randomwalk", "5", "100M", "1.1")]["df"].copy()
-temp_df4["distribution"] = df_dict[("distribution", "5", "100M", "1.1")]["df"]["distribution"]
-temp_df4.distribution = temp_df4.distribution.astype(float)
+temp_df4 = df_dict[("ecmp", "3", "100M")]["df"].copy()
+temp_df4["randomwalk"] = df_dict[("randomwalk", "3", "100M", "1.1")]["df"]["randomwalk"]
+temp_df4.randomwalk = temp_df4.randomwalk.astype(float)
 
 
 temp_df1.plot.density(ax=axis[0, 0])
