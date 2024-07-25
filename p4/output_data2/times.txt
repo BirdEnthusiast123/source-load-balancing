@@ -1,0 +1,6 @@
+randomwalk 1M
+37.16
+randomwalk 10M
+119.06
+randomwalk 100M
+929.57
