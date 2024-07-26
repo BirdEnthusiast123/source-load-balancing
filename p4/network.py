@@ -62,7 +62,7 @@ net.startNetwork()
 
 # Initialize controller
 controller = Controller.RoutingController()
-controller.flowlet_leniency_factor = 1000
+controller.flowlet_leniency_factor = 0.0
 
 # Fetch stats
 mininet_hosts = {net.net.get(key): net.net.get(val) for key, val in hosts.items()}
@@ -84,7 +84,7 @@ for i in range(NB_OF_SIMS):
     for mininet_host in mininet_hosts.keys():
         output[mininet_host].append(mininet_host.waitOutput().strip())
 
-output_file_name = f"naif_{flow_size}.csv"
+output_file_name = f"naif2_{flow_size}.csv"
 
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
